@@ -60,20 +60,23 @@ export default function PrivacyPage() {
 
               <section className="flex flex-col gap-2">
                 <h2 className="font-display text-lg sm:text-xl font-bold text-[var(--foreground)]">
-                  2. Information We Expect to Collect
+                  2. Information We Collect
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  When the early-access questionnaire opens in Phase 5, participants may submit:
+                  When you submit the early-access questionnaire, Project Roam collects:
                 </p>
                 <ul className="list-disc pl-5 space-y-1 text-xs sm:text-sm text-[var(--muted-foreground)]">
-                  <li>Contact information: email address</li>
-                  <li>Demographics: age band, gender option, dating preferences, and home country</li>
-                  <li>Travel plans: upcoming destination, planned arrival and departure dates</li>
-                  <li>Travel style: pace, interests, and relationship intentions</li>
-                  <li>Research preferences: optional opt-in to participate in 15-minute user interviews</li>
+                  <li>Contact information: email address and home country</li>
+                  <li>Demographics: age band, gender option (and optional self-description), and dating interest (who you want to meet)</li>
+                  <li>Travel plans: upcoming destination, planned calendar arrival and departure dates, and travel mode (solo, with friends, group, other)</li>
+                  <li>Preferences &amp; intentions: relationship intentions, travel interests (up to 5), and traveler vs. local preference</li>
+                  <li>Optional validation research answers: travel frequency and previous dating app usage while traveling</li>
+                  <li>Interview opt-in: optional willingness to participate in a short product research conversation</li>
+                  <li>Optional marketing consent: optional preference to receive product news and research updates</li>
+                  <li>Privacy-safe operational metadata: submission identifiers and non-PII analytics events</li>
                 </ul>
-                <p className="text-xs text-[var(--muted-foreground)] mt-1">
-                  We do NOT collect exact hotel or accommodation details, nor do we access your device&apos;s real-time GPS coordinates.
+                <p className="text-xs text-[var(--muted-foreground)] mt-1 font-semibold text-[#1B4332]">
+                  We do NOT request your hotel or accommodation address, nor do we request or track live GPS location.
                 </p>
               </section>
 
@@ -85,8 +88,8 @@ export default function PrivacyPage() {
                   Information is collected solely to:
                 </p>
                 <ul className="list-disc pl-5 space-y-1 text-xs sm:text-sm text-[var(--muted-foreground)]">
-                  <li>Validate genuine demand for trip-based dating</li>
-                  <li>Identify which destinations have sufficient travel density to justify launching initial matching cohorts</li>
+                  <li>Validate genuine demand for date-overlapping travel dating</li>
+                  <li>Identify which destinations have sufficient travel density to justify opening initial matching cohorts</li>
                   <li>Invite selected participants to user research and early test groups</li>
                   <li>Notify you when Roam begins matching in your travel destination</li>
                 </ul>
@@ -106,7 +109,7 @@ export default function PrivacyPage() {
                   5. Email Communication
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  If you submit your email for early access, we will only use it for transactional validation updates, invitation to user research (if opted in), and announcements regarding matching in your selected destination. We do not sell or rent email lists to third parties.
+                  When you submit an early-access request, we send a transactional confirmation email regarding your submission. If you explicitly opt in to marketing news, we may send occasional product updates. You can opt out at any time. We do not sell or rent email lists to third parties.
                 </p>
               </section>
 
@@ -115,7 +118,7 @@ export default function PrivacyPage() {
                   6. Public Visibility
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  Information submitted during early access is completely private and will NEVER automatically become a public profile on any live platform without your explicit consent and separate profile setup.
+                  Information submitted during early access is completely private and will NEVER automatically become a public profile on any live platform without your explicit consent and separate profile setup. Homepage sample profiles remain fictional demonstrations.
                 </p>
               </section>
 
@@ -124,7 +127,7 @@ export default function PrivacyPage() {
                   7. Data Retention
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  Early-access validation data will be retained only as long as necessary to evaluate market demand and conduct pre-launch user testing. Unused validation submissions will be pruned following project conclusion.
+                  We retain validation information only for as long as needed for product validation, early-access operations, and related legal or security needs.
                 </p>
               </section>
 
@@ -133,7 +136,20 @@ export default function PrivacyPage() {
                   8. Data Deletion &amp; Contact
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  You have the right to request deletion of any early-access submission at any time. When public submission opens, direct contact mechanisms will be provided in every confirmation email to request immediate removal of your record.
+                  You have the right to request deletion of your early-access submission at any time.{" "}
+                  {process.env.NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL ? (
+                    <>
+                      To request deletion of your stored validation data, contact us with your submission email at{" "}
+                      <span className="font-mono text-xs text-[var(--foreground)]">
+                        {process.env.NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL}
+                      </span>
+                      .
+                    </>
+                  ) : (
+                    <>
+                      A verified project contact channel for deletion requests will be established and published here prior to public launch.
+                    </>
+                  )}
                 </p>
               </section>
 

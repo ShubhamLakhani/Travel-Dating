@@ -1,6 +1,6 @@
-import { EarlyAccessDraft } from "@/types/signup";
-import { TripSearchDraft } from "@/types/trip";
-import { getStoredTripDraft } from "./trip-storage";
+import type { EarlyAccessDraft } from "../../types/signup.ts";
+import type { TripSearchDraft } from "../../types/trip.ts";
+import { getStoredTripDraft } from "./trip-storage.ts";
 
 export const SIGNUP_STORAGE_KEY = "roam.validation.signup.v1";
 
@@ -9,7 +9,7 @@ export const SIGNUP_STORAGE_KEY = "roam.validation.signup.v1";
  * Phase 5 remains explicitly in a pre-persistence validation/review mode.
  * Phase 6 will enable durable signup when Supabase database writes are connected.
  */
-export const DURABLE_SIGNUP_ENABLED = false;
+export const DURABLE_SIGNUP_ENABLED = true;
 
 const listeners = new Set<() => void>();
 
@@ -142,14 +142,119 @@ export function clearStoredSignupDraft(): void {
   }
 }
 
+export const LAST_SUBMISSION_STORAGE_KEY = "roam.validation.last-submission.v1";
+
+export interface EarlyAccessSubmissionReceipt {
+  submissionId: string;
+  destinationName: string;
+  arrivalDate: string;
+  departureDate: string;
+  tripCreated: boolean;
+  confirmationEmail: "sent" | "failed" | "skipped";
+  submittedAt: string;
+  conversionTracked: boolean;
+}
+
+let cachedReceiptRaw: string | null = null;
+let cachedReceiptSnapshot: EarlyAccessSubmissionReceipt | null = null;
+
 /**
- * Prepares the draft for adding another trip (Phase 5/6 "Add another trip" action).
+ * Retrieves the last durable submission receipt from sessionStorage safely.
+ * Non-PII receipt used exclusively by /success screen.
+ */
+export function getStoredSubmissionReceipt(): EarlyAccessSubmissionReceipt | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.sessionStorage.getItem(LAST_SUBMISSION_STORAGE_KEY);
+    if (!raw) {
+      cachedReceiptRaw = null;
+      cachedReceiptSnapshot = null;
+      return null;
+    }
+    if (raw === cachedReceiptRaw && cachedReceiptSnapshot !== null) {
+      return cachedReceiptSnapshot;
+    }
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object" || !parsed.submissionId) {
+      cachedReceiptRaw = null;
+      cachedReceiptSnapshot = null;
+      return null;
+    }
+    cachedReceiptRaw = raw;
+    cachedReceiptSnapshot = parsed as EarlyAccessSubmissionReceipt;
+    return cachedReceiptSnapshot;
+  } catch {
+    cachedReceiptRaw = null;
+    cachedReceiptSnapshot = null;
+    return null;
+  }
+}
+
+/**
+ * Saves the last durable submission receipt to sessionStorage.
+ */
+export function saveStoredSubmissionReceipt(receipt: EarlyAccessSubmissionReceipt): void {
+  if (typeof window === "undefined") return;
+  try {
+    window.sessionStorage.setItem(LAST_SUBMISSION_STORAGE_KEY, JSON.stringify(receipt));
+    notifyListeners();
+  } catch {
+    // Ignore storage quota error
+  }
+}
+
+/**
+ * Clears the stored submission receipt.
+ */
+export function clearStoredSubmissionReceipt(): void {
+  if (typeof window === "undefined") return;
+  try {
+    cachedReceiptRaw = null;
+    cachedReceiptSnapshot = null;
+    window.sessionStorage.removeItem(LAST_SUBMISSION_STORAGE_KEY);
+    notifyListeners();
+  } catch {
+    // Ignore error
+  }
+}
+
+/**
+ * Marks conversion analytics as tracked in the local receipt.
+ */
+export function markConversionTracked(): void {
+  const receipt = getStoredSubmissionReceipt();
+  if (receipt && !receipt.conversionTracked) {
+    saveStoredSubmissionReceipt({
+      ...receipt,
+      conversionTracked: true,
+    });
+  }
+}
+
+/**
+ * Rotates the submission ID on a draft (e.g. after a 409 conflict).
+ */
+export function rotateSubmissionId(draft: EarlyAccessDraft): EarlyAccessDraft {
+  const updated: EarlyAccessDraft = {
+    ...draft,
+    submissionId: generateClientSubmissionId(),
+  };
+  saveSignupDraft(updated);
+  return updated;
+}
+
+/**
+ * Prepares the draft for adding another trip (Phase 6 "Add another trip" action).
+ * Generates a fresh submissionId for the second trip.
  * Clears destination, arrival, departure, travelMode and resets step to 1.
- * Retains profile, contact, intentions, interests, and submissionId.
+ * Retains profile, contact, intentions, interests, and marketingConsent.
+ * Clears the last-submission receipt so /success does not display stale trip details.
  */
 export function resetForNewTrip(currentDraft: EarlyAccessDraft): EarlyAccessDraft {
+  clearStoredSubmissionReceipt();
   const updated: EarlyAccessDraft = {
     ...currentDraft,
+    submissionId: generateClientSubmissionId(),
     step: 1,
     trip: {
       destination: null,

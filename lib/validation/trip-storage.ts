@@ -1,4 +1,4 @@
-import { TripSearchDraft } from "@/types/trip";
+import type { TripSearchDraft } from "../../types/trip.ts";
 
 const TRIP_STORAGE_KEY = "roam.validation.trip.v1";
 

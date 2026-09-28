@@ -243,7 +243,7 @@ export function StepContact({ contact, onUpdate, onBack, onContinue }: StepConta
         </div>
 
         {/* Marketing Consent (OPTIONAL, separate) */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1.5">
           <label className="flex items-start gap-3 cursor-pointer select-none">
             <input
               type="checkbox"
@@ -252,9 +252,12 @@ export function StepContact({ contact, onUpdate, onBack, onContinue }: StepConta
               className="h-4.5 w-4.5 rounded border-[var(--border)] text-[var(--primary)] focus:ring-[var(--focus)] mt-0.5"
             />
             <span className="text-xs text-[var(--muted-foreground)]">
-              Send me Project Roam early-access updates and invitation announcements.
+              Send me occasional Project Roam product news and research updates.
             </span>
           </label>
+          <p className="text-[11px] text-[var(--muted-foreground)] pl-7">
+            We&apos;ll still send a confirmation about this early-access request.
+          </p>
         </div>
 
         {/* Privacy Reassurance Banner */}

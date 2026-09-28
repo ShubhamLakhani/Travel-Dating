@@ -129,4 +129,9 @@ export const earlyAccessSchema = z.object({
   interviewOptIn: z.boolean().optional(),
 });
 
+export const earlyAccessServerSchema = earlyAccessSchema.extend({
+  website: z.string().optional(),
+});
+
 export type EarlyAccessFormData = z.infer<typeof earlyAccessSchema>;
+export type EarlyAccessServerFormData = z.infer<typeof earlyAccessServerSchema>;

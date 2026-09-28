@@ -51,10 +51,10 @@ export default function TermsPage() {
             <div className="flex flex-col gap-8 text-sm text-[var(--foreground)]/90 leading-relaxed">
               <section className="flex flex-col gap-2">
                 <h2 className="font-display text-lg sm:text-xl font-bold text-[var(--foreground)]">
-                  1. Pre-Launch Validation Stage
+                  1. Early-Access Validation Stage &amp; Stored Submissions
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  The Project Roam website is currently operating solely as a pre-launch validation and early-access platform. Access to this website is provided for demonstration, interest measurement, and market research purposes only.
+                  The Project Roam website is currently operating as an early-access demand validation platform. When you complete the questionnaire, your travel dates and preferences are durably stored to assess market density. Submitting your details does not create an active dating profile or guarantee admission to any future beta testing cohort.
                 </p>
               </section>
 

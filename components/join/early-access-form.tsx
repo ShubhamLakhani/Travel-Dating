@@ -7,8 +7,9 @@ import {
   createEmptySignupDraft,
   getStoredSignupDraft,
   saveSignupDraft,
+  rotateSubmissionId,
 } from "@/lib/validation/signup-storage";
-import { calculateTripNights, getArrivalMonthKey } from "@/lib/validation/trip-dates";
+import { calculateTripNights, getArrivalMonthKey, getTodayCalendarDate } from "@/lib/validation/trip-dates";
 import { trackEvent } from "@/lib/analytics/track";
 import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
 import { JoinProgress } from "./join-progress";
@@ -27,11 +28,18 @@ export function EarlyAccessForm({ initialTrip }: EarlyAccessFormProps) {
     if (typeof window !== "undefined") {
       const existing = getStoredSignupDraft();
       if (existing) {
-        // If existing draft exists but trip was never populated and initialTrip is available, seed it
-        if (!existing.trip.destination && initialTrip?.destination) {
-          existing.trip.destination = initialTrip.destination;
-          existing.trip.arrivalDate = initialTrip.arrivalDate;
-          existing.trip.departureDate = initialTrip.departureDate;
+        // If initialTrip is provided from search, sync it if draft trip is empty or if draft has a past date or different destination
+        if (initialTrip?.destination) {
+          const isPastDate = existing.trip.arrivalDate && existing.trip.arrivalDate < getTodayCalendarDate();
+          if (!existing.trip.destination || isPastDate || existing.trip.destination.id !== initialTrip.destination.id) {
+            existing.trip.destination = initialTrip.destination;
+            existing.trip.arrivalDate = initialTrip.arrivalDate;
+            existing.trip.departureDate = initialTrip.departureDate;
+          }
+        }
+        // If draft arrival date is in the past, reset step to 1 so user can pick future dates
+        if (existing.trip.arrivalDate && existing.trip.arrivalDate < getTodayCalendarDate()) {
+          existing.step = 1;
         }
         return existing;
       }
@@ -206,6 +214,13 @@ export function EarlyAccessForm({ initialTrip }: EarlyAccessFormProps) {
           <StepReview
             draft={draft}
             onUpdateInterviewOptIn={handleUpdateInterview}
+            onRotateSubmissionId={() => {
+              setDraft((prev) => rotateSubmissionId(prev));
+            }}
+            onEditTrip={() => {
+              setDraft((prev) => ({ ...prev, step: 1 }));
+              scrollToTop();
+            }}
           />
         )}
       </div>

@@ -2,17 +2,30 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-import { CheckCircle2, MessageSquare, ArrowRight, ShieldCheck, MapPin, Heart, Compass } from "lucide-react";
+import {
+  CheckCircle2,
+  MessageSquare,
+  ArrowRight,
+  ShieldCheck,
+  MapPin,
+  Heart,
+  Compass,
+  Loader2,
+  AlertCircle,
+} from "lucide-react";
 import { EarlyAccessDraft } from "@/types/signup";
 import { formatDateRangeDisplay, getArrivalMonthKey } from "@/lib/validation/trip-dates";
 import { trackEvent } from "@/lib/analytics/track";
 import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
+import { saveStoredSubmissionReceipt, DURABLE_SIGNUP_ENABLED } from "@/lib/validation/signup-storage";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 interface StepReviewProps {
   draft: EarlyAccessDraft;
   onUpdateInterviewOptIn: (optIn: boolean) => void;
+  onRotateSubmissionId: () => void;
+  onEditTrip?: () => void;
 }
 
 function maskEmail(email: string): string {
@@ -33,11 +46,19 @@ const INTENTION_DISPLAY_NAMES: Record<string, string> = {
   activity_partner: "Activity partner",
 };
 
-export function StepReview({ draft, onUpdateInterviewOptIn }: StepReviewProps) {
+export function StepReview({
+  draft,
+  onUpdateInterviewOptIn,
+  onRotateSubmissionId,
+  onEditTrip,
+}: StepReviewProps) {
   const router = useRouter();
   const [hasOptedIn, setHasOptedIn] = React.useState<boolean | null>(
     draft.interviewOptIn ?? null
   );
+
+  const [status, setStatus] = React.useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
   const handleInterviewChoice = (optIn: boolean) => {
     setHasOptedIn(optIn);
@@ -55,8 +76,74 @@ export function StepReview({ draft, onUpdateInterviewOptIn }: StepReviewProps) {
     }
   };
 
-  const handleContinueToSuccess = () => {
-    // Navigate to preview success screen
+  const handleSubmit = async () => {
+    setStatus("submitting");
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch("/api/early-access", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          submissionId: draft.submissionId,
+          trip: draft.trip,
+          profile: draft.profile,
+          intentions: draft.intentions,
+          interests: draft.interests,
+          customInterest: draft.customInterest,
+          contact: draft.contact,
+          interviewOptIn: Boolean(draft.interviewOptIn),
+        }),
+      });
+
+      if (response.status === 409) {
+        setStatus("error");
+        setErrorMessage(
+          "Your form changed after an earlier submission attempt. Please try again."
+        );
+        // Safely rotate submissionId once to resolve conflict
+        onRotateSubmissionId();
+        return;
+      }
+
+      const data = await response.json();
+
+      if (!response.ok || !data.ok) {
+        setStatus("error");
+        setErrorMessage(
+          data.message ||
+            "We couldn't save your early-access request. Your answers are still here — please try again."
+        );
+        return;
+      }
+
+      // 1. Store durable non-PII submission receipt
+      saveStoredSubmissionReceipt({
+        submissionId: data.submissionId,
+        destinationName: draft.trip.destination?.name || "Your destination",
+        arrivalDate: draft.trip.arrivalDate || "",
+        departureDate: draft.trip.departureDate || "",
+        tripCreated: Boolean(data.tripCreated),
+        confirmationEmail: data.confirmationEmail || "skipped",
+        submittedAt: new Date().toISOString(),
+        conversionTracked: false,
+      });
+
+      setStatus("success");
+
+      // 2. Navigate to real success screen
+      router.push("/success");
+    } catch {
+      setStatus("error");
+      setErrorMessage(
+        "We couldn't save your early-access request. Your answers are still here — please try again."
+      );
+    }
+  };
+
+  const handlePreviewSuccess = () => {
     router.push("/success?preview=1");
   };
 
@@ -64,7 +151,7 @@ export function StepReview({ draft, onUpdateInterviewOptIn }: StepReviewProps) {
 
   return (
     <div className="flex flex-col gap-8">
-      {/* Pre-Persistence Development Banner */}
+      {/* Review Header Banner */}
       <div className="p-4 sm:p-5 rounded-2xl bg-[var(--surface)] border border-[var(--primary)]/30 shadow-xs flex flex-col gap-3 text-center sm:text-left">
         <div className="flex flex-col sm:flex-row items-center gap-3">
           <div className="h-10 w-10 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] flex items-center justify-center shrink-0">
@@ -72,17 +159,31 @@ export function StepReview({ draft, onUpdateInterviewOptIn }: StepReviewProps) {
           </div>
           <div>
             <Badge variant="primary" className="text-[10px] uppercase font-bold tracking-wider mb-1">
-              Phase 5 Review State
+              {DURABLE_SIGNUP_ENABLED ? "Ready for Submission" : "Review Questionnaire"}
             </Badge>
             <h1 className="font-display text-xl sm:text-2xl font-bold text-[var(--foreground)]">
-              Form complete
+              Review your early-access details
             </h1>
           </div>
         </div>
         <p className="text-xs sm:text-sm text-[var(--muted-foreground)] leading-relaxed">
-          Your early-access details are ready. Durable signup and database persistence will be connected in the next implementation phase (Phase 6).
+          Please confirm your details below. Once submitted, your trip will be recorded to help us open early matching.
         </p>
       </div>
+
+      {/* Submission Error Banner */}
+      {status === "error" && errorMessage && (
+        <div
+          role="alert"
+          className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs sm:text-sm flex items-start gap-3 shadow-xs"
+        >
+          <AlertCircle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" aria-hidden="true" />
+          <div className="flex flex-col gap-1">
+            <span className="font-semibold text-red-900">Submission Notice</span>
+            <p className="leading-relaxed">{errorMessage}</p>
+          </div>
+        </div>
+      )}
 
       {/* Summary Review Card */}
       <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col gap-5">
@@ -96,21 +197,32 @@ export function StepReview({ draft, onUpdateInterviewOptIn }: StepReviewProps) {
         </div>
 
         {/* Trip Row */}
-        <div className="flex items-start gap-3 text-xs sm:text-sm">
-          <MapPin className="h-4 w-4 text-[var(--primary)] shrink-0 mt-0.5" aria-hidden="true" />
-          <div>
-            <span className="font-bold text-[var(--foreground)]">
-              {draft.trip.destination?.name}, {draft.trip.destination?.country}
-            </span>
-            <div className="text-xs text-[var(--muted-foreground)] mt-0.5">
-              {draft.trip.arrivalDate && draft.trip.departureDate
-                ? formatDateRangeDisplay(draft.trip.arrivalDate, draft.trip.departureDate)
-                : "Dates selected"}
-              {draft.trip.travelMode && (
-                <span className="capitalize"> &middot; {draft.trip.travelMode} traveler</span>
-              )}
+        <div className="flex items-start justify-between gap-3 text-xs sm:text-sm">
+          <div className="flex items-start gap-3">
+            <MapPin className="h-4 w-4 text-[var(--primary)] shrink-0 mt-0.5" aria-hidden="true" />
+            <div>
+              <span className="font-bold text-[var(--foreground)]">
+                {draft.trip.destination?.name}, {draft.trip.destination?.country}
+              </span>
+              <div className="text-xs text-[var(--muted-foreground)] mt-0.5">
+                {draft.trip.arrivalDate && draft.trip.departureDate
+                  ? formatDateRangeDisplay(draft.trip.arrivalDate, draft.trip.departureDate)
+                  : "Dates selected"}
+                {draft.trip.travelMode && (
+                  <span className="capitalize"> &middot; {draft.trip.travelMode} traveler</span>
+                )}
+              </div>
             </div>
           </div>
+          {onEditTrip && (
+            <button
+              type="button"
+              onClick={onEditTrip}
+              className="text-xs text-[var(--primary)] hover:underline font-semibold shrink-0 cursor-pointer"
+            >
+              Edit
+            </button>
+          )}
         </div>
 
         {/* Profile / Preferences Row */}
@@ -212,21 +324,39 @@ export function StepReview({ draft, onUpdateInterviewOptIn }: StepReviewProps) {
         )}
       </div>
 
-      {/* Development CTA to Preview Success Page */}
+      {/* Main Submission Action */}
       <div className="pt-2 border-t border-[var(--border)] flex flex-col items-center gap-3">
         <Button
           type="button"
           variant="primary"
           size="lg"
-          onClick={handleContinueToSuccess}
-          rightIcon={<ArrowRight className="h-4 w-4 ml-1.5" aria-hidden="true" />}
-          className="w-full sm:w-auto h-12 px-8 text-sm font-bold rounded-full shadow-md"
+          disabled={status === "submitting"}
+          onClick={handleSubmit}
+          leftIcon={
+            status === "submitting" ? (
+              <Loader2 className="h-4 w-4 animate-spin mr-1" aria-hidden="true" />
+            ) : undefined
+          }
+          rightIcon={
+            status !== "submitting" ? (
+              <ArrowRight className="h-4 w-4 ml-1.5" aria-hidden="true" />
+            ) : undefined
+          }
+          className="w-full sm:w-auto h-12 px-10 text-sm font-bold rounded-full shadow-md"
         >
-          Continue to Preview Success Screen &rarr;
+          {status === "submitting" ? "Joining…" : "Join Early Access"}
         </Button>
-        <span className="text-[11px] text-[var(--muted-foreground)]">
-          Development preview mode &middot; Phase 6 will connect live Supabase submission
-        </span>
+
+        {/* Development preview button fallback */}
+        {!DURABLE_SIGNUP_ENABLED && (
+          <button
+            type="button"
+            onClick={handlePreviewSuccess}
+            className="text-xs text-[var(--muted-foreground)] hover:text-[var(--foreground)] underline underline-offset-2"
+          >
+            Development Preview Mode &middot; Preview Success Screen
+          </button>
+        )}
       </div>
     </div>
   );
