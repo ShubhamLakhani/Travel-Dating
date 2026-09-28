@@ -97,29 +97,61 @@ app/                  # Next.js App Router routes & layouts
 ├── layout.tsx        # Root layout with fonts, metadata, and analytics
 ├── page.tsx          # Phase 1 foundation preview
 ├── join/             # Placeholder route
-├── success/          # Placeholder route
-├── privacy/          # Placeholder legal route
-├── terms/            # Placeholder legal route
-└── safety/           # Placeholder safety route
+├── success/          # Verified Phase 6 durable submission success page
+├── privacy/          # Public legal privacy policy
+├── terms/            # Public terms of service
+├── safety/           # Safety guidelines
+└── admin/            # Phase 7 Internal Founder Validation Dashboard
+    ├── login/        # Admin authentication entry
+    └── (dashboard)/  # Guarded internal screens (Overview, Density, Destinations, Trips, Users, Interviews)
 
-components/           # Modular React components
-├── ui/               # Base UI primitives (Button, Input, Card, Badge, etc.)
-├── layout/           # Shared layout components
-├── analytics/        # Analytics client providers
-├── forms/            # Form components (upcoming phases)
-├── landing/          # Landing sections (upcoming phases)
-├── matching/         # Match preview components (upcoming phases)
-└── safety/           # Safety components (upcoming phases)
+components/admin/     # Admin views, interactive density tables, filters, header
+lib/admin/            # Density engine, session auth, database analytics queries
+```
 
-lib/                  # Shared utilities and service clients
-├── utils/            # Utility functions (cn class merger)
-├── analytics/        # PostHog client, event registry, and track wrapper
-└── supabase/         # SSR browser, server, and admin Supabase clients
+---
 
-types/                # Shared domain TypeScript declarations
-├── analytics.ts      # Analytics event and privacy types
-├── trip.ts           # Trip draft and travel mode types
-└── signup.ts         # User preference and signup draft types
+## Phase 7 — Admin Validation Dashboard & Trip Density Analytics
 
-public/               # Static assets
+Phase 7 introduces an internal founder dashboard to answer key market validation questions before launching a public beta.
+
+### 1. Key Objectives & Metrics
+
+- **Core Metric:** **Trip Density** (`destination + overlapping travel dates`). Total registration vanity counts are separated from usable liquidity.
+- **Max Concurrency Algorithm:** Sweep-line timeline calculation of simultaneous travellers at a destination (`O(n log n)`). Users with multiple trips are merged into non-overlapping intervals to prevent self-counting.
+- **Overlap Formula:**
+  $$\text{Overlap} \iff \text{tripA.arrivalDate} \le \text{tripB.departureDate} \land \text{tripB.arrivalDate} \le \text{tripA.departureDate}$$
+- **Compatible Density:** Conservative mutual compatibility filter requiring symmetric gender/interested-in preferences, compatible meet modes (travelers vs locals), and overlapping intentions.
+- **Closed-Beta Readiness Signals:**
+  - `READY`: Peak concurrency $\ge 5$ OR ($\ge 3$ concurrency with $5+$ unique travellers).
+  - `WARMING`: Peak concurrency $\ge 2$ with at least 1 overlapping pair.
+  - `COLD`: $0-1$ isolated travellers.
+- **Interview Research Pipeline:** Tracks founder interview volunteers from opt-in to completed outreach calls.
+- **CSV Data Exports:** Protected endpoints for Destinations, Trips, and Interview Volunteers.
+
+### 2. Admin Security Architecture
+
+- **Fail-Closed Gateways:** Next.js Edge `middleware.ts` intercepts unauthorized `/admin/*` and `/api/admin/*` calls, returning immediate `307 Redirect` to `/admin/login` or `401 Unauthorized` for APIs.
+- **Server Guard:** All dashboard server components verify HMAC-SHA256 signed HTTP-only cookies (`roam_admin_session`) or Bearer tokens against `ADMIN_SECRET_KEY` and the `ADMIN_EMAILS` allowlist.
+- **Data Minimization:** Aggregate views obfuscate identifiers (`u_39f…1a2b`) and hide emails. Full contact emails are strictly restricted to the authorized interview pipeline.
+- **No Client Secrets:** Service-role keys and administrative credentials remain strictly server-side.
+
+### 3. Local Dashboard Access
+
+1. Ensure `.env` contains:
+   ```bash
+   ADMIN_SECRET_KEY=roam_admin_dev_pass_2026
+   ADMIN_EMAILS=admin@roam.dating
+   ```
+2. Navigate to [http://localhost:3000/admin](http://localhost:3000/admin) (automatically redirects to `/admin/login`).
+3. Enter the secret passkey (`roam_admin_dev_pass_2026`) and optional admin email (`admin@roam.dating`).
+4. To test logout, click **Log out** in the header.
+
+### 4. Running Test Suites
+
+```bash
+pnpm test       # 59/59 unit tests (dates, schemas, durable signup, density engine, auth, security)
+pnpm lint       # ESLint (0 errors, 0 warnings)
+pnpm typecheck  # TypeScript strict typechecking
+pnpm build      # Production Next.js build
 ```

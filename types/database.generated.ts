@@ -315,6 +315,10 @@ export type Database = {
         Args: { p_status: string; p_submission_id: string }
         Returns: undefined
       }
+      update_interview_status: {
+        Args: { p_opt_in_id: string; p_status: string }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
