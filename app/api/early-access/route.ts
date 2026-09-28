@@ -4,6 +4,7 @@ import {
   submitEarlyAccess,
   IdempotencyConflictError,
 } from "@/lib/early-access/submit-early-access";
+import { checkRateLimit } from "@/lib/security/rate-limit";
 
 const MAX_BODY_BYTES = 32 * 1024; // 32 KB
 
@@ -54,7 +55,29 @@ export async function POST(request: Request) {
     );
   }
 
-  // 2. Content-Type check
+  // 2. Server-side Rate Limiting (10 requests per minute per client)
+  const rateLimitResult = checkRateLimit(request, {
+    windowMs: 60 * 1000,
+    maxRequests: 10,
+    prefix: "early-access",
+  });
+
+  if (!rateLimitResult.allowed) {
+    return NextResponse.json(
+      {
+        error: "TOO_MANY_REQUESTS",
+        message: "Too many submission attempts. Please wait a moment before trying again.",
+      },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(rateLimitResult.retryAfterSeconds),
+        },
+      }
+    );
+  }
+
+  // 3. Content-Type check
   const contentType = request.headers.get("content-type");
   if (!contentType || !contentType.includes("application/json")) {
     return NextResponse.json(
@@ -158,6 +181,16 @@ export async function POST(request: Request) {
       departureDate: data.trip.departureDate,
       travelMode: data.trip.travelMode,
       interviewOptIn: data.interviewOptIn,
+      attribution: data.attribution
+        ? {
+            utmSource: data.attribution.utmSource || null,
+            utmMedium: data.attribution.utmMedium || null,
+            utmCampaign: data.attribution.utmCampaign || null,
+            utmContent: data.attribution.utmContent || null,
+            utmTerm: data.attribution.utmTerm || null,
+            referrer: data.attribution.referrer || null,
+          }
+        : null,
     });
 
     return NextResponse.json(result, { status: 200 });

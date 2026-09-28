@@ -179,9 +179,15 @@ export type Database = {
           created_at: string
           interview_opt_in: boolean
           payload_hash: string
+          referrer: string | null
           submission_id: string
           trip_created: boolean
           trip_id: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
           waitlist_user_id: string
         }
         Insert: {
@@ -191,9 +197,15 @@ export type Database = {
           created_at?: string
           interview_opt_in?: boolean
           payload_hash: string
+          referrer?: string | null
           submission_id: string
           trip_created: boolean
           trip_id: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
           waitlist_user_id: string
         }
         Update: {
@@ -203,9 +215,15 @@ export type Database = {
           created_at?: string
           interview_opt_in?: boolean
           payload_hash?: string
+          referrer?: string | null
           submission_id?: string
           trip_created?: boolean
           trip_id?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
           waitlist_user_id?: string
         }
         Relationships: [

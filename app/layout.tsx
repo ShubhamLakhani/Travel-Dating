@@ -16,9 +16,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://roam.dating"),
   title: "Roam — Meet Someone Going Where You're Going",
   description:
     "Connect with compatible singles before or during your next trip based on destination, travel dates, and how you like to travel. Join Project Roam early access.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Roam — Meet Someone Going Where You're Going",
     description:

@@ -168,3 +168,32 @@ export interface AdminUserListItem {
   tripCount: number;
   isInterviewVolunteer: boolean;
 }
+
+export interface AttributionChannelSummary {
+  source: string;
+  medium: string;
+  campaign: string;
+  submissionsCount: number;
+  tripsCount: number;
+  interviewOptInsCount: number;
+  conversionRate: number;
+}
+
+export interface AdminAttributionData {
+  totalSubmissions: number;
+  attributedSubmissions: number;
+  directSubmissions: number;
+  topSources: Array<{ source: string; count: number; percentage: number }>;
+  topMediums: Array<{ medium: string; count: number; percentage: number }>;
+  topCampaigns: Array<{ campaign: string; count: number; percentage: number }>;
+  channels: AttributionChannelSummary[];
+}
+
+export interface LaunchChecklistItem {
+  id: string;
+  title: string;
+  category: "infrastructure" | "safety" | "communication" | "analytics" | "operations";
+  status: "configured" | "action_required" | "verified";
+  details: string;
+  actionRequired?: string;
+}

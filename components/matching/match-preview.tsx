@@ -110,13 +110,19 @@ export function MatchPreview({ draft, onModifyTrip }: MatchPreviewProps) {
         </div>
 
         {/* Section Headline */}
-        <div className="text-center max-w-md mx-auto mb-6 flex flex-col gap-2">
+        <div className="text-center max-w-md mx-auto mb-4 flex flex-col gap-2">
           <h2 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)]">
             Your trip could cross paths with…
           </h2>
           <p className="text-xs sm:text-sm text-[var(--muted-foreground)] leading-relaxed">
             People traveling to {destination.name} during overlapping dates.
           </p>
+        </div>
+
+        {/* Validation Transparency Disclosure */}
+        <div className="w-full max-w-sm mb-6 px-3 py-1.5 rounded-full bg-[var(--surface-muted)] border border-[var(--border)] text-[11px] text-[var(--muted-foreground)] flex items-center justify-center text-center gap-2 shadow-xs">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)] shrink-0" aria-hidden="true" />
+          <span>Preview profiles illustrate how ROAM matching could work. Real community matching launches after validation.</span>
         </div>
 
         {/* Match Card */}

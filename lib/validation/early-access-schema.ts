@@ -129,8 +129,22 @@ export const earlyAccessSchema = z.object({
   interviewOptIn: z.boolean().optional(),
 });
 
+export const attributionSchema = z
+  .object({
+    utmSource: z.string().max(100).optional(),
+    utmMedium: z.string().max(100).optional(),
+    utmCampaign: z.string().max(100).optional(),
+    utmContent: z.string().max(100).optional(),
+    utmTerm: z.string().max(100).optional(),
+    referrer: z.string().max(255).optional(),
+    landingPath: z.string().max(100).optional(),
+    capturedAt: z.string().optional(),
+  })
+  .optional();
+
 export const earlyAccessServerSchema = earlyAccessSchema.extend({
   website: z.string().optional(),
+  attribution: attributionSchema,
 });
 
 export type EarlyAccessFormData = z.infer<typeof earlyAccessSchema>;

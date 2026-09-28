@@ -15,6 +15,8 @@ import {
   MessageSquare,
   LogOut,
   ShieldCheck,
+  TrendingUp,
+  CheckSquare,
 } from "lucide-react";
 
 interface AdminHeaderProps {
@@ -26,8 +28,10 @@ const NAV_ITEMS = [
   { href: "/admin/density", label: "Trip Density", icon: Activity },
   { href: "/admin/destinations", label: "Destinations", icon: Compass },
   { href: "/admin/trips", label: "Trips Explorer", icon: Plane },
+  { href: "/admin/attribution", label: "Attribution", icon: TrendingUp },
   { href: "/admin/users", label: "Demographics", icon: Users },
   { href: "/admin/interviews", label: "Interviews", icon: MessageSquare },
+  { href: "/admin/launch", label: "Launch Checklist", icon: CheckSquare },
 ];
 
 export function AdminHeader({ adminEmail }: AdminHeaderProps) {

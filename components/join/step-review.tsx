@@ -18,6 +18,7 @@ import { formatDateRangeDisplay, getArrivalMonthKey } from "@/lib/validation/tri
 import { trackEvent } from "@/lib/analytics/track";
 import { ANALYTICS_EVENTS } from "@/lib/analytics/events";
 import { saveStoredSubmissionReceipt, DURABLE_SIGNUP_ENABLED } from "@/lib/validation/signup-storage";
+import { getStoredAttribution } from "@/lib/analytics/attribution";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -81,6 +82,7 @@ export function StepReview({
     setErrorMessage(null);
 
     try {
+      const storedAttribution = getStoredAttribution();
       const response = await fetch("/api/early-access", {
         method: "POST",
         headers: {
@@ -95,6 +97,17 @@ export function StepReview({
           customInterest: draft.customInterest,
           contact: draft.contact,
           interviewOptIn: Boolean(draft.interviewOptIn),
+          attribution: storedAttribution
+            ? {
+                utmSource: storedAttribution.utm_source,
+                utmMedium: storedAttribution.utm_medium,
+                utmCampaign: storedAttribution.utm_campaign,
+                utmContent: storedAttribution.utm_content,
+                utmTerm: storedAttribution.utm_term,
+                referrer: storedAttribution.referrer,
+                landingPath: storedAttribution.landing_path,
+              }
+            : undefined,
         }),
       });
 

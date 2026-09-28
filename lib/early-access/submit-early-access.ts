@@ -35,6 +35,14 @@ export interface SubmitEarlyAccessInput {
   departureDate: string;
   travelMode: string;
   interviewOptIn?: boolean;
+  attribution?: {
+    utmSource?: string | null;
+    utmMedium?: string | null;
+    utmCampaign?: string | null;
+    utmContent?: string | null;
+    utmTerm?: string | null;
+    referrer?: string | null;
+  } | null;
 }
 
 export interface SubmitEarlyAccessResult {
@@ -130,6 +138,26 @@ export async function submitEarlyAccess(
 
   const tripCreated = Boolean(rpcData?.trip_created);
   const idempotentReplay = Boolean(rpcData?.idempotent_replay);
+
+  // If attribution metadata was provided, persist it to the submission record
+  if (input.attribution) {
+    try {
+      await supabase
+        .from("validation_submissions")
+        .update({
+          utm_source: input.attribution.utmSource || null,
+          utm_medium: input.attribution.utmMedium || null,
+          utm_campaign: input.attribution.utmCampaign || null,
+          utm_content: input.attribution.utmContent || null,
+          utm_term: input.attribution.utmTerm || null,
+          referrer: input.attribution.referrer || null,
+        })
+        .eq("submission_id", input.submissionId);
+    } catch {
+      // Non-fatal: attribution update failure must never fail user signup
+    }
+  }
+
   let emailStatus: "sent" | "failed" | "skipped" = "skipped";
 
   // 3. Handle Transactional Confirmation Email

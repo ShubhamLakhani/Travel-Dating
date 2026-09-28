@@ -8,9 +8,19 @@ import {
   createAdminSessionToken,
   ADMIN_COOKIE_NAME,
 } from "@/lib/admin/session";
+import { checkRateLimit, getClientIdentifier } from "@/lib/security/rate-limit";
 
 export async function POST(request: Request) {
   try {
+    const clientId = getClientIdentifier(request);
+    const rateLimit = checkRateLimit(`login_${clientId}`, { maxRequests: 5, windowSeconds: 60 });
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { error: "TOO_MANY_REQUESTS", message: "Too many login attempts. Please try again later." },
+        { status: 429, headers: { "Retry-After": String(rateLimit.retryAfterSeconds) } }
+      );
+    }
+
     const body = await request.json().catch(() => ({}));
     const passkey = typeof body.passkey === "string" ? body.passkey : "";
     const email = typeof body.email === "string" ? body.email : "";
