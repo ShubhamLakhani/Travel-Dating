@@ -140,9 +140,12 @@ export default function PrivacyPage() {
                   {process.env.NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL ? (
                     <>
                       To request deletion of your stored validation data, contact us with your submission email at{" "}
-                      <span className="font-mono text-xs text-[var(--foreground)]">
+                      <a
+                        href={`mailto:${process.env.NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL}`}
+                        className="font-mono text-xs text-[var(--primary)] hover:underline"
+                      >
                         {process.env.NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL}
-                      </span>
+                      </a>
                       .
                     </>
                   ) : (

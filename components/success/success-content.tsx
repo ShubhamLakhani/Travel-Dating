@@ -97,7 +97,10 @@ export function SuccessContent() {
     const shareData = {
       title: "Project Roam",
       text: "Meet someone going where you're going — Project Roam",
-      url: typeof window !== "undefined" ? window.location.origin : "https://roam.dating",
+      url:
+        typeof window !== "undefined"
+          ? window.location.origin
+          : (process.env.NEXT_PUBLIC_SITE_URL || "/"),
     };
 
     if (typeof navigator !== "undefined" && navigator.share) {

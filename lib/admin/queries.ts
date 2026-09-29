@@ -682,7 +682,10 @@ export async function getLaunchChecklistData(): Promise<LaunchChecklistItem[]> {
   const hasResend = Boolean(process.env.RESEND_API_KEY);
   const hasEmailFrom = Boolean(process.env.EMAIL_FROM);
   const hasPrivacyContact = Boolean(process.env.NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL);
-  const hasPosthog = Boolean(process.env.NEXT_PUBLIC_POSTHOG_KEY);
+  const hasPosthog = Boolean(
+    process.env.NEXT_PUBLIC_POSTHOG_KEY ||
+    process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN
+  );
   const hasAdminSecret = Boolean(process.env.ADMIN_SECRET_KEY);
   const hasSiteUrl = Boolean(process.env.NEXT_PUBLIC_SITE_URL);
 

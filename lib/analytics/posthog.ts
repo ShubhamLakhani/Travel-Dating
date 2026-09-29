@@ -19,8 +19,11 @@ export function initPostHog(): void {
     return;
   }
 
-  const key = process.env.NEXT_PUBLIC_POSTHOG_KEY;
-  const host = process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://app.posthog.com";
+  const key =
+    process.env.NEXT_PUBLIC_POSTHOG_KEY ||
+    process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN;
+  const host =
+    process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com";
 
   if (!key) {
     // PostHog key not configured; safely skip initialization without crashing
