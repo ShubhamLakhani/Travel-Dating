@@ -681,7 +681,11 @@ export async function getLaunchChecklistData(): Promise<LaunchChecklistItem[]> {
   const hasSupabaseSecret = Boolean(process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY);
   const hasResend = Boolean(process.env.RESEND_API_KEY);
   const hasEmailFrom = Boolean(process.env.EMAIL_FROM);
-  const hasPrivacyContact = Boolean(process.env.NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL);
+  const hasPrivacyContact = Boolean(
+    process.env.NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL ||
+    process.env.PRIVACY_NOTIFICATION_EMAIL ||
+    process.env.ADMIN_SIGNUP_NOTIFICATION_EMAIL
+  );
   const hasPosthog = Boolean(
     process.env.NEXT_PUBLIC_POSTHOG_KEY ||
     process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN
@@ -770,11 +774,11 @@ export async function getLaunchChecklistData(): Promise<LaunchChecklistItem[]> {
     },
     {
       id: "comm_privacy_contact",
-      title: "Privacy & Deletion Mailbox",
+      title: "Privacy & Deletion Channel",
       category: "communication",
       status: hasPrivacyContact ? "verified" : "action_required",
-      details: hasPrivacyContact ? `Privacy contact mailbox set to ${process.env.NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL}` : "NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL is not yet configured.",
-      actionRequired: hasPrivacyContact ? undefined : "Configure NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL (e.g. privacy@roam.dating).",
+      details: hasPrivacyContact ? "Privacy request channel (/privacy/request) active with secure operator forwarding." : "PRIVACY_NOTIFICATION_EMAIL or ADMIN_SIGNUP_NOTIFICATION_EMAIL required.",
+      actionRequired: hasPrivacyContact ? undefined : "Configure PRIVACY_NOTIFICATION_EMAIL or ADMIN_SIGNUP_NOTIFICATION_EMAIL for privacy requests.",
     },
     // Analytics
     {

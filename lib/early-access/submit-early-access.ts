@@ -3,9 +3,11 @@ import { Resend } from "resend";
 import { getRequiredAdminClient } from "@/lib/supabase/admin";
 import { computeCanonicalPayloadHash } from "./canonical-payload";
 import {
-  EarlyAccessConfirmationEmail,
-  renderEarlyAccessEmailText,
-} from "@/emails/early-access-confirmation";
+  renderEarlyAccessConfirmationHtml,
+  renderEarlyAccessConfirmationText,
+  renderNewSignupNotificationHtml,
+  renderNewSignupNotificationText,
+} from "@/lib/communication/email-formatters";
 import { formatDateRangeDisplay } from "@/lib/validation/trip-dates";
 
 export interface SubmitEarlyAccessInput {
@@ -186,17 +188,19 @@ export async function submitEarlyAccess(
         const [arrivalPart = input.arrivalDate, departurePart = input.departureDate] =
           dateRangeText.split(" → ");
 
+        const confirmationHtml = renderEarlyAccessConfirmationHtml({
+          destinationName: input.destination.name,
+          arrivalFormatted: arrivalPart,
+          departureFormatted: departurePart,
+        });
+
         const { error: sendError } = await resend.emails.send({
           from: emailFrom,
           to: input.email.trim(),
           replyTo: process.env.EMAIL_REPLY_TO || undefined,
           subject: "You're on the Project Roam early-access list ✈️",
-          react: EarlyAccessConfirmationEmail({
-            destinationName: input.destination.name,
-            arrivalFormatted: arrivalPart,
-            departureFormatted: departurePart,
-          }),
-          text: renderEarlyAccessEmailText({
+          html: confirmationHtml,
+          text: renderEarlyAccessConfirmationText({
             destinationName: input.destination.name,
             arrivalFormatted: arrivalPart,
             departureFormatted: departurePart,
@@ -228,6 +232,52 @@ export async function submitEarlyAccess(
           // Non-fatal
         }
       }
+    }
+  }
+
+  // 4. Internal Operator Notification (Best-effort, server-only)
+  // Sends a minimized notification to the operator inbox without user PII
+  const adminNotificationEmail = process.env.ADMIN_SIGNUP_NOTIFICATION_EMAIL;
+  const resendApiKey = process.env.RESEND_API_KEY;
+  const emailFrom = process.env.EMAIL_FROM;
+
+  if (adminNotificationEmail && resendApiKey && emailFrom && !idempotentReplay) {
+    try {
+      const resend = new Resend(resendApiKey);
+      const dateRangeText = formatDateRangeDisplay(input.arrivalDate, input.departureDate);
+      const [arrivalPart = input.arrivalDate, departurePart = input.departureDate] =
+        dateRangeText.split(" → ");
+
+      const adminNotificationHtml = renderNewSignupNotificationHtml({
+        destinationName: input.destination.name,
+        arrivalFormatted: arrivalPart,
+        departureFormatted: departurePart,
+        travelMode: input.travelMode,
+        interviewOptIn: Boolean(input.interviewOptIn),
+        marketingUpdates: Boolean(input.marketingConsent),
+      });
+
+      await resend.emails.send({
+        from: emailFrom,
+        to: adminNotificationEmail.trim(),
+        subject: "New Roam early-access signup",
+        html: adminNotificationHtml,
+        text: renderNewSignupNotificationText({
+          destinationName: input.destination.name,
+          arrivalFormatted: arrivalPart,
+          departureFormatted: departurePart,
+          travelMode: input.travelMode,
+          interviewOptIn: Boolean(input.interviewOptIn),
+          marketingUpdates: Boolean(input.marketingConsent),
+        }),
+      });
+    } catch (err: unknown) {
+      // Best-effort only: do not roll back signup or fail participant request
+      // Never log the private operator email
+      console.error(
+        "Operational notice: Failed to send internal admin signup notification.",
+        err instanceof Error ? err.message : ""
+      );
     }
   }
 

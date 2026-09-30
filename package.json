@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "node --experimental-strip-types --test lib/validation/trip-dates.test.ts lib/validation/early-access-schema.test.ts lib/early-access/durable-signup.test.ts lib/admin/density-engine.test.ts lib/admin/auth.test.ts lib/admin/security.test.ts lib/security/rate-limit.test.ts lib/analytics/attribution-and-hardening.test.ts"
+    "test": "node --experimental-strip-types --test lib/validation/trip-dates.test.ts lib/validation/early-access-schema.test.ts lib/early-access/durable-signup.test.ts lib/admin/density-engine.test.ts lib/admin/auth.test.ts lib/admin/security.test.ts lib/security/rate-limit.test.ts lib/analytics/attribution-and-hardening.test.ts lib/communication/notifications-and-privacy.test.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

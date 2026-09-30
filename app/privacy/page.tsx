@@ -131,29 +131,21 @@ export default function PrivacyPage() {
                 </p>
               </section>
 
-              <section className="flex flex-col gap-2">
+              <section className="flex flex-col gap-4">
                 <h2 className="font-display text-lg sm:text-xl font-bold text-[var(--foreground)]">
-                  8. Data Deletion &amp; Contact
+                  8. Contact Us About Your Data
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  You have the right to request deletion of your early-access submission at any time.{" "}
-                  {process.env.NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL ? (
-                    <>
-                      To request deletion of your stored validation data, contact us with your submission email at{" "}
-                      <a
-                        href={`mailto:${process.env.NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL}`}
-                        className="font-mono text-xs text-[var(--primary)] hover:underline"
-                      >
-                        {process.env.NEXT_PUBLIC_PRIVACY_CONTACT_EMAIL}
-                      </a>
-                      .
-                    </>
-                  ) : (
-                    <>
-                      A verified project contact channel for deletion requests will be established and published here prior to public launch.
-                    </>
-                  )}
+                  You have the right to request access to, correction of, or permanent deletion of your early-access submission at any time. For access, correction, or deletion requests, use our secure privacy request form.
                 </p>
+                <div className="pt-1">
+                  <Link
+                    href="/privacy/request"
+                    className="inline-flex items-center justify-center rounded-xl bg-[var(--primary)] px-5 py-2.5 text-sm font-bold text-white shadow-sm hover:opacity-90 transition-opacity"
+                  >
+                    Submit a privacy request
+                  </Link>
+                </div>
               </section>
 
               <section className="flex flex-col gap-2">

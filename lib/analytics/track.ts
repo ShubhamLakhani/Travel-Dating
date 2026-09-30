@@ -32,6 +32,9 @@ export const PROHIBITED_KEYS: readonly string[] = [
   "freeform",
   "freeformtext",
   "usertext",
+  "message",
+  "privacymessage",
+  "operatoremail",
 ];
 
 // Set of already fired one-time events during this page session to prevent reload duplicates
