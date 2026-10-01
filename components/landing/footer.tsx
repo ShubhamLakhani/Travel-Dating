@@ -12,9 +12,9 @@ export function Footer() {
   return (
     <footer className="border-t border-[var(--border)] py-12 bg-[var(--surface)] text-[var(--muted-foreground)]">
       <Container size="wide">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {/* Brand & Tagline */}
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-2 sm:col-span-2">
             <Link
               href="/"
               className="font-display text-2xl font-bold tracking-tight text-[var(--foreground)] hover:opacity-90 transition-opacity"
@@ -22,39 +22,85 @@ export function Footer() {
             >
               roam
             </Link>
-            <p className="text-xs sm:text-sm text-[var(--muted-foreground)]">
-              Meet someone going where you&apos;re going.
+            <p className="text-xs sm:text-sm text-[var(--muted-foreground)] max-w-sm">
+              Meet someone going where you&apos;re going. Travel dating built around shared destinations and real travel dates.
             </p>
+            <div className="pt-2">
+              <Link
+                href="/join"
+                className="inline-flex items-center text-xs font-semibold text-[var(--primary)] hover:underline"
+              >
+                Join early access &rarr;
+              </Link>
+            </div>
+          </div>
+
+          {/* Travel Guides */}
+          <div className="flex flex-col gap-3">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]">
+              Travel Guides
+            </span>
+            <nav aria-label="Travel Guides" className="flex flex-col gap-2 text-xs sm:text-sm">
+              <Link
+                href="/travel-dating"
+                className="hover:text-[var(--foreground)] transition-colors"
+              >
+                Travel Dating Guide
+              </Link>
+              <Link
+                href="/dating-while-traveling"
+                className="hover:text-[var(--foreground)] transition-colors"
+              >
+                Dating While Traveling
+              </Link>
+              <Link
+                href="/meet-people-before-your-trip"
+                className="hover:text-[var(--foreground)] transition-colors"
+              >
+                Meet People Before Your Trip
+              </Link>
+              <Link
+                href="/solo-travel-dating"
+                className="hover:text-[var(--foreground)] transition-colors"
+              >
+                Solo Travel Dating
+              </Link>
+            </nav>
           </div>
 
           {/* Legal and Support Links */}
-          <nav aria-label="Footer Navigation" className="flex flex-wrap items-center gap-6 text-xs sm:text-sm">
-            <Link
-              href="/safety"
-              className="hover:text-[var(--foreground)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)]"
-            >
-              Safety
-            </Link>
-            <Link
-              href="/privacy"
-              className="hover:text-[var(--foreground)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)]"
-            >
-              Privacy
-            </Link>
-            <Link
-              href="/terms"
-              className="hover:text-[var(--foreground)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)]"
-            >
-              Terms
-            </Link>
-            <button
-              type="button"
-              onClick={() => setIsContactOpen(true)}
-              className="hover:text-[var(--foreground)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)] cursor-pointer"
-            >
-              Contact
-            </button>
-          </nav>
+          <div className="flex flex-col gap-3">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]">
+              Safety &amp; Legal
+            </span>
+            <nav aria-label="Footer Navigation" className="flex flex-col gap-2 text-xs sm:text-sm">
+              <Link
+                href="/safety"
+                className="hover:text-[var(--foreground)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)]"
+              >
+                Safety Principles
+              </Link>
+              <Link
+                href="/privacy"
+                className="hover:text-[var(--foreground)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)]"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/terms"
+                className="hover:text-[var(--foreground)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)]"
+              >
+                Terms of Service
+              </Link>
+              <button
+                type="button"
+                onClick={() => setIsContactOpen(true)}
+                className="text-left hover:text-[var(--foreground)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)] cursor-pointer"
+              >
+                Contact
+              </button>
+            </nav>
+          </div>
         </div>
 
         {/* Pre-launch Disclaimer Banner */}

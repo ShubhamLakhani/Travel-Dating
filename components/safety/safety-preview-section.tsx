@@ -163,10 +163,16 @@ export function SafetyPreviewSection() {
         </div>
 
         {/* Product Principle Statement Banner */}
-        <div className="mt-12 max-w-3xl mx-auto p-4 sm:p-5 rounded-2xl bg-[var(--safety-accent)]/50 border border-[#1B4332]/20 text-center">
+        <div className="mt-12 max-w-3xl mx-auto p-4 sm:p-5 rounded-2xl bg-[var(--safety-accent)]/50 border border-[#1B4332]/20 text-center flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs sm:text-sm font-semibold text-[#1B4332] leading-relaxed">
             Our product principle: core safety tools shouldn&apos;t sit behind a premium subscription.
           </p>
+          <a
+            href="/safety"
+            className="text-xs font-bold text-[#1B4332] underline hover:opacity-80 shrink-0"
+          >
+            Read our full safety principles &rarr;
+          </a>
         </div>
       </Container>
     </Section>

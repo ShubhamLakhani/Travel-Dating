@@ -1,7 +1,17 @@
 import * as React from "react";
+import type { Metadata } from "next";
 import { JoinHeader } from "@/components/join/join-header";
 import { SuccessContent } from "@/components/success/success-content";
 import { Container } from "@/components/ui/container";
+
+export const metadata: Metadata = {
+  title: "Early Access Confirmed | Roam",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+  },
+};
 
 export default function SuccessPage() {
   return (

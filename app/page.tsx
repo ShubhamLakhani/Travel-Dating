@@ -38,8 +38,39 @@ export default async function HomePage({ searchParams }: HomePageProps) {
     }
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://roam.toolmint.cc/#website",
+        "url": "https://roam.toolmint.cc/",
+        "name": "Roam",
+        "description":
+          "Travel dating built around destination and travel dates. Connect with compatible travelers before or during a trip. Roam is currently in early access validation.",
+        "publisher": {
+          "@id": "https://roam.toolmint.cc/#organization",
+        },
+        "inLanguage": "en-US",
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://roam.toolmint.cc/#organization",
+        "name": "Roam",
+        "url": "https://roam.toolmint.cc/",
+        "logo": "https://roam.toolmint.cc/images/roam-logo.svg",
+      },
+    ],
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[var(--background)]">
+      {/* Structured Data (JSON-LD) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Header with Navigation and Early Access CTA */}
       <LandingHeader />
 

@@ -36,7 +36,7 @@ test("admin-security: rejects arbitrary attacker-signed tokens", () => {
 });
 
 test("admin-security: rejects expired session tokens", () => {
-  const expiredToken = createAdminSessionToken("admin@roam.dating", -3600);
+  const expiredToken = createAdminSessionToken("admin@toolmint.cc", -3600);
   const result = verifyAdminSessionToken(expiredToken);
   assert.equal(result.valid, false);
   assert.equal(result.error, "Session expired");
@@ -45,9 +45,9 @@ test("admin-security: rejects expired session tokens", () => {
 test("admin-security: enforces ADMIN_EMAILS allowlist strictly", () => {
   const original = process.env.ADMIN_EMAILS;
   try {
-    process.env.ADMIN_EMAILS = "founder@roam.dating,admin@roam.dating";
-    assert.equal(isEmailAllowedAdmin("founder@roam.dating"), true);
-    assert.equal(isEmailAllowedAdmin("admin@roam.dating"), true);
+    process.env.ADMIN_EMAILS = "founder@toolmint.cc,admin@toolmint.cc";
+    assert.equal(isEmailAllowedAdmin("founder@toolmint.cc"), true);
+    assert.equal(isEmailAllowedAdmin("admin@toolmint.cc"), true);
     assert.equal(isEmailAllowedAdmin("intruder@randomdomain1234.org"), false);
   } finally {
     process.env.ADMIN_EMAILS = original;

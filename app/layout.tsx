@@ -29,21 +29,25 @@ function getMetadataBase(): URL {
   if (process.env.VERCEL_URL) {
     return new URL(`https://${process.env.VERCEL_URL}`);
   }
-  return new URL("http://localhost:3000");
+  return new URL("https://roam.toolmint.cc");
 }
 
 export const metadata: Metadata = {
   metadataBase: getMetadataBase(),
-  title: "Roam — Meet Someone Going Where You're Going",
+  title: {
+    default: "Roam — Meet Someone Going Where You're Going",
+    template: "%s | Roam",
+  },
   description:
-    "Connect with compatible singles before or during your next trip based on destination, travel dates, and how you like to travel. Join Project Roam early access.",
+    "Travel dating built around destination and travel dates. Connect with compatible travelers before or during a trip. Roam is currently in early access validation.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Roam — Meet Someone Going Where You're Going",
     description:
-      "Connect with compatible singles before or during your next trip based on destination, travel dates, and how you like to travel. Join Project Roam early access.",
+      "Travel dating built around destination and travel dates. Connect with compatible travelers before or during a trip. Roam is currently in early access validation.",
+    url: "https://roam.toolmint.cc",
     type: "website",
     locale: "en_US",
     siteName: "Roam",
@@ -52,8 +56,13 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Roam — Meet Someone Going Where You're Going",
     description:
-      "Connect with compatible singles before or during your next trip based on destination, travel dates, and how you like to travel. Join Project Roam early access.",
+      "Travel dating built around destination and travel dates. Connect with compatible travelers before or during a trip. Roam is currently in early access validation.",
   },
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? {
+        google: process.env.GOOGLE_SITE_VERIFICATION,
+      }
+    : undefined,
 };
 
 export const viewport: Viewport = {

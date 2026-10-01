@@ -1,8 +1,19 @@
+import type { Metadata } from "next";
 import { JoinHeader } from "@/components/join/join-header";
 import { EarlyAccessForm } from "@/components/join/early-access-form";
 import { Container } from "@/components/ui/container";
 import { findDestinationBySlug } from "@/lib/destinations/validation-destinations";
 import { TripSearchDraft } from "@/types/trip";
+
+export const metadata: Metadata = {
+  title: "Early Access Questionnaire | Roam",
+  description: "Join the Project Roam early-access validation list.",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+  },
+};
 
 interface JoinPageProps {
   searchParams?: Promise<{

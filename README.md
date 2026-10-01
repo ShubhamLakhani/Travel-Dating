@@ -141,10 +141,10 @@ Phase 7 introduces an internal founder dashboard to answer key market validation
 1. Ensure `.env` contains:
    ```bash
    ADMIN_SECRET_KEY=roam_admin_dev_pass_2026
-   ADMIN_EMAILS=admin@roam.dating
+   ADMIN_EMAILS=admin@mail.toolmint.cc
    ```
 2. Navigate to [http://localhost:3000/admin](http://localhost:3000/admin) (automatically redirects to `/admin/login`).
-3. Enter the secret passkey (`roam_admin_dev_pass_2026`) and optional admin email (`admin@roam.dating`).
+3. Enter the secret passkey (`roam_admin_dev_pass_2026`) and optional admin email (`admin@mail.toolmint.cc`).
 4. To test logout, click **Log out** in the header.
 
 ### 4. Running Test Suites

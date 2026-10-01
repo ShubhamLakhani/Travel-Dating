@@ -153,7 +153,7 @@ export function validateAdminCredentials(input: {
   let finalEmail = (input.email || "").trim().toLowerCase();
 
   if (!finalEmail) {
-    finalEmail = allowedEmails.length > 0 ? allowedEmails[0] : "admin@roam.dating";
+    finalEmail = allowedEmails.length > 0 ? allowedEmails[0] : "admin@mail.toolmint.cc";
   } else if (!isEmailAllowedAdmin(finalEmail)) {
     return {
       valid: false,

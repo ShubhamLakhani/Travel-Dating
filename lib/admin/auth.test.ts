@@ -11,7 +11,7 @@ import {
 } from "./session.ts";
 
 test("admin-auth: createAdminSessionToken and verifyAdminSessionToken roundtrip", () => {
-  const email = "founder@roam.dating";
+  const email = "founder@toolmint.cc";
   const token = createAdminSessionToken(email);
 
   assert.equal(typeof token, "string");
@@ -24,7 +24,7 @@ test("admin-auth: createAdminSessionToken and verifyAdminSessionToken roundtrip"
 });
 
 test("admin-auth: rejects tampered token signature", () => {
-  const token = createAdminSessionToken("admin@roam.dating");
+  const token = createAdminSessionToken("admin@toolmint.cc");
   const [payloadBase64, signature] = token.split(".");
   // Tamper with signature
   const tamperedSig = signature.slice(0, -3) + "xyz";
@@ -47,10 +47,10 @@ test("admin-auth: validates credentials against server passkey", () => {
   const passkey = process.env.ADMIN_SECRET_KEY || "roam_admin_dev_pass_2026";
   const valid = validateAdminCredentials({
     passkey,
-    email: "founder@roam.dating",
+    email: "founder@toolmint.cc",
   });
   assert.equal(valid.valid, true);
-  assert.equal(valid.email, "founder@roam.dating");
+  assert.equal(valid.email, "founder@toolmint.cc");
 
   const invalid = validateAdminCredentials({
     passkey: "wrong-password-1234",
@@ -65,6 +65,6 @@ test("admin-auth: isEmailAllowedAdmin handles allowlist checking", () => {
     assert.equal(isEmailAllowedAdmin(firstAllowed), true);
     assert.equal(isEmailAllowedAdmin("stranger@random-domain.org"), false);
   } else {
-    assert.equal(isEmailAllowedAdmin("any@roam.dating"), true);
+    assert.equal(isEmailAllowedAdmin("any@toolmint.cc"), true);
   }
 });

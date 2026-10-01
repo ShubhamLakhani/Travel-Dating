@@ -3,6 +3,7 @@
 
 import { TrendingUp, Globe, Target, Layers, ArrowUpRight } from "lucide-react";
 import { getAdminAttributionData } from "@/lib/admin/queries";
+import { CampaignLinkHelper } from "@/components/admin/campaign-link-helper";
 
 export const dynamic = "force-dynamic";
 
@@ -30,6 +31,9 @@ export default async function AdminAttributionPage() {
           Real-world validation campaign attribution captured via UTM parameters and document referrers.
         </p>
       </div>
+
+      {/* Campaign Link Helper (Admin-only tool for acquisition campaigns) */}
+      <CampaignLinkHelper />
 
       {/* Aggregate KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

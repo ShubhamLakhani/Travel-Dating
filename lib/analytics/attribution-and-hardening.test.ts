@@ -13,7 +13,7 @@ import { checkRateLimit, resetRateLimitStore } from "../security/rate-limit.ts";
 import { earlyAccessServerSchema } from "../validation/early-access-schema.ts";
 
 test("attribution: parseAttributionFromUrl extracts standard UTM params safely", () => {
-  const url = "https://roam.dating/?utm_source=instagram&utm_medium=social&utm_campaign=summer26&utm_content=story1&utm_term=dating";
+  const url = "https://roam.toolmint.cc/?utm_source=instagram&utm_medium=social&utm_campaign=summer26&utm_content=story1&utm_term=dating";
   const attr = parseAttributionFromUrl(url);
 
   assert.equal(attr.utm_source, "instagram");
@@ -24,7 +24,7 @@ test("attribution: parseAttributionFromUrl extracts standard UTM params safely",
 });
 
 test("attribution: parseAttributionFromUrl handles missing and empty UTMs cleanly", () => {
-  const url = "https://roam.dating/join?foo=bar";
+  const url = "https://roam.toolmint.cc/join?foo=bar";
   const attr = parseAttributionFromUrl(url);
 
   assert.equal(attr.utm_source, undefined);
