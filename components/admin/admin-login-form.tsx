@@ -72,7 +72,7 @@ export function AdminLoginForm() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="admin@roam.dating"
+            placeholder="you@example.com"
             className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent outline-none transition-all"
             autoComplete="email"
           />
