@@ -100,14 +100,28 @@ export function captureAndStoreAttribution(): AttributionData {
     const existing: AttributionData = existingStr ? JSON.parse(existingStr) : {};
 
     // First touch attribution model: preserve original landing UTMs if already present, but update if new ones arrive
+    const s = effectiveSource || existing.utmSource || existing.utm_source || "direct";
+    const m = utmMedium || existing.utmMedium || existing.utm_medium || (effectiveSource && !utmMedium ? "referral" : "none");
+    const c = utmCampaign || existing.utmCampaign || existing.utm_campaign || "organic";
+    const cnt = utmContent || existing.utmContent || existing.utm_content;
+    const trm = utmTerm || existing.utmTerm || existing.utm_term;
+    const ref = referrer || existing.referrer;
+    const lp = existing.landingPath || existing.landing_path || window.location.pathname;
+
     const updated: AttributionData = {
-      utmSource: effectiveSource || existing.utmSource || "direct",
-      utmMedium: utmMedium || existing.utmMedium || (effectiveSource && !utmMedium ? "referral" : "none"),
-      utmCampaign: utmCampaign || existing.utmCampaign || "organic",
-      utmContent: utmContent || existing.utmContent,
-      utmTerm: utmTerm || existing.utmTerm,
-      referrer: referrer || existing.referrer,
-      landingPath: existing.landingPath || window.location.pathname,
+      utmSource: s,
+      utmMedium: m,
+      utmCampaign: c,
+      utmContent: cnt,
+      utmTerm: trm,
+      utm_source: s,
+      utm_medium: m,
+      utm_campaign: c,
+      utm_content: cnt,
+      utm_term: trm,
+      referrer: ref,
+      landingPath: lp,
+      landing_path: lp,
       capturedAt: existing.capturedAt || new Date().toISOString(),
     };
 

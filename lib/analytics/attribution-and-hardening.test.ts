@@ -23,6 +23,18 @@ test("attribution: parseAttributionFromUrl extracts standard UTM params safely",
   assert.equal(attr.utm_term, "dating");
 });
 
+test("attribution: Phase 11 acquisition test URL parses correctly", () => {
+  const url = "https://roam.toolmint.cc/?utm_source=phase11_test&utm_medium=qa&utm_campaign=seo_acquisition";
+  const attr = parseAttributionFromUrl(url);
+
+  assert.equal(attr.utm_source, "phase11_test");
+  assert.equal(attr.utmSource, "phase11_test");
+  assert.equal(attr.utm_medium, "qa");
+  assert.equal(attr.utmMedium, "qa");
+  assert.equal(attr.utm_campaign, "seo_acquisition");
+  assert.equal(attr.utmCampaign, "seo_acquisition");
+});
+
 test("attribution: parseAttributionFromUrl handles missing and empty UTMs cleanly", () => {
   const url = "https://roam.toolmint.cc/join?foo=bar";
   const attr = parseAttributionFromUrl(url);

@@ -99,13 +99,13 @@ export function StepReview({
           interviewOptIn: Boolean(draft.interviewOptIn),
           attribution: storedAttribution
             ? {
-                utmSource: storedAttribution.utm_source,
-                utmMedium: storedAttribution.utm_medium,
-                utmCampaign: storedAttribution.utm_campaign,
-                utmContent: storedAttribution.utm_content,
-                utmTerm: storedAttribution.utm_term,
+                utmSource: storedAttribution.utmSource || storedAttribution.utm_source,
+                utmMedium: storedAttribution.utmMedium || storedAttribution.utm_medium,
+                utmCampaign: storedAttribution.utmCampaign || storedAttribution.utm_campaign,
+                utmContent: storedAttribution.utmContent || storedAttribution.utm_content,
+                utmTerm: storedAttribution.utmTerm || storedAttribution.utm_term,
                 referrer: storedAttribution.referrer,
-                landingPath: storedAttribution.landing_path,
+                landingPath: storedAttribution.landingPath || storedAttribution.landing_path,
               }
             : undefined,
         }),
