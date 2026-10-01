@@ -2,11 +2,11 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ShieldCheck, Mail, Globe } from "lucide-react";
+import { ArrowLeft, ArrowRight, ShieldCheck, Mail } from "lucide-react";
 import { EarlyAccessContactState, TravelFrequency } from "@/types/signup";
-import { COUNTRIES } from "@/lib/data/countries";
 import { contactStepSchema } from "@/lib/validation/early-access-schema";
 import { Button } from "@/components/ui/button";
+import { CountrySelect } from "./country-select";
 
 interface StepContactProps {
   contact: EarlyAccessContactState;
@@ -34,8 +34,8 @@ export function StepContact({ contact, onUpdate, onBack, onContinue }: StepConta
     });
   };
 
-  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onUpdate({ homeCountry: e.target.value });
+  const handleCountryChange = (countryName: string) => {
+    onUpdate({ homeCountry: countryName });
     setErrors((prev) => {
       const copy = { ...prev };
       delete copy.homeCountry;
@@ -129,31 +129,16 @@ export function StepContact({ contact, onUpdate, onBack, onContinue }: StepConta
           <label htmlFor="country-select" className="text-xs font-bold uppercase tracking-wider text-[var(--foreground)]">
             Home country <span className="text-[var(--primary)]">*</span>
           </label>
-          <div className="relative flex items-center">
-            <Globe className="absolute left-4 h-5 w-5 text-[var(--muted-foreground)] pointer-events-none" aria-hidden="true" />
-            <select
-              id="country-select"
-              required
-              value={contact.homeCountry}
-              onChange={handleCountryChange}
-              className={`w-full h-12 pl-12 pr-8 rounded-2xl border bg-[var(--surface)] text-sm text-[var(--foreground)] transition-all focus:outline-none appearance-none cursor-pointer ${
-                errors.homeCountry
-                  ? "border-red-500 ring-2 ring-red-500/20"
-                  : "border-[var(--border)] focus:border-[var(--primary)]"
-              }`}
-            >
-              <option value="" disabled>
-                Select your home country
-              </option>
-              {COUNTRIES.map((c) => (
-                <option key={c.code} value={c.name}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <CountrySelect
+            value={contact.homeCountry}
+            onChange={handleCountryChange}
+            hasError={Boolean(errors.homeCountry)}
+            errorMessageId="country-select-error"
+          />
           {errors.homeCountry && (
-            <p className="text-xs font-medium text-red-600 pl-1">{errors.homeCountry}</p>
+            <p id="country-select-error" className="text-xs font-medium text-red-600 pl-1">
+              {errors.homeCountry}
+            </p>
           )}
         </div>
 

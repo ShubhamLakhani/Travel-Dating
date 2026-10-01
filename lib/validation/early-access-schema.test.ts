@@ -248,3 +248,32 @@ test("earlyAccessSchema: validates composed full submission", () => {
   const result = earlyAccessSchema.safeParse(validFullDraft);
   assert.equal(result.success, true);
 });
+
+test("contactStepSchema: validates all entries in COUNTRIES dataset", async () => {
+  const { COUNTRIES } = await import("../data/countries.ts");
+  assert.ok(COUNTRIES.length > 40, "COUNTRIES must contain full country list");
+
+  for (const country of COUNTRIES) {
+    const res = contactStepSchema.safeParse({
+      email: "traveler@example.com",
+      homeCountry: country.name,
+      is18Plus: true,
+      marketingConsent: false,
+    });
+    assert.equal(res.success, true, `Country ${country.name} must be valid`);
+    if (res.success) {
+      assert.equal(res.data.homeCountry, country.name);
+    }
+  }
+});
+
+test("contactStepSchema: rejects empty homeCountry", () => {
+  const res = contactStepSchema.safeParse({
+    email: "traveler@example.com",
+    homeCountry: "",
+    is18Plus: true,
+    marketingConsent: false,
+  });
+  assert.equal(res.success, false);
+});
+
