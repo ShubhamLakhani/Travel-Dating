@@ -8,14 +8,14 @@ import { Section } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "What is Travel Dating? Matching by Destination & Dates | Roam",
+  title: "What is Travel Dating? Matching by Destination & Dates",
   description:
     "Explore how travel dating works, why conventional dating apps fail travelers, and how matching by destination and travel dates creates genuine connections.",
   alternates: {
     canonical: "/travel-dating",
   },
   openGraph: {
-    title: "What is Travel Dating? Matching by Destination & Dates | Roam",
+    title: "What is Travel Dating? Matching by Destination & Dates",
     description:
       "Explore how travel dating works, why conventional dating apps fail travelers, and how matching by destination and travel dates creates genuine connections.",
     url: "https://roam.toolmint.cc/travel-dating",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "What is Travel Dating? Matching by Destination & Dates | Roam",
+    title: "What is Travel Dating? Matching by Destination & Dates",
     description:
       "Explore how travel dating works, why conventional dating apps fail travelers, and how matching by destination and travel dates creates genuine connections.",
   },

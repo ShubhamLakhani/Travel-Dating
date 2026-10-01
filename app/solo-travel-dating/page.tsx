@@ -8,14 +8,14 @@ import { Section } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Solo Travel Dating: Connecting Without Compromising Freedom | Roam",
+  title: "Solo Travel Dating: Connecting Without Compromising Freedom",
   description:
     "How to date as a solo traveler without losing your independent spirit. Practical tips for finding shared excursions, dinner dates, and romance abroad.",
   alternates: {
     canonical: "/solo-travel-dating",
   },
   openGraph: {
-    title: "Solo Travel Dating: Connecting Without Compromising Freedom | Roam",
+    title: "Solo Travel Dating: Connecting Without Compromising Freedom",
     description:
       "How to date as a solo traveler without losing your independent spirit. Practical tips for finding shared excursions, dinner dates, and romance abroad.",
     url: "https://roam.toolmint.cc/solo-travel-dating",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Solo Travel Dating: Connecting Without Compromising Freedom | Roam",
+    title: "Solo Travel Dating: Connecting Without Compromising Freedom",
     description:
       "How to date as a solo traveler without losing your independent spirit. Practical tips for finding shared excursions, dinner dates, and romance abroad.",
   },

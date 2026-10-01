@@ -8,14 +8,14 @@ import { Section } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Meet People Before Your Trip: Advance Itinerary Matching | Roam",
+  title: "Meet People Before Your Trip: Advance Itinerary Matching",
   description:
     "Connect with compatible travelers 2 to 4 weeks before departure. Learn how advance destination and date matching creates stress-free shared adventures.",
   alternates: {
     canonical: "/meet-people-before-your-trip",
   },
   openGraph: {
-    title: "Meet People Before Your Trip: Advance Itinerary Matching | Roam",
+    title: "Meet People Before Your Trip: Advance Itinerary Matching",
     description:
       "Connect with compatible travelers 2 to 4 weeks before departure. Learn how advance destination and date matching creates stress-free shared adventures.",
     url: "https://roam.toolmint.cc/meet-people-before-your-trip",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Meet People Before Your Trip: Advance Itinerary Matching | Roam",
+    title: "Meet People Before Your Trip: Advance Itinerary Matching",
     description:
       "Connect with compatible travelers 2 to 4 weeks before departure. Learn how advance destination and date matching creates stress-free shared adventures.",
   },

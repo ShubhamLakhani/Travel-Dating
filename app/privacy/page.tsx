@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, AlertCircle } from "lucide-react";
 import { Container } from "@/components/ui/container";
@@ -5,6 +6,21 @@ import { Section } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { Footer } from "@/components/landing/footer";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "Review Roam's privacy policy, personal data collection safeguards, and user rights under GDPR and CCPA.",
+  alternates: {
+    canonical: "/privacy",
+  },
+  openGraph: {
+    title: "Privacy Policy",
+    description:
+      "Review Roam's privacy policy, personal data collection safeguards, and user rights under GDPR and CCPA.",
+    url: "https://roam.toolmint.cc/privacy",
+  },
+};
 
 export default function PrivacyPage() {
   return (

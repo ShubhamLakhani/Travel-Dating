@@ -8,14 +8,14 @@ import { Section } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Dating While Traveling: Advice, Tips & Safety | Roam",
+  title: "Dating While Traveling: Advice, Tips & Safety",
   description:
     "Discover how to date while traveling without holiday pressure. Practical advice on communication, setting expectations, and exploring new cities safely.",
   alternates: {
     canonical: "/dating-while-traveling",
   },
   openGraph: {
-    title: "Dating While Traveling: Advice, Tips & Safety | Roam",
+    title: "Dating While Traveling: Advice, Tips & Safety",
     description:
       "Discover how to date while traveling without holiday pressure. Practical advice on communication, setting expectations, and exploring new cities safely.",
     url: "https://roam.toolmint.cc/dating-while-traveling",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dating While Traveling: Advice, Tips & Safety | Roam",
+    title: "Dating While Traveling: Advice, Tips & Safety",
     description:
       "Discover how to date while traveling without holiday pressure. Practical advice on communication, setting expectations, and exploring new cities safely.",
   },

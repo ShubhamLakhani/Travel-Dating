@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, AlertCircle } from "lucide-react";
 import { Container } from "@/components/ui/container";
@@ -5,6 +6,21 @@ import { Section } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { Footer } from "@/components/landing/footer";
+
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description:
+    "Terms of service, early-access rules, age restrictions (18+ only), and platform expectations for Project Roam.",
+  alternates: {
+    canonical: "/terms",
+  },
+  openGraph: {
+    title: "Terms of Service",
+    description:
+      "Terms of service, early-access rules, age restrictions (18+ only), and platform expectations for Project Roam.",
+    url: "https://roam.toolmint.cc/terms",
+  },
+};
 
 export default function TermsPage() {
   return (

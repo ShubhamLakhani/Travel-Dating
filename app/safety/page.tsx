@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ShieldCheck, MapPinOff, Share2, Clock, ArrowLeft, AlertCircle } from "lucide-react";
 import { Container } from "@/components/ui/container";
@@ -5,6 +6,21 @@ import { Section } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { Footer } from "@/components/landing/footer";
+
+export const metadata: Metadata = {
+  title: "Trust & Safety Principles",
+  description:
+    "Learn about Roam's core trust and safety principles, privacy by design, and travel meetup precautions.",
+  alternates: {
+    canonical: "/safety",
+  },
+  openGraph: {
+    title: "Trust & Safety Principles",
+    description:
+      "Learn about Roam's core trust and safety principles, privacy by design, and travel meetup precautions.",
+    url: "https://roam.toolmint.cc/safety",
+  },
+};
 
 export default function SafetyPage() {
   return (
