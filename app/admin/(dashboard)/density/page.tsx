@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Trip Density Analytics Page
+// Project Roam : Phase 7 Trip Density Analytics Page
 // File: app/admin/(dashboard)/density/page.tsx
 
 import { Layers, Users, Zap, CheckCircle2 } from "lucide-react";
@@ -8,7 +8,7 @@ import { DensityTable } from "@/components/admin/density-table";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Trip Density Engine | Project Roam Admin",
+  title: "Trip Density Engine | Triply Admin",
   description: "Marketplace density analysis, date overlap calculations, and closed-beta readiness.",
 };
 
@@ -35,7 +35,7 @@ export default async function AdminDensityPage() {
           </span>
         </div>
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">
-          ROAM is trip-first. A marketplace is viable only when travellers overlap in destination and calendar dates.
+          Triply is trip-first. A marketplace is viable only when travelers overlap in destination and calendar dates.
         </p>
       </div>
 

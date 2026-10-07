@@ -6,8 +6,8 @@ import { findDestinationBySlug } from "@/lib/destinations/validation-destination
 import { TripSearchDraft } from "@/types/trip";
 
 export const metadata: Metadata = {
-  title: "Early Access Questionnaire | Roam",
-  description: "Join the Project Roam early-access validation list.",
+  title: "Early Access Questionnaire",
+  description: "Join the Triply early-access validation list.",
   robots: {
     index: false,
     follow: false,

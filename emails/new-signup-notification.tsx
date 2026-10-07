@@ -14,7 +14,7 @@ export type { NewSignupNotificationEmailProps };
  * Privacy Invariants:
  * - Excludes gender, interested-in values, relationship intentions, detailed dating preferences,
  *   self-described text, custom interests, and participant email.
- * - Details are accessible securely only in the authenticated Roam Admin Dashboard.
+ * - Details are accessible securely only in the authenticated Triply Admin Dashboard.
  */
 export function NewSignupNotificationEmail({
   destinationName,
@@ -30,7 +30,7 @@ export function NewSignupNotificationEmail({
         fontFamily:
           "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
         backgroundColor: "#FAF7F2",
-        color: "#1A2530",
+        color: "#0B0F2D",
         padding: "40px 20px",
         lineHeight: 1.6,
       }}
@@ -52,10 +52,10 @@ export function NewSignupNotificationEmail({
               fontSize: "20px",
               fontWeight: 800,
               letterSpacing: "-0.03em",
-              color: "#FF6257",
+              color: "#FF735D",
             }}
           >
-            roam
+            triply
           </span>
           <span
             style={{
@@ -75,17 +75,17 @@ export function NewSignupNotificationEmail({
           style={{
             fontSize: "20px",
             fontWeight: 700,
-            color: "#1A2530",
+            color: "#0B0F2D",
             margin: "0 0 16px 0",
             letterSpacing: "-0.02em",
           }}
         >
-          New Roam early-access signup
+          New Triply early-access signup
         </h1>
 
         <div
           style={{
-            backgroundColor: "#F4EFE6",
+            backgroundColor: "#F7E9DA",
             borderRadius: "12px",
             padding: "20px",
             margin: "20px 0 24px 0",
@@ -94,17 +94,17 @@ export function NewSignupNotificationEmail({
         >
           <div style={{ marginBottom: "10px" }}>
             <strong style={{ color: "#4B5563" }}>Destination:</strong>{" "}
-            <span style={{ fontWeight: 700, color: "#1A2530" }}>{destinationName}</span>
+            <span style={{ fontWeight: 700, color: "#0B0F2D" }}>{destinationName}</span>
           </div>
           <div style={{ marginBottom: "10px" }}>
             <strong style={{ color: "#4B5563" }}>Travel dates:</strong>{" "}
-            <span style={{ fontWeight: 600, color: "#1A2530" }}>
+            <span style={{ fontWeight: 600, color: "#6B5BFF" }}>
               {arrivalFormatted} → {departureFormatted}
             </span>
           </div>
           <div style={{ marginBottom: "10px" }}>
             <strong style={{ color: "#4B5563" }}>Travel mode:</strong>{" "}
-            <span style={{ color: "#1A2530", textTransform: "capitalize" }}>{travelMode}</span>
+            <span style={{ color: "#0B0F2D", textTransform: "capitalize" }}>{travelMode}</span>
           </div>
           <div style={{ marginBottom: "10px" }}>
             <strong style={{ color: "#4B5563" }}>Interview opt-in:</strong>{" "}
@@ -121,14 +121,14 @@ export function NewSignupNotificationEmail({
         </div>
 
         <p style={{ fontSize: "14px", color: "#4B5563", margin: "0 0 20px 0" }}>
-          Open the Roam admin dashboard for full details.
+          Open the Triply admin dashboard for full details.
         </p>
 
         <a
-          href="https://roam.toolmint.cc/admin"
+          href="https://triply.toolmint.cc/admin"
           style={{
             display: "inline-block",
-            backgroundColor: "#FF6257",
+            backgroundColor: "#FF735D",
             color: "#FFFFFF",
             fontSize: "14px",
             fontWeight: 700,
@@ -143,7 +143,7 @@ export function NewSignupNotificationEmail({
         <hr style={{ border: "none", borderTop: "1px solid #EDE8E1", margin: "28px 0" }} />
 
         <p style={{ fontSize: "12px", color: "#9CA3AF", margin: 0 }}>
-          Project Roam — Internal System Notification<br />
+          Triply: Internal System Notification<br />
           Delivered securely to configured operator inbox.
         </p>
       </div>

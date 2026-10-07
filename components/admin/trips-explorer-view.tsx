@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Trips Explorer Component
+// Project Roam : Phase 7 Trips Explorer Component
 // File: components/admin/trips-explorer-view.tsx
 
 "use client";

@@ -14,7 +14,7 @@ export function CampaignLinkHelper() {
   const [copied, setCopied] = React.useState(false);
 
   const generatedUrl = React.useMemo(() => {
-    const base = "https://roam.toolmint.cc";
+    const base = process.env.NEXT_PUBLIC_SITE_URL || "https://triply.toolmint.cc";
     const cleanPath = path.startsWith("/") ? path : `/${path}`;
     const url = new URL(cleanPath, base);
 

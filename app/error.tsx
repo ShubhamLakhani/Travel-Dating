@@ -17,7 +17,7 @@ export default function GlobalError({
   useEffect(() => {
     // Log unexpected errors in development
     if (process.env.NODE_ENV === "development") {
-      console.error("[Roam Application Error]", error);
+      console.error("[Triply Application Error]", error);
     }
   }, [error]);
 

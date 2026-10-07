@@ -1,9 +1,10 @@
-// Project Roam — Phase 11 Admin IndexNow Trigger API
+// Project Roam : Phase 11 Admin IndexNow Trigger API
 // File: app/api/admin/indexnow/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
 import { verifyAdminSession } from "@/lib/admin/auth";
 import { submitToIndexNow, CANONICAL_PUBLIC_URLS } from "@/lib/seo/indexnow";
+import { getAbsoluteUrl } from "@/lib/seo/site-url";
 
 export const dynamic = "force-dynamic";
 
@@ -45,7 +46,7 @@ export async function GET() {
 
   return NextResponse.json({
     configured,
-    keyLocation: "https://roam.toolmint.cc/api/indexnow/key",
+    keyLocation: getAbsoluteUrl("/api/indexnow/key"),
     canonicalUrls: CANONICAL_PUBLIC_URLS,
   });
 }

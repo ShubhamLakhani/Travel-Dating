@@ -1,22 +1,45 @@
-import { Check, Heart, Compass, Sparkles } from "lucide-react";
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
+import { Sparkles, Camera, Utensils, Coffee, Music, HeartHandshake } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 
 export function CompatibilitySection() {
-  const userStyles = [
-    "Slow mornings",
-    "Photography",
-    "Local food",
-    "Live music",
-    "Spontaneous plans",
-  ];
+  const shouldReduceMotion = useReducedMotion();
 
   const sharedSignals = [
-    { label: "Photography", detail: "Shared hobby" },
-    { label: "Local food", detail: "Exploring neighborhood spots" },
-    { label: "Relaxed travel", detail: "Flexible afternoon pacing" },
-    { label: "Similar dating intention", detail: "Both open to seeing where it goes" },
+    {
+      label: "Photography",
+      detail: "Early morning city walks with a camera",
+      icon: Camera,
+      color: "#6B5BFF",
+    },
+    {
+      label: "Local food",
+      detail: "Neighborhood bakeries, street food, and trattorias",
+      icon: Utensils,
+      color: "#FF735D",
+    },
+    {
+      label: "Slow mornings",
+      detail: "No 7 AM alarms or packed tour buses",
+      icon: Coffee,
+      color: "#E84A8B",
+    },
+    {
+      label: "Live music",
+      detail: "Discovering small acoustic and jazz spots",
+      icon: Music,
+      color: "#6B5BFF",
+    },
+    {
+      label: "Similar intention",
+      detail: "Both open to genuine romance while exploring",
+      icon: HeartHandshake,
+      color: "#FF735D",
+    },
   ];
 
   return (
@@ -24,101 +47,90 @@ export function CompatibilitySection() {
       <Container size="wide">
         {/* Section Heading */}
         <div className="max-w-2xl mx-auto text-center flex flex-col gap-3 mb-12 sm:mb-16">
-          <Badge variant="neutral" className="w-fit mx-auto text-xs font-semibold">
+          <Badge variant="travel" className="w-fit mx-auto text-xs font-semibold">
             Travel Compatibility
           </Badge>
 
-          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[var(--foreground)] leading-tight">
-            More than a location match.
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[var(--foreground)] leading-tight">
+            More than a location pin.
           </h2>
 
-          <p className="text-sm sm:text-base text-[var(--muted-foreground)] leading-relaxed">
-            Roam is designed to help you understand whether you&apos;d actually enjoy traveling around the same place together.
+          <p className="text-base text-[var(--muted-foreground)] leading-relaxed">
+            Finding someone in the same city is only the first step. Triply focuses on concrete travel habits, so you can see whether you would actually enjoy spending an afternoon together.
           </p>
         </div>
 
-        {/* Side-by-Side Concrete Signal Cards */}
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
-          {/* Card 1: Your Travel Style */}
-          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius-card)] p-6 sm:p-7 shadow-sm flex flex-col justify-between">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <div className="h-10 w-10 rounded-xl bg-[var(--travel-accent)] text-[#1C3F5E] flex items-center justify-center">
-                  <Compass className="h-5 w-5" aria-hidden="true" />
-                </div>
-                <span className="text-xs font-semibold text-[var(--muted-foreground)] uppercase tracking-wider">
-                  Your Profile
-                </span>
+        {/* Visual Converging Tags Showcase */}
+        <div className="max-w-4xl mx-auto flex flex-col gap-6">
+          {/* Top Traveler Badges: Traveler A & Traveler B */}
+          <div className="grid grid-cols-2 gap-4 text-xs font-semibold">
+            <div className="flex items-center gap-2 p-3 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs">
+              <div className="h-6 w-6 rounded-full bg-[#6B5BFF] text-white flex items-center justify-center text-[10px] font-bold">
+                A
               </div>
-
-              <div>
-                <h3 className="font-display text-lg font-bold text-[var(--foreground)]">
-                  Your travel style
-                </h3>
-                <p className="text-xs text-[var(--muted-foreground)] mt-0.5">
-                  How you like to experience a new destination.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-2 pt-2">
-                {userStyles.map((style) => (
-                  <span
-                    key={style}
-                    className="px-3 py-1.5 rounded-full text-xs font-medium bg-[var(--surface-muted)] text-[var(--foreground)] border border-[var(--border)]"
-                  >
-                    {style}
-                  </span>
-                ))}
-              </div>
+              <span className="text-[var(--foreground)]">Your Travel Style</span>
             </div>
-
-            <div className="mt-8 pt-4 border-t border-[var(--border)] text-xs text-[var(--muted-foreground)] flex items-center gap-1.5">
-              <Sparkles className="h-3.5 w-3.5 text-[var(--primary)]" aria-hidden="true" />
-              <span>Personalized travel rhythm, not a generic questionnaire</span>
+            <div className="flex items-center justify-end gap-2 p-3 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs text-right">
+              <span className="text-[var(--foreground)]">Match&apos;s Travel Style</span>
+              <div className="h-6 w-6 rounded-full bg-[#FF735D] text-white flex items-center justify-center text-[10px] font-bold">
+                B
+              </div>
             </div>
           </div>
 
-          {/* Card 2: You Both Enjoy (Shared Signals) */}
-          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius-card)] p-6 sm:p-7 shadow-sm flex flex-col justify-between ring-1 ring-[var(--primary)]/15">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <div className="h-10 w-10 rounded-xl bg-[var(--primary)]/10 text-[var(--primary)] flex items-center justify-center">
-                  <Heart className="h-5 w-5 fill-[var(--primary)]" aria-hidden="true" />
+          {/* Central Converging Card */}
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius-large)] p-6 sm:p-8 shadow-sm flex flex-col gap-6 relative overflow-hidden">
+            <div className="flex items-center justify-between border-b border-[var(--border)]/70 pb-4">
+              <div className="flex items-center gap-2">
+                <div className="h-7 w-7 rounded-full bg-gradient-to-r from-[#FF735D] to-[#6B5BFF] flex items-center justify-center text-white">
+                  <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                 </div>
-                <span className="text-xs font-semibold text-[var(--primary)] uppercase tracking-wider">
-                  Shared Signals
+                <span className="font-display font-bold text-sm sm:text-base text-[var(--foreground)]">
+                  Converging Travel Signals
                 </span>
               </div>
-
-              <div>
-                <h3 className="font-display text-lg font-bold text-[var(--foreground)]">
-                  You both enjoy
-                </h3>
-                <p className="text-xs text-[var(--muted-foreground)] mt-0.5">
-                  Clear, tangible reasons why crossing paths makes sense.
-                </p>
-              </div>
-
-              <div className="flex flex-col gap-2.5 pt-2">
-                {sharedSignals.map(({ label, detail }) => (
-                  <div
-                    key={label}
-                    className="flex items-center justify-between p-2.5 rounded-xl bg-[var(--surface-muted)]/60 border border-[var(--border)] text-xs"
-                  >
-                    <div className="flex items-center gap-2">
-                      <div className="h-5 w-5 rounded-full bg-[var(--safety-accent)] text-[#1B4332] flex items-center justify-center shrink-0">
-                        <Check className="h-3 w-3 stroke-[3]" aria-hidden="true" />
-                      </div>
-                      <span className="font-semibold text-[var(--foreground)]">{label}</span>
-                    </div>
-                    <span className="text-[11px] text-[var(--muted-foreground)]">{detail}</span>
-                  </div>
-                ))}
-              </div>
+              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-gradient-to-r from-[#FF735D]/10 via-[#E84A8B]/10 to-[#6B5BFF]/10 text-[var(--triply-midnight)] border border-[#E84A8B]/20">
+                Shared habits
+              </span>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-[var(--border)] text-xs text-[var(--muted-foreground)] flex items-center gap-1.5">
-              <span>Understand why someone is relevant before saying hello</span>
+            {/* List of Converging Signals */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {sharedSignals.map((signal, index) => {
+                const Icon = signal.icon;
+                return (
+                  <motion.div
+                    key={signal.label}
+                    initial={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.45, delay: index * 0.08 }}
+                    className="p-4 rounded-2xl bg-[var(--surface-soft)] border border-[var(--border)] flex items-start gap-3.5 hover:border-[var(--primary)]/30 hover:shadow-xs transition-all"
+                  >
+                    <div
+                      style={{ color: signal.color }}
+                      className="h-10 w-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center shrink-0 shadow-xs"
+                    >
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <div className="flex flex-col gap-0.5">
+                      <div className="flex items-center gap-2">
+                        <span className="font-display font-bold text-sm text-[var(--foreground)]">
+                          {signal.label}
+                        </span>
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                      </div>
+                      <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
+                        {signal.detail}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            <div className="pt-2 text-xs text-[var(--muted-foreground)] text-center">
+              Clear, tangible compatibility signals rather than misleading percentage scores.
             </div>
           </div>
         </div>

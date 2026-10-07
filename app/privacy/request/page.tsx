@@ -1,10 +1,11 @@
 "use client";
 
-// Project Roam — Privacy Request Page
+// Triply Privacy Request Page
 // File: app/privacy/request/page.tsx
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, CheckCircle2, AlertCircle, Loader2, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -78,9 +79,16 @@ export default function PrivacyRequestPage() {
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Back to Privacy Policy
           </Link>
-          <span className="font-display font-bold text-lg text-[var(--primary)] tracking-tight">
-            roam
-          </span>
+          <Link href="/" aria-label="Triply home">
+            <Image
+              src="/brand/triply/triply-primary-horizontal.png"
+              alt="Triply"
+              width={100}
+              height={32}
+              className="h-7 w-auto object-contain"
+              priority
+            />
+          </Link>
         </div>
       </header>
 
@@ -95,20 +103,20 @@ export default function PrivacyRequestPage() {
             Privacy Action Request
           </h1>
           <p className="mt-2 text-sm text-[var(--muted-foreground)] leading-relaxed">
-            Submit a request to access, update, or completely delete your Project Roam validation submission records.
+            Submit a request to access, update, or completely delete your Triply validation submission records.
           </p>
         </div>
 
         {status === "success" ? (
           <div className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-8 text-center flex flex-col items-center gap-4 shadow-sm">
-            <div className="h-14 w-14 rounded-full bg-[var(--color-success)]/15 text-[var(--color-success)] flex items-center justify-center">
+            <div className="h-14 w-14 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">
               <CheckCircle2 className="h-8 w-8" aria-hidden="true" />
             </div>
             <h2 className="font-display text-xl font-bold text-[var(--foreground)]">
               Request received
             </h2>
             <p className="text-sm text-[var(--muted-foreground)] max-w-md leading-relaxed">
-              We&apos;ve received your privacy request and will review it. If you requested deletion, your submission data will be purged from our database.
+              We have received your privacy request and will review it. If you requested deletion, your submission data will be purged from our database.
             </p>
             <div className="pt-4">
               <Link href="/">
@@ -212,9 +220,9 @@ export default function PrivacyRequestPage() {
             {status === "error" && errorMessage && (
               <div
                 role="alert"
-                className="p-3 rounded-lg bg-[var(--color-error)]/10 border border-[var(--color-error)]/20 text-[var(--color-error)] text-sm flex items-start gap-2.5"
+                className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm flex items-start gap-2.5"
               >
-                <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" aria-hidden="true" />
+                <AlertCircle className="h-4 w-4 shrink-0 mt-0.5 text-red-600" aria-hidden="true" />
                 <span>{errorMessage}</span>
               </div>
             )}

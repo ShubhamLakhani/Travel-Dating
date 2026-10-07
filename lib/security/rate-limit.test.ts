@@ -1,4 +1,4 @@
-// Project Roam — Phase 8 Rate Limiter Unit Tests
+// Project Roam : Phase 8 Rate Limiter Unit Tests
 // File: lib/security/rate-limit.test.ts
 
 import test from "node:test";

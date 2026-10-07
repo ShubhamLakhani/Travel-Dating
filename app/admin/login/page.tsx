@@ -1,13 +1,14 @@
-// Project Roam — Phase 7 Admin Login Page
+// Triply Admin Login Page
 // File: app/admin/login/page.tsx
 
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { verifyAdminSession } from "@/lib/admin/auth";
 import { AdminLoginForm } from "@/components/admin/admin-login-form";
 
 export const metadata = {
-  title: "Admin Login | Project Roam",
-  description: "Internal founder and validation dashboard login for Project Roam.",
+  title: "Admin Login",
+  description: "Internal founder and validation dashboard login for Triply.",
   robots: {
     index: false,
     follow: false,
@@ -23,9 +24,16 @@ export default async function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-[var(--background)] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <span className="font-extrabold text-4xl tracking-tight text-[var(--primary)]">
-          roam
-        </span>
+        <div className="flex justify-center mb-3">
+          <Image
+            src="/brand/triply/triply-primary-stacked.png"
+            alt="Triply"
+            width={120}
+            height={150}
+            priority
+            className="h-16 w-auto object-contain"
+          />
+        </div>
         <h1 className="mt-3 text-2xl font-bold tracking-tight text-[var(--foreground)]">
           Validation Dashboard
         </h1>

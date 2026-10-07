@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Admin Session & Auth Unit Tests
+// Project Roam : Phase 7 Admin Session & Auth Unit Tests
 // File: lib/admin/auth.test.ts
 
 import test from "node:test";

@@ -2,14 +2,15 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
+import { motion, useReducedMotion } from "motion/react";
 import {
   Plus,
   Share2,
   Check,
   ArrowRight,
   Calendar,
-  Sparkles,
   AlertCircle,
   MailCheck,
 } from "lucide-react";
@@ -30,6 +31,7 @@ export function SuccessContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isPreviewParam = searchParams.get("preview") === "1";
+  const shouldReduceMotion = useReducedMotion();
 
   const isClient = React.useSyncExternalStore(
     () => () => {},
@@ -95,8 +97,8 @@ export function SuccessContent() {
 
   const handleShare = async () => {
     const shareData = {
-      title: "Project Roam",
-      text: "Meet someone going where you're going — Project Roam",
+      title: "Triply",
+      text: "Meet someone going where you're going with Triply.",
       url:
         typeof window !== "undefined"
           ? window.location.origin
@@ -172,17 +174,56 @@ export function SuccessContent() {
   const isDurable = Boolean(receipt);
 
   return (
-    <div className="w-full max-w-lg mx-auto flex flex-col items-center text-center gap-6 py-8">
-      {/* Route Path Graphic Motif */}
-      <div className="relative mb-2">
-        <div className="h-16 w-16 rounded-full bg-[var(--travel-accent)] text-[#1C3F5E] flex items-center justify-center border-2 border-[var(--border)] shadow-md">
-          <Sparkles className="h-8 w-8 text-[var(--primary)]" aria-hidden="true" />
-        </div>
-        <div
-          className="absolute -top-1 -right-1 h-6 w-6 rounded-full bg-[var(--primary)] text-white flex items-center justify-center text-xs font-bold shadow-xs"
-          aria-hidden="true"
-        >
-          ✓
+    <div className="w-full max-w-lg mx-auto flex flex-col items-center text-center gap-6 py-6">
+      {/* Route Path Graphic Motif with Triply standalone symbol */}
+      <div className="relative mb-1 flex items-center justify-center">
+        {/* Converging ambient lines */}
+        <div className="w-48 h-20 relative flex items-center justify-center">
+          <svg
+            className="absolute inset-0 w-full h-full"
+            viewBox="0 0 192 80"
+            fill="none"
+            aria-hidden="true"
+          >
+            <motion.path
+              d="M 16 70 Q 70 65 96 40"
+              stroke="var(--triply-purple)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              fill="none"
+              initial={shouldReduceMotion ? { pathLength: 1 } : { pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            />
+            <motion.path
+              d="M 176 70 Q 122 65 96 40"
+              stroke="var(--triply-coral)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              fill="none"
+              initial={shouldReduceMotion ? { pathLength: 1 } : { pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+            />
+          </svg>
+
+          {/* Triply Standalone Symbol */}
+          <div className="relative z-10 w-16 h-16 rounded-2xl bg-[var(--surface)] border border-[var(--border)] p-2 shadow-lg flex items-center justify-center">
+            <Image
+              src="/brand/triply/triply-symbol.png"
+              alt="Triply destination symbol"
+              width={48}
+              height={48}
+              className="w-10 h-10 object-contain"
+              priority
+            />
+            <div
+              className="absolute -top-1.5 -right-1.5 h-6 w-6 rounded-full bg-[var(--triply-coral)] text-white flex items-center justify-center text-xs font-bold shadow-md"
+              aria-hidden="true"
+            >
+              ✓
+            </div>
+          </div>
         </div>
       </div>
 
@@ -201,7 +242,7 @@ export function SuccessContent() {
       <div className="w-full bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius-card)] p-6 sm:p-8 shadow-sm flex flex-col gap-5 text-center">
         <div className="flex flex-col gap-1.5">
           <h1 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-[var(--foreground)]">
-            {isDurable ? "You're on the list. ✈️" : `${destinationName} added.`}
+            {isDurable ? "You are on the list." : `${destinationName} added.`}
           </h1>
 
           {isDurable && (
@@ -218,24 +259,24 @@ export function SuccessContent() {
 
         {/* Informative Subcopy */}
         {isDurable ? (
-          <div className="p-4 rounded-2xl bg-[var(--surface-muted)] border border-[var(--border)] text-xs text-[var(--muted-foreground)] leading-relaxed flex flex-col gap-2">
+          <div className="p-4 rounded-2xl bg-[var(--surface-soft)] border border-[var(--border)] text-xs text-[var(--muted-foreground)] leading-relaxed flex flex-col gap-2">
             <span>
-              We&apos;ll let you know as Roam begins validating early matching around destinations like {destinationName}.
+              We will notify you as Triply begins early access matching for trips to {destinationName}.
             </span>
             {receipt?.confirmationEmail === "sent" && (
               <span className="flex items-center justify-center gap-1.5 font-semibold text-[#1B4332] pt-1">
                 <MailCheck className="h-4 w-4 text-[#1B4332]" aria-hidden="true" />
-                We&apos;ve also sent you a confirmation email.
+                We have also sent you a confirmation email.
               </span>
             )}
           </div>
         ) : (
-          <div className="p-4 rounded-2xl bg-[var(--surface-muted)] border border-[var(--border)] text-xs text-[var(--muted-foreground)] leading-relaxed flex flex-col gap-1">
+          <div className="p-4 rounded-2xl bg-[var(--surface-soft)] border border-[var(--border)] text-xs text-[var(--muted-foreground)] leading-relaxed flex flex-col gap-1">
             <strong className="text-[var(--foreground)] font-semibold">
-              Submission preview — database registration is connected in the next build phase.
+              Submission preview: database registration is connected in the next phase.
             </strong>
             <span>
-              You&apos;re almost ready for early access. Once durable database storage is enabled, submissions will receive confirmation and priority invites.
+              You are almost ready for early access. Once durable storage is enabled, submissions will receive confirmation and priority invites.
             </span>
           </div>
         )}
@@ -269,7 +310,7 @@ export function SuccessContent() {
             }
             className="w-full text-xs sm:text-sm font-semibold rounded-full"
           >
-            {copied ? "Link copied to clipboard!" : "Share Roam with friends"}
+            {copied ? "Link copied to clipboard!" : "Share Triply with friends"}
           </Button>
         </div>
       </div>

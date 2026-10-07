@@ -1,4 +1,4 @@
-// Project Roam — Phase 8 Launch Checklist Page
+// Project Roam : Phase 8 Launch Checklist Page
 // File: app/admin/(dashboard)/launch/page.tsx
 
 import { CheckCircle2, AlertTriangle, AlertCircle, ShieldCheck, Server, Radio, MessageSquare, Database } from "lucide-react";
@@ -7,7 +7,7 @@ import { getLaunchChecklistData } from "@/lib/admin/queries";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Launch Checklist | Project Roam Admin",
+  title: "Launch Checklist | Triply Admin",
   description: "Operational readiness, verification status, and launch blockers for public validation.",
 };
 
@@ -42,7 +42,7 @@ export default async function AdminLaunchChecklistPage() {
           </span>
         </div>
         <p className="mt-1 text-sm text-[var(--muted-foreground)]">
-          Live technical and operational status for Project Roam&apos;s public validation launch. Secrets are securely hidden.
+          Live technical and operational status for Triply&apos;s public validation launch. Secrets are securely hidden.
         </p>
       </div>
 

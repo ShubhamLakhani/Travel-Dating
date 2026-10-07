@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Interactive Density Table Component
+// Project Roam : Phase 7 Interactive Density Table Component
 // File: components/admin/density-table.tsx
 
 "use client";
@@ -299,7 +299,7 @@ export function DensityTable({ summaries }: DensityTableProps) {
                                 <div className="bg-[var(--surface)] p-3 rounded-xl border border-[var(--border)]">
                                   <div className="text-[var(--muted-foreground)]">Travel Range</div>
                                   <div className="font-semibold text-[var(--foreground)] mt-0.5">
-                                    {dest.earliestArrival || "—"} to {dest.latestDeparture || "—"}
+                                    {dest.earliestArrival || "N/A"} to {dest.latestDeparture || "N/A"}
                                   </div>
                                 </div>
                                 <div className="bg-[var(--surface)] p-3 rounded-xl border border-[var(--border)]">

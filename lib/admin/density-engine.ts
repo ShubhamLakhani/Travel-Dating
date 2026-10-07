@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Trip Density Engine
+// Project Roam : Phase 7 Trip Density Engine
 // File: lib/admin/density-engine.ts
 
 import type {

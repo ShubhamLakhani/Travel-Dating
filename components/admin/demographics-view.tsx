@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Demographics & Privacy-First Users Component
+// Project Roam : Phase 7 Demographics & Privacy-First Users Component
 // File: components/admin/demographics-view.tsx
 
 "use client";
@@ -233,7 +233,7 @@ export function DemographicsView({ insights, users }: DemographicsViewProps) {
                             Opted In
                           </span>
                         ) : (
-                          <span className="text-[var(--muted-foreground)]">—</span>
+                          <span className="text-[var(--muted-foreground)]">N/A</span>
                         )}
                       </td>
                       <td className="py-3 px-4 text-right text-[var(--muted-foreground)]">

@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Admin Auth Logout Route
+// Project Roam : Phase 7 Admin Auth Logout Route
 // File: app/api/admin/auth/logout/route.ts
 
 import { NextResponse } from "next/server";

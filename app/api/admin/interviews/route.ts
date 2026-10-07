@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Admin Interviews API Route
+// Project Roam : Phase 7 Admin Interviews API Route
 // File: app/api/admin/interviews/route.ts
 
 import { NextResponse } from "next/server";

@@ -1,4 +1,4 @@
-// Project Roam — Phase 8 Production Analytics Tracking Wrapper
+// Project Roam : Phase 8 Production Analytics Tracking Wrapper
 // File: lib/analytics/track.ts
 
 import { posthog, isPostHogInitialized } from "./posthog.ts";

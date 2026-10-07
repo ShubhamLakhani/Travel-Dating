@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Destination Analytics Page
+// Project Roam : Phase 7 Destination Analytics Page
 // File: app/admin/(dashboard)/destinations/page.tsx
 
 import { getDestinationDensitySummaries, getAdminOverviewData } from "@/lib/admin/queries";
@@ -7,7 +7,7 @@ import { DestinationsView } from "@/components/admin/destinations-view";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Destination Analytics | Project Roam Admin",
+  title: "Destination Analytics | Triply Admin",
   description: "Market demand, trip distribution, and upcoming traveller overlap by destination.",
 };
 

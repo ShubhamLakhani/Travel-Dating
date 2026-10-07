@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Admin & Density Analytics Types
+// Project Roam : Phase 7 Admin & Density Analytics Types
 // File: types/admin.ts
 
 export type DensityBucket =

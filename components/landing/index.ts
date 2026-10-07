@@ -4,7 +4,7 @@ export * from "./trip-search-card";
 export * from "./trip-crossing-teaser";
 export * from "./destination-picker";
 export * from "./date-range-picker";
-export * from "./why-roam-section";
+export * from "./why-triply-section";
 export * from "./pretrip-section";
 export * from "./compatibility-section";
 export * from "./people-types-section";

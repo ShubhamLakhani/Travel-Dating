@@ -10,15 +10,16 @@ import { Footer } from "@/components/landing/footer";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Review Roam's privacy policy, personal data collection safeguards, and user rights under GDPR and CCPA.",
+    "Review Triply's privacy policy, personal data collection safeguards, and user rights under GDPR and CCPA.",
   alternates: {
     canonical: "/privacy",
   },
   openGraph: {
-    title: "Privacy Policy",
+    title: "Privacy Policy | Triply",
     description:
-      "Review Roam's privacy policy, personal data collection safeguards, and user rights under GDPR and CCPA.",
-    url: "https://roam.toolmint.cc/privacy",
+      "Review Triply's privacy policy, personal data collection safeguards, and user rights under GDPR and CCPA.",
+    url: "/privacy",
+    siteName: "Triply",
   },
 };
 
@@ -37,7 +38,7 @@ export default function PrivacyPage() {
                 className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
               >
                 <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                <span>Back to Roam</span>
+                <span>Back to Triply</span>
               </Link>
             </div>
 
@@ -50,16 +51,16 @@ export default function PrivacyPage() {
                 Pre-Launch Validation Privacy Notice
               </h1>
               <p className="text-xs sm:text-sm text-[var(--muted-foreground)] leading-relaxed">
-                Last updated: September 2026 &middot; Pre-launch validation stage
+                Last updated: October 2026 &middot; Pre-launch validation stage
               </p>
             </div>
 
             {/* Validation Notice Box */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--surface-muted)] border border-[var(--border)] flex items-start gap-3 mb-10 text-xs sm:text-sm text-[var(--foreground)]/90 leading-relaxed">
-              <AlertCircle className="h-5 w-5 text-[var(--primary)] shrink-0 mt-0.5" aria-hidden="true" />
+            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--surface-soft)] border border-[var(--border)] flex items-start gap-3 mb-10 text-xs sm:text-sm text-[var(--foreground)]/90 leading-relaxed">
+              <AlertCircle className="h-5 w-5 text-[var(--triply-coral)] shrink-0 mt-0.5" aria-hidden="true" />
               <div>
                 <strong className="font-semibold text-[var(--foreground)]">Validation Notice:</strong>{" "}
-                Project Roam is an early-stage startup validating travel-dating demand. This notice explains what information we collect during our pre-launch testing and early-access waitlist phases.
+                Triply is an early-stage startup validating travel-dating demand. This notice explains what information we collect during our pre-launch testing and early-access waitlist phases.
               </div>
             </div>
 
@@ -70,7 +71,7 @@ export default function PrivacyPage() {
                   1. Current Product Stage
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  Roam is currently in pre-launch validation. The matching profiles shown on the public landing page are fictional examples created to illustrate the concept of overlapping trip discovery. No public marketplace or social search is currently live.
+                  Triply is currently in pre-launch validation. The matching profiles shown on the public landing page are fictional examples created to illustrate the concept of overlapping trip discovery. No public marketplace or social search is currently live.
                 </p>
               </section>
 
@@ -79,7 +80,7 @@ export default function PrivacyPage() {
                   2. Information We Collect
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  When you submit the early-access questionnaire, Project Roam collects:
+                  When you submit the early-access questionnaire, Triply collects:
                 </p>
                 <ul className="list-disc pl-5 space-y-1 text-xs sm:text-sm text-[var(--muted-foreground)]">
                   <li>Contact information: email address and home country</li>
@@ -107,7 +108,7 @@ export default function PrivacyPage() {
                   <li>Validate genuine demand for date-overlapping travel dating</li>
                   <li>Identify which destinations have sufficient travel density to justify opening initial matching cohorts</li>
                   <li>Invite selected participants to user research and early test groups</li>
-                  <li>Notify you when Roam begins matching in your travel destination</li>
+                  <li>Notify you when Triply begins matching in your travel destination</li>
                 </ul>
               </section>
 
@@ -169,7 +170,7 @@ export default function PrivacyPage() {
                   9. Adults Only (18+)
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  Project Roam is designed strictly for individuals aged 18 years and older. We do not knowingly collect information from anyone under the age of 18.
+                  Triply is designed strictly for individuals aged 18 years and older. We do not knowingly collect information from anyone under the age of 18.
                 </p>
               </section>
 
@@ -178,7 +179,7 @@ export default function PrivacyPage() {
                   10. Changes to This Notice
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  As Project Roam evolves from validation to public beta, this notice will be updated and replaced with a comprehensive production privacy policy before live matching launches.
+                  As Triply evolves from validation to public beta, this notice will be updated and replaced with a comprehensive production privacy policy before live matching launches.
                 </p>
               </section>
             </div>

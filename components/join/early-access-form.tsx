@@ -19,11 +19,14 @@ import { StepIntentions } from "./step-intentions";
 import { StepContact } from "./step-contact";
 import { StepReview } from "./step-review";
 
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+
 interface EarlyAccessFormProps {
   initialTrip?: TripSearchDraft | null;
 }
 
 export function EarlyAccessForm({ initialTrip }: EarlyAccessFormProps) {
+  const shouldReduceMotion = useReducedMotion();
   const [draft, setDraft] = React.useState<EarlyAccessDraft>(() => {
     if (typeof window !== "undefined") {
       const existing = getStoredSignupDraft();
@@ -158,71 +161,83 @@ export function EarlyAccessForm({ initialTrip }: EarlyAccessFormProps) {
     setDraft((prev) => ({ ...prev, interviewOptIn: optIn }));
   };
 
+  const currentStepKey = String(draft.step);
+
   return (
     <div ref={formTopRef} className="w-full max-w-xl mx-auto flex flex-col gap-6 scroll-mt-6">
       <JoinProgress currentStep={draft.step} />
 
-      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius-card)] p-6 sm:p-8 shadow-sm">
-        {draft.step === 1 && (
-          <StepTrip
-            trip={draft.trip}
-            onUpdate={handleUpdateTrip}
-            onContinue={handleContinueFromTrip}
-          />
-        )}
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius-card)] p-6 sm:p-8 shadow-sm overflow-hidden">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={currentStepKey}
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: 14 }}
+            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
+            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -14 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {draft.step === 1 && (
+              <StepTrip
+                trip={draft.trip}
+                onUpdate={handleUpdateTrip}
+                onContinue={handleContinueFromTrip}
+              />
+            )}
 
-        {draft.step === 2 && (
-          <StepProfile
-            profile={draft.profile}
-            onUpdate={handleUpdateProfile}
-            onBack={() => {
-              setDraft((prev) => ({ ...prev, step: 1 }));
-              scrollToTop();
-            }}
-            onContinue={handleContinueFromProfile}
-          />
-        )}
+            {draft.step === 2 && (
+              <StepProfile
+                profile={draft.profile}
+                onUpdate={handleUpdateProfile}
+                onBack={() => {
+                  setDraft((prev) => ({ ...prev, step: 1 }));
+                  scrollToTop();
+                }}
+                onContinue={handleContinueFromProfile}
+              />
+            )}
 
-        {draft.step === 3 && (
-          <StepIntentions
-            intentions={draft.intentions}
-            interests={draft.interests}
-            customInterest={draft.customInterest}
-            onUpdateIntentions={handleUpdateIntentions}
-            onUpdateInterests={handleUpdateInterests}
-            onBack={() => {
-              setDraft((prev) => ({ ...prev, step: 2 }));
-              scrollToTop();
-            }}
-            onContinue={handleContinueFromPreferences}
-          />
-        )}
+            {draft.step === 3 && (
+              <StepIntentions
+                intentions={draft.intentions}
+                interests={draft.interests}
+                customInterest={draft.customInterest}
+                onUpdateIntentions={handleUpdateIntentions}
+                onUpdateInterests={handleUpdateInterests}
+                onBack={() => {
+                  setDraft((prev) => ({ ...prev, step: 2 }));
+                  scrollToTop();
+                }}
+                onContinue={handleContinueFromPreferences}
+              />
+            )}
 
-        {draft.step === 4 && (
-          <StepContact
-            contact={draft.contact}
-            onUpdate={handleUpdateContact}
-            onBack={() => {
-              setDraft((prev) => ({ ...prev, step: 3 }));
-              scrollToTop();
-            }}
-            onContinue={handleContinueFromContact}
-          />
-        )}
+            {draft.step === 4 && (
+              <StepContact
+                contact={draft.contact}
+                onUpdate={handleUpdateContact}
+                onBack={() => {
+                  setDraft((prev) => ({ ...prev, step: 3 }));
+                  scrollToTop();
+                }}
+                onContinue={handleContinueFromContact}
+              />
+            )}
 
-        {draft.step === "review" && (
-          <StepReview
-            draft={draft}
-            onUpdateInterviewOptIn={handleUpdateInterview}
-            onRotateSubmissionId={() => {
-              setDraft((prev) => rotateSubmissionId(prev));
-            }}
-            onEditTrip={() => {
-              setDraft((prev) => ({ ...prev, step: 1 }));
-              scrollToTop();
-            }}
-          />
-        )}
+            {draft.step === "review" && (
+              <StepReview
+                draft={draft}
+                onUpdateInterviewOptIn={handleUpdateInterview}
+                onRotateSubmissionId={() => {
+                  setDraft((prev) => rotateSubmissionId(prev));
+                }}
+                onEditTrip={() => {
+                  setDraft((prev) => ({ ...prev, step: 1 }));
+                  scrollToTop();
+                }}
+              />
+            )}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

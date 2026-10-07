@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Admin Export Trips CSV Route
+// Project Roam : Phase 7 Admin Export Trips CSV Route
 // File: app/api/admin/export/trips/route.ts
 
 import { NextResponse } from "next/server";

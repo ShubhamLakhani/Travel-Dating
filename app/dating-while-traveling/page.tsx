@@ -1,250 +1,239 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ShieldCheck, Coffee, Clock, Heart, Sparkles } from "lucide-react";
-import { LandingHeader } from "@/components/landing/landing-header";
-import { Footer } from "@/components/landing/footer";
-import { Container } from "@/components/ui/container";
-import { Section } from "@/components/ui/section";
-import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
+import { Coffee, Clock, Heart, ShieldCheck, AlertCircle, Compass } from "lucide-react";
+import { SeoArticleLayout, type TocItem } from "@/components/seo/seo-article-layout";
+import { getAbsoluteUrl, getSiteUrl } from "@/lib/seo/site-url";
 
 export const metadata: Metadata = {
   title: "Dating While Traveling: Advice, Tips & Safety",
   description:
-    "Discover how to date while traveling without holiday pressure. Practical advice on communication, setting expectations, and exploring new cities safely.",
+    "Discover how to date while traveling without holiday pressure. Practical advice on pacing, safety, communication, and exploring new cities together.",
   alternates: {
     canonical: "/dating-while-traveling",
   },
   openGraph: {
-    title: "Dating While Traveling: Advice, Tips & Safety",
+    title: "Dating While Traveling: Advice, Tips & Safety | Triply",
     description:
-      "Discover how to date while traveling without holiday pressure. Practical advice on communication, setting expectations, and exploring new cities safely.",
-    url: "https://roam.toolmint.cc/dating-while-traveling",
+      "Discover how to date while traveling without holiday pressure. Practical advice on pacing, safety, communication, and exploring new cities together.",
+    url: "/dating-while-traveling",
     type: "article",
-    siteName: "Roam",
+    siteName: "Triply",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dating While Traveling: Advice, Tips & Safety",
+    title: "Dating While Traveling: Advice, Tips & Safety | Triply",
     description:
-      "Discover how to date while traveling without holiday pressure. Practical advice on communication, setting expectations, and exploring new cities safely.",
+      "Discover how to date while traveling without holiday pressure. Practical advice on pacing, safety, communication, and exploring new cities together.",
   },
 };
 
 export default function DatingWhileTravelingPage() {
+  const pageUrl = getAbsoluteUrl("/dating-while-traveling");
+  const siteUrl = getSiteUrl();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Dating While Traveling: Advice, Tips & Safety for Single Travelers",
+    "headline": "Dating While Traveling: Advice, Tips and Safety for Single Travelers",
     "description":
-      "Discover how to date while traveling without holiday pressure. Practical advice on communication, setting expectations, and exploring new cities safely.",
+      "Discover how to date while traveling without holiday pressure. Practical advice on pacing, safety, communication, and exploring new cities together.",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://roam.toolmint.cc/dating-while-traveling",
+      "@id": pageUrl,
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Roam",
-      "url": "https://roam.toolmint.cc/",
+      "name": "Triply",
+      "url": `${siteUrl}/`,
     },
     "inLanguage": "en-US",
   };
 
+  const tocItems: TocItem[] = [
+    { id: "reality-check", label: "The reality of on-the-road dating" },
+    { id: "four-rules", label: "Four rules for low-stress meetups" },
+    { id: "short-overlaps", label: "When trips overlap for only two days" },
+    { id: "unfamiliar-cities", label: "Safety in unfamiliar destinations" },
+    { id: "early-access-note", label: "Early-access disclosure" },
+  ];
+
+  const heroVisual = (
+    <div className="w-full max-w-[380px] bg-[var(--surface)] border border-[var(--border)] rounded-3xl p-4 shadow-lg relative overflow-hidden">
+      <div className="relative h-44 rounded-2xl overflow-hidden mb-3">
+        <Image
+          src="/images/editorial/travel-cafe.jpg"
+          alt="Two travelers enjoying a quiet coffee conversation at a corner cafe"
+          fill
+          sizes="(max-width: 640px) 100vw, 360px"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--triply-midnight)]/80 via-transparent to-transparent" />
+        <div className="absolute bottom-2.5 left-3 right-3 text-white">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--triply-coral)] block">
+            Low-Pressure Pacing
+          </span>
+          <span className="text-xs font-semibold">Gràcia Espresso Bar &middot; 45-minute casual hello</span>
+        </div>
+      </div>
+
+      <div className="p-3 rounded-2xl bg-[var(--surface-soft)] border border-[var(--border)]/70 space-y-2">
+        <div className="flex items-center justify-between text-xs font-bold text-[var(--foreground)]">
+          <span>Planned Itinerary Rhythm</span>
+          <span className="text-[11px] text-[var(--triply-purple)] font-medium">Independent Pacing</span>
+        </div>
+        <div className="text-[11px] text-[var(--muted-foreground)] leading-relaxed">
+          Morning: Solo gallery wander &middot; Afternoon: Shared cafe &middot; Evening: Sunset walk
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--background)]">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <LandingHeader />
+      <SeoArticleLayout
+        category="Traveler Advice"
+        title="Dating while traveling: how to connect authentically on the road"
+        intro="Traveling opens fresh horizons and spontaneous encounters, but dating on a trip works best with balanced pacing, honest intentions, and solid safety habits."
+        heroVisual={heroVisual}
+        tocItems={tocItems}
+        currentSlug="dating-while-traveling"
+      >
+        {/* Section 1 */}
+        <section id="reality-check" className="space-y-4">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+            The reality of on-the-road dating
+          </h2>
+          <p>
+            Dating while on a trip is completely different from dating in your hometown. Your daily routine is suspended, your curiosity is heightened, and your stay in any given city has a definite end date.
+          </p>
+          <p>
+            While movies portray effortless holiday romance, realistic travel dating encounters common friction points:
+          </p>
 
-      <main className="flex-1 flex flex-col">
-        <Section spacing="default">
-          <Container size="narrow">
-            <div className="mb-6">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-              >
-                <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                <span>Back to Roam Home</span>
-              </Link>
+          <ul className="space-y-2.5 text-sm sm:text-base text-[var(--foreground)]/90 list-disc pl-5">
+            <li>
+              <strong>The pressure cooker effect:</strong> With only a weekend or four days in town, people often rush into high-stakes plans instead of enjoying casual company.
+            </li>
+            <li>
+              <strong>Mismatched intentions:</strong> One traveler may seek a fellow museum buddy, while another wants a whirlwind holiday romance. Without upfront honesty, expectations quickly clash.
+            </li>
+            <li>
+              <strong>Local tour guide fatigue:</strong> Residents on traditional dating apps often get tired of showing visitors the same tourist landmarks. Travelers, meanwhile, want to explore with someone who shares their excitement.
+            </li>
+          </ul>
+        </section>
+
+        {/* Section 2 */}
+        <section id="four-rules" className="space-y-4 pt-6 border-t border-[var(--border)]">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+            Four rules for low-stress meetups
+          </h2>
+          <p>
+            To avoid awkward encounters and protect your travel schedule, follow four simple guidelines:
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+            <div className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs flex flex-col gap-2">
+              <span className="font-bold text-sm text-[var(--foreground)] flex items-center gap-2">
+                <Coffee className="h-4 w-4 text-[var(--triply-coral)]" aria-hidden="true" />
+                1. Keep first dates low-commitment
+              </span>
+              <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
+                Choose a neighborhood cafe, an outdoor street food market, or a public sculpture park. Never commit to a four-course dinner before you know if you enjoy each other&apos;s company.
+              </p>
             </div>
 
-            <header className="flex flex-col gap-4 mb-10">
-              <Badge variant="travel" className="w-fit text-xs font-semibold">
-                Traveler Advice
-              </Badge>
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[var(--foreground)] leading-tight">
-                Dating while traveling: how to connect authentically on the road
-              </h1>
-              <p className="text-base sm:text-lg text-[var(--muted-foreground)] leading-relaxed">
-                Traveling opens up new perspectives and spontaneous adventures, but dating on a trip requires balance, clear intentions, and smart safety habits.
+            <div className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs flex flex-col gap-2">
+              <span className="font-bold text-sm text-[var(--foreground)] flex items-center gap-2">
+                <Clock className="h-4 w-4 text-[var(--triply-purple)]" aria-hidden="true" />
+                2. State your trip window early
+              </span>
+              <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
+                Be clear about your arrival and departure dates from your very first conversation. Knowing how much time you have avoids misunderstandings and prevents rush.
               </p>
-            </header>
+            </div>
 
-            <article className="prose prose-neutral max-w-none space-y-8 text-[var(--foreground)] text-sm sm:text-base leading-relaxed">
-              <section className="space-y-4">
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--foreground)]">
-                  The reality of on-the-road romance
-                </h2>
-                <p>
-                  Dating during a journey is unlike dating in your hometown. Your routine is suspended, your curiosity is heightened, and your time in any one destination is strictly limited.
-                </p>
-                <p>
-                  While movie portrayals suggest effortless holiday romance, realistic travel dating faces common hurdles:
-                </p>
-                <ul className="list-disc pl-5 space-y-2 text-[var(--foreground)]/90">
-                  <li><strong>The pressure cooker effect:</strong> With only a weekend or a few days in town, travelers often feel rushed into high-stakes plans rather than relaxed exploration.</li>
-                  <li><strong>Ambiguous intentions:</strong> Is this a sightseeing companion, a casual holiday romance, or someone open to ongoing connection after you fly home?</li>
-                  <li><strong>Local fatigue:</strong> Locals on dating apps often grow tired of touring travelers through the same monuments, while travelers want fresh discoveries.</li>
-                </ul>
-              </section>
+            <div className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs flex flex-col gap-2">
+              <span className="font-bold text-sm text-[var(--foreground)] flex items-center gap-2">
+                <Heart className="h-4 w-4 text-[var(--triply-magenta)]" aria-hidden="true" />
+                3. Pick activities you already love
+              </span>
+              <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
+                If you love contemporary art or vintage bookshops, suggest browsing those spots together. If chemistry is friendly rather than romantic, you still had a great afternoon.
+              </p>
+            </div>
 
-              <section className="space-y-4 pt-4 border-t border-[var(--border)]">
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--foreground)]">
-                  Four rules for low-stress travel dates
-                </h2>
+            <div className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs flex flex-col gap-2">
+              <span className="font-bold text-sm text-[var(--foreground)] flex items-center gap-2">
+                <Compass className="h-4 w-4 text-[var(--triply-lavender)]" aria-hidden="true" />
+                4. Protect your independence
+              </span>
+              <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
+                Never depend on a date for your transport, hotel key, or phone charger. Maintain your own itinerary so you can comfortably say goodbye whenever you wish.
+              </p>
+            </div>
+          </div>
+        </section>
 
-                <div className="space-y-4 my-4 not-prose">
-                  <div className="p-4 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs">
-                    <span className="font-bold text-sm text-[var(--foreground)] flex items-center gap-2 mb-1">
-                      <Coffee className="h-4 w-4 text-[var(--primary)]" aria-hidden="true" />
-                      1. Keep first meetups low-commitment
-                    </span>
-                    <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
-                      Choose a neighborhood coffee shop, an outdoor market, or a public museum exhibition. Avoid locking yourself into a 4-hour seated tasting menu before you verify chemistry.
-                    </p>
-                  </div>
+        {/* Section 3 */}
+        <section id="short-overlaps" className="space-y-4 pt-6 border-t border-[var(--border)]">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+            When trips overlap for only two days
+          </h2>
+          <p>
+            What happens when your travel calendars overlap for just forty-eight hours? In conventional dating apps, this is usually a deal-breaker because users expect long-term local availability.
+          </p>
+          <p>
+            In travel dating, a two-day window can be delightful if approached with realistic expectations. A shared hike along coastal cliffs, a visit to a morning fish market, or drinks on a rooftop terrace can turn into the highlight of your journey without any burden of future demands.
+          </p>
+          <div className="p-4 rounded-2xl bg-[var(--surface-soft)] border border-[var(--border)] text-xs text-[var(--muted-foreground)] leading-relaxed">
+            <strong className="text-[var(--foreground)] block mb-1">Key Tip for Short Overlaps</strong>
+            Agree in advance on the scope of your time together. A ninety-minute coffee and walking conversation leaves both of you plenty of time for independent sightseeing.
+          </div>
+        </section>
 
-                  <div className="p-4 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs">
-                    <span className="font-bold text-sm text-[var(--foreground)] flex items-center gap-2 mb-1">
-                      <Clock className="h-4 w-4 text-[var(--primary)]" aria-hidden="true" />
-                      2. State your trip window early
-                    </span>
-                    <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
-                      Be transparent about when you arrive and when you leave. Setting expectations avoids disappointment and helps you prioritize activities that fit both schedules.
-                    </p>
-                  </div>
+        {/* Section 4 */}
+        <section id="unfamiliar-cities" className="space-y-4 pt-6 border-t border-[var(--border)]">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+            Safety in unfamiliar destinations
+          </h2>
+          <p>
+            Meeting someone in an unfamiliar city requires steady common sense. Research local neighborhood customs, stay alert, and use licensed public transportation or verified ride-hailing apps.
+          </p>
 
-                  <div className="p-4 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs">
-                    <span className="font-bold text-sm text-[var(--foreground)] flex items-center gap-2 mb-1">
-                      <Heart className="h-4 w-4 text-[var(--primary)]" aria-hidden="true" />
-                      3. Share activities you actually enjoy
-                    </span>
-                    <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
-                      If you love contemporary architecture, propose walking a historic design district together. Shared activities relieve conversational pressure and make memories even if romantic spark is muted.
-                    </p>
-                  </div>
+          <div className="p-6 rounded-2xl bg-[var(--triply-midnight)] text-white space-y-3">
+            <div className="flex items-center gap-2 text-sm font-bold text-[var(--triply-coral)]">
+              <ShieldCheck className="h-5 w-5" aria-hidden="true" />
+              Safety Fundamentals
+            </div>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              Triply is committed to safety by design. We will never collect or broadcast your live GPS tracking data, and we will never ask for your hotel room number or private booking vouchers.
+            </p>
+            <div className="pt-2">
+              <Link
+                href="/safety"
+                className="text-xs font-bold text-[var(--triply-lavender)] hover:underline inline-flex items-center gap-1"
+              >
+                Learn more about Triply Trust &amp; Safety Principles &rarr;
+              </Link>
+            </div>
+          </div>
+        </section>
 
-                  <div className="p-4 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs">
-                    <span className="font-bold text-sm text-[var(--foreground)] flex items-center gap-2 mb-1">
-                      <ShieldCheck className="h-4 w-4 text-emerald-600" aria-hidden="true" />
-                      4. Protect your independence
-                    </span>
-                    <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
-                      Never depend on your date for your only way home, your room key, or your cellular connectivity. Maintain your own itinerary so you can comfortably exit if boundaries are crossed.
-                    </p>
-                  </div>
-                </div>
-              </section>
-
-              <section className="space-y-4 pt-4 border-t border-[var(--border)]">
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--foreground)]">
-                  Safety in unfamiliar cities
-                </h2>
-                <p>
-                  Meeting someone abroad requires heightened common sense. Read local safety customs, drink responsibly, and use authorized ride-hailing or official public transit.
-                </p>
-                <p>
-                  For a detailed breakdown of Roam&apos;s planned privacy protections—such as never collecting live GPS location or hotel details—visit our{" "}
-                  <Link href="/safety" className="text-[var(--primary)] font-semibold hover:underline">
-                    Trust &amp; Safety Principles
-                  </Link>
-                  .
-                </p>
-              </section>
-
-              {/* Validation Stage Disclosure */}
-              <section className="p-4 rounded-xl bg-[var(--travel-accent)]/50 border border-[var(--border)] text-xs text-[var(--muted-foreground)] not-prose flex items-start gap-3">
-                <Sparkles className="h-5 w-5 text-[var(--primary)] shrink-0 mt-0.5" aria-hidden="true" />
-                <div>
-                  <strong className="text-[var(--foreground)] block mb-0.5">Pre-Launch Validation Disclosure</strong>
-                  Project Roam is currently in early-access validation. We do not have active public matching. By sharing your upcoming travel dates, you help us determine which destinations have sufficient traveler density to launch.
-                </div>
-              </section>
-
-              {/* CTA Section */}
-              <section className="p-8 rounded-3xl bg-[var(--surface)] border border-[var(--border)] text-center space-y-4 not-prose shadow-sm">
-                <h3 className="text-xl sm:text-2xl font-extrabold text-[var(--foreground)] tracking-tight">
-                  Have a trip planned?
-                </h3>
-                <p className="text-sm text-[var(--muted-foreground)] max-w-md mx-auto">
-                  Find out who else might be in the same city during your dates.
-                </p>
-                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <Link
-                    href="/join"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white bg-[var(--primary)] hover:opacity-95 transition-all shadow-xs"
-                  >
-                    <span>Join Early Access</span>
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </Link>
-                  <Link
-                    href="/travel-dating"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-[var(--foreground)] bg-[var(--surface-muted)] hover:bg-[var(--border)]/60 transition-all border border-[var(--border)]"
-                  >
-                    <span>What is Travel Dating?</span>
-                  </Link>
-                </div>
-              </section>
-
-              {/* Related Guides */}
-              <section className="pt-6 border-t border-[var(--border)] not-prose">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--muted-foreground)] mb-4">
-                  Explore More Guides
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <Link
-                    href="/travel-dating"
-                    className="p-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--primary)]/50 transition-colors group"
-                  >
-                    <span className="text-xs font-bold text-[var(--foreground)] group-hover:text-[var(--primary)] block transition-colors">
-                      The Travel Dating Concept
-                    </span>
-                    <span className="text-[11px] text-[var(--muted-foreground)] mt-1 block">
-                      Why date overlaps replace radius searches.
-                    </span>
-                  </Link>
-                  <Link
-                    href="/meet-people-before-your-trip"
-                    className="p-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--primary)]/50 transition-colors group"
-                  >
-                    <span className="text-xs font-bold text-[var(--foreground)] group-hover:text-[var(--primary)] block transition-colors">
-                      Pre-Trip Connections
-                    </span>
-                    <span className="text-[11px] text-[var(--muted-foreground)] mt-1 block">
-                      How coordinating 2–4 weeks in advance works.
-                    </span>
-                  </Link>
-                  <Link
-                    href="/solo-travel-dating"
-                    className="p-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--primary)]/50 transition-colors group"
-                  >
-                    <span className="text-xs font-bold text-[var(--foreground)] group-hover:text-[var(--primary)] block transition-colors">
-                      Solo Traveler Insights
-                    </span>
-                    <span className="text-[11px] text-[var(--muted-foreground)] mt-1 block">
-                      Meeting companions without losing solo freedom.
-                    </span>
-                  </Link>
-                </div>
-              </section>
-            </article>
-          </Container>
-        </Section>
-      </main>
-
-      <Footer />
-    </div>
+        {/* Section 5 */}
+        <section id="early-access-note" className="p-4 rounded-xl bg-[var(--triply-sand)]/60 border border-[var(--border)] text-xs text-[var(--muted-foreground)] flex items-start gap-3">
+          <AlertCircle className="h-5 w-5 text-[var(--triply-coral)] shrink-0 mt-0.5" aria-hidden="true" />
+          <div>
+            <strong className="text-[var(--foreground)] block mb-0.5">Pre-Launch Validation Disclosure</strong>
+            Triply is currently in early-access research mode. We do not have active public matching. By sharing your upcoming travel dates, you help us see which destinations have sufficient traveler density to launch.
+          </div>
+        </section>
+      </SeoArticleLayout>
+    </>
   );
 }

@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Admin Security & Privacy Protection Unit Tests
+// Project Roam : Phase 7 Admin Security & Privacy Protection Unit Tests
 // File: lib/admin/security.test.ts
 
 import test from "node:test";

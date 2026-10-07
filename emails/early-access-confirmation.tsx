@@ -7,7 +7,7 @@ export interface EarlyAccessConfirmationEmailProps {
 }
 
 /**
- * Transactional confirmation email component for Project Roam early access.
+ * Transactional confirmation email component for Triply early access.
  *
  * Privacy Invariants:
  * - Excludes gender, dating preferences, relationship intentions, research answers, or marketing flags.
@@ -24,7 +24,7 @@ export function EarlyAccessConfirmationEmail({
         fontFamily:
           "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
         backgroundColor: "#FAF7F2",
-        color: "#1A2530",
+        color: "#0B0F2D",
         padding: "40px 20px",
         lineHeight: 1.6,
       }}
@@ -43,13 +43,13 @@ export function EarlyAccessConfirmationEmail({
         <div style={{ marginBottom: "24px" }}>
           <span
             style={{
-              fontSize: "22px",
+              fontSize: "24px",
               fontWeight: 800,
               letterSpacing: "-0.03em",
-              color: "#FF6257",
+              color: "#FF735D",
             }}
           >
-            roam
+            triply
           </span>
         </div>
 
@@ -57,17 +57,17 @@ export function EarlyAccessConfirmationEmail({
           style={{
             fontSize: "22px",
             fontWeight: 700,
-            color: "#1A2530",
+            color: "#0B0F2D",
             margin: "0 0 16px 0",
             letterSpacing: "-0.02em",
           }}
         >
-          You&apos;re on the Project Roam early-access list. ✈️
+          You&apos;re on the Triply early-access list. ✈️
         </h1>
 
         <div
           style={{
-            backgroundColor: "#F4EFE6",
+            backgroundColor: "#F7E9DA",
             borderRadius: "12px",
             padding: "16px 20px",
             margin: "20px 0 24px 0",
@@ -77,7 +77,7 @@ export function EarlyAccessConfirmationEmail({
             style={{
               fontSize: "18px",
               fontWeight: 700,
-              color: "#1A2530",
+              color: "#0B0F2D",
               marginBottom: "4px",
             }}
           >
@@ -86,8 +86,8 @@ export function EarlyAccessConfirmationEmail({
           <div
             style={{
               fontSize: "14px",
-              color: "#6B7280",
-              fontWeight: 500,
+              color: "#6B5BFF",
+              fontWeight: 600,
             }}
           >
             {arrivalFormatted} → {departureFormatted}
@@ -95,11 +95,11 @@ export function EarlyAccessConfirmationEmail({
         </div>
 
         <p style={{ fontSize: "15px", color: "#374151", margin: "0 0 14px 0" }}>
-          Thanks for helping us validate Roam.
+          Thanks for helping us validate Triply.
         </p>
 
         <p style={{ fontSize: "14px", color: "#4B5563", margin: "0 0 14px 0" }}>
-          Roam is still in pre-launch validation. We&apos;ll use your submission to understand where travelers want the product to launch and let you know as we begin opening early matching around your destination.
+          Triply is still in pre-launch validation. We&apos;ll use your submission to understand where travelers want the product to launch and let you know as we begin opening early matching around your destination.
         </p>
 
         <p
@@ -110,7 +110,7 @@ export function EarlyAccessConfirmationEmail({
             padding: "12px 16px",
             borderRadius: "8px",
             margin: "20px 0",
-            borderLeft: "3px solid #2E6B52",
+            borderLeft: "3px solid #6B5BFF",
           }}
         >
           <strong>Privacy note:</strong> Your submitted trip does not create a public dating profile. We do not ask for your accommodation or live GPS location.
@@ -119,7 +119,7 @@ export function EarlyAccessConfirmationEmail({
         <hr style={{ border: "none", borderTop: "1px solid #EDE8E1", margin: "28px 0" }} />
 
         <p style={{ fontSize: "12px", color: "#9CA3AF", margin: 0 }}>
-          Project Roam — Meet someone going where you&apos;re going.<br />
+          Triply: Two travelers. One shared destination.<br />
           This is a transactional confirmation regarding your early-access submission.
         </p>
       </div>
@@ -132,18 +132,17 @@ export function renderEarlyAccessEmailText({
   arrivalFormatted,
   departureFormatted,
 }: EarlyAccessConfirmationEmailProps): string {
-  return `You're on the Project Roam early-access list. ✈️
+  return `You're on the Triply early-access list. ✈️
 
 ${destinationName}
 ${arrivalFormatted} → ${departureFormatted}
 
-Thanks for helping us validate Roam.
+Thanks for helping us validate Triply.
 
-Roam is still in pre-launch validation. We'll use your submission to understand where travelers want the product to launch and let you know as we begin opening early matching around your destination.
+Triply is still in pre-launch validation. We'll use your submission to understand where travelers want the product to launch and let you know as we begin opening early matching around your destination.
 
 Privacy note: Your submitted trip does not create a public dating profile. We do not ask for your accommodation or live GPS location.
 
-— Project Roam
-Meet someone going where you're going.
+Triply: Two travelers. One shared destination.
 `;
 }

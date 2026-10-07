@@ -31,7 +31,7 @@ interface CountrySelectProps {
 }
 
 /**
- * Custom Dropdown Indicator using Roam's design system ChevronDown
+ * Custom Dropdown Indicator using Triply's design system ChevronDown
  */
 function CustomDropdownIndicator(props: DropdownIndicatorProps<CountryOption, false>) {
   const { selectProps } = props;
@@ -48,7 +48,7 @@ function CustomDropdownIndicator(props: DropdownIndicatorProps<CountryOption, fa
 }
 
 /**
- * Custom Option rendering with Sky Mist focus accent and Coral selection
+ * Custom Option rendering with Triply soft surface accent and Coral selection
  */
 function CustomOption(props: OptionProps<CountryOption, false>) {
   const { isSelected, isFocused, children, innerProps, innerRef } = props;
@@ -60,8 +60,8 @@ function CustomOption(props: OptionProps<CountryOption, false>) {
         isSelected
           ? "bg-[var(--surface-muted)] text-[var(--primary)] font-bold"
           : isFocused
-          ? "bg-[var(--sky-mist)] text-[var(--foreground)] font-medium"
-          : "text-[var(--foreground)] font-medium hover:bg-[var(--sky-mist)]/50"
+          ? "bg-[var(--surface-soft)] text-[var(--foreground)] font-medium"
+          : "text-[var(--foreground)] font-medium hover:bg-[var(--surface-soft)]/60"
       }`}
     >
       <span>{children}</span>

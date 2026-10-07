@@ -1,6 +1,6 @@
 import { LandingHeader } from "@/components/landing/landing-header";
 import { HeroSection } from "@/components/landing/hero-section";
-import { WhyRoamSection } from "@/components/landing/why-roam-section";
+import { WhyTriplySection } from "@/components/landing/why-triply-section";
 import { PreTripSection } from "@/components/landing/pretrip-section";
 import { CompatibilitySection } from "@/components/landing/compatibility-section";
 import { PeopleTypesSection } from "@/components/landing/people-types-section";
@@ -11,6 +11,7 @@ import { FaqSection } from "@/components/landing/faq-section";
 import { Footer } from "@/components/landing/footer";
 import { findDestinationBySlug } from "@/lib/destinations/validation-destinations";
 import { TripSearchDraft } from "@/types/trip";
+import { getSiteUrl } from "@/lib/seo/site-url";
 
 interface HomePageProps {
   searchParams?: Promise<{
@@ -38,27 +39,29 @@ export default async function HomePage({ searchParams }: HomePageProps) {
     }
   }
 
+  const siteUrl = getSiteUrl();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebSite",
-        "@id": "https://roam.toolmint.cc/#website",
-        "url": "https://roam.toolmint.cc/",
-        "name": "Roam",
+        "@id": `${siteUrl}/#website`,
+        "url": `${siteUrl}/`,
+        "name": "Triply",
         "description":
-          "Travel dating built around destination and travel dates. Connect with compatible travelers before or during a trip. Roam is currently in early access validation.",
+          "Travel dating built around destination and travel dates. Connect with compatible travelers before or during your trip. Triply is currently in early-access validation.",
         "publisher": {
-          "@id": "https://roam.toolmint.cc/#organization",
+          "@id": `${siteUrl}/#organization`,
         },
         "inLanguage": "en-US",
       },
       {
         "@type": "Organization",
-        "@id": "https://roam.toolmint.cc/#organization",
-        "name": "Roam",
-        "url": "https://roam.toolmint.cc/",
-        "logo": "https://roam.toolmint.cc/images/roam-logo.svg",
+        "@id": `${siteUrl}/#organization`,
+        "name": "Triply",
+        "url": `${siteUrl}/`,
+        "logo": `${siteUrl}/brand/triply/triply-primary-horizontal.png`,
       },
     ],
   };
@@ -78,8 +81,8 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         {/* Hero Section + Interactive Trip Search / Match Preview */}
         <HeroSection initialSearchDraft={initialDraft} />
 
-        {/* Why Roam Section */}
-        <WhyRoamSection />
+        {/* Why Triply Section */}
+        <WhyTriplySection />
 
         {/* Pre-Trip Matching Section */}
         <PreTripSection />

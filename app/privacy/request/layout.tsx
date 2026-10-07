@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Request | Roam",
+  title: "Privacy Request",
   description: "Submit a privacy request regarding your early-access data.",
   robots: {
     index: false,

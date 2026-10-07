@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Admin Defense-in-Depth Middleware Guard
+// Triply: Phase 7 Admin Defense-in-Depth Middleware Guard
 // File: middleware.ts
 
 import { NextResponse } from "next/server";

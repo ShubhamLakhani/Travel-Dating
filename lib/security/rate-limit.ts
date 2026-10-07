@@ -1,4 +1,4 @@
-// Project Roam — Phase 8 Practical Server-Side Rate Limiter
+// Project Roam : Phase 8 Practical Server-Side Rate Limiter
 // File: lib/security/rate-limit.ts
 
 export interface RateLimitConfig {

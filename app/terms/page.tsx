@@ -10,15 +10,16 @@ import { Footer } from "@/components/landing/footer";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description:
-    "Terms of service, early-access rules, age restrictions (18+ only), and platform expectations for Project Roam.",
+    "Terms of service, early-access rules, age restrictions (18+ only), and platform expectations for Triply.",
   alternates: {
     canonical: "/terms",
   },
   openGraph: {
-    title: "Terms of Service",
+    title: "Terms of Service | Triply",
     description:
-      "Terms of service, early-access rules, age restrictions (18+ only), and platform expectations for Project Roam.",
-    url: "https://roam.toolmint.cc/terms",
+      "Terms of service, early-access rules, age restrictions (18+ only), and platform expectations for Triply.",
+    url: "/terms",
+    siteName: "Triply",
   },
 };
 
@@ -37,7 +38,7 @@ export default function TermsPage() {
                 className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
               >
                 <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                <span>Back to Roam</span>
+                <span>Back to Triply</span>
               </Link>
             </div>
 
@@ -50,16 +51,16 @@ export default function TermsPage() {
                 Pre-Launch Validation Terms
               </h1>
               <p className="text-xs sm:text-sm text-[var(--muted-foreground)] leading-relaxed">
-                Last updated: September 2026 &middot; Pre-launch validation stage
+                Last updated: October 2026 &middot; Pre-launch validation stage
               </p>
             </div>
 
             {/* Legal Notice */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--surface-muted)] border border-[var(--border)] flex items-start gap-3 mb-10 text-xs sm:text-sm text-[var(--foreground)]/90 leading-relaxed">
-              <AlertCircle className="h-5 w-5 text-[var(--primary)] shrink-0 mt-0.5" aria-hidden="true" />
+            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--surface-soft)] border border-[var(--border)] flex items-start gap-3 mb-10 text-xs sm:text-sm text-[var(--foreground)]/90 leading-relaxed">
+              <AlertCircle className="h-5 w-5 text-[var(--triply-coral)] shrink-0 mt-0.5" aria-hidden="true" />
               <div>
                 <strong className="font-semibold text-[var(--foreground)]">Pre-Launch Notice:</strong>{" "}
-                Project Roam is currently in concept validation. Formal legal terms and conditions will be established prior to public commercial launch.
+                Triply is currently in concept validation. Formal legal terms and conditions will be established prior to public commercial launch.
               </div>
             </div>
 
@@ -70,7 +71,7 @@ export default function TermsPage() {
                   1. Early-Access Validation Stage &amp; Stored Submissions
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  The Project Roam website is currently operating as an early-access demand validation platform. When you complete the questionnaire, your travel dates and preferences are durably stored to assess market density. Submitting your details does not create an active dating profile or guarantee admission to any future beta testing cohort.
+                  The Triply website is currently operating as an early-access demand validation platform. When you complete the questionnaire, your travel dates and preferences are durably stored to assess market density. Submitting your details does not create an active dating profile or guarantee admission to any future beta testing cohort.
                 </p>
               </section>
 
@@ -97,7 +98,7 @@ export default function TermsPage() {
                   4. No Guarantee of Launch or Availability
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  Submitting an early-access request or trip details does not guarantee that Roam will launch, operate, or provide matching services in your destination or during your travel dates. Launch decisions depend on traveler density and validation findings.
+                  Submitting an early-access request or trip details does not guarantee that Triply will launch, operate, or provide matching services in your destination or during your travel dates. Launch decisions depend on traveler density and validation findings.
                 </p>
               </section>
 
@@ -115,7 +116,7 @@ export default function TermsPage() {
                   6. Intellectual Property
                 </h2>
                 <p className="text-[var(--muted-foreground)]">
-                  All trademarks, wordmarks, UI designs, graphics, and source code associated with Project Roam are the proprietary intellectual property of Project Roam. You may not copy, reproduce, or repurpose any part of the site without explicit written authorization.
+                  All trademarks, wordmarks, UI designs, graphics, and source code associated with Triply are the proprietary intellectual property of Triply. You may not copy, reproduce, or repurpose any part of the site without explicit written authorization.
                 </p>
               </section>
 

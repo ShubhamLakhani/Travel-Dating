@@ -237,7 +237,7 @@ export function StepContact({ contact, onUpdate, onBack, onContinue }: StepConta
               className="h-4.5 w-4.5 rounded border-[var(--border)] text-[var(--primary)] focus:ring-[var(--focus)] mt-0.5"
             />
             <span className="text-xs text-[var(--muted-foreground)]">
-              Send me occasional Project Roam product news and research updates.
+              Send me occasional Triply product news and research updates.
             </span>
           </label>
           <p className="text-[11px] text-[var(--muted-foreground)] pl-7">
@@ -249,13 +249,13 @@ export function StepContact({ contact, onUpdate, onBack, onContinue }: StepConta
         <div className="p-3.5 rounded-xl bg-[var(--safety-accent)]/50 border border-[#1B4332]/20 flex items-start gap-2.5 text-xs text-[#1B4332]">
           <ShieldCheck className="h-4 w-4 shrink-0 mt-0.5" aria-hidden="true" />
           <span>
-            Roam doesn&apos;t ask for your hotel, exact accommodation, or live GPS location during validation.
+            Triply doesn&apos;t ask for your hotel, exact accommodation, or live GPS location during validation.
           </span>
         </div>
 
         {/* Legal Link */}
         <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
-          By continuing, you acknowledge Project Roam&apos;s{" "}
+          By continuing, you acknowledge Triply&apos;s{" "}
           <Link
             href="/privacy"
             target="_blank"

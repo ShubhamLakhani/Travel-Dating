@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils/cn";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: "primary" | "neutral" | "travel" | "safety" | "outline";
+  variant?: "primary" | "neutral" | "travel" | "safety" | "gradient" | "outline";
 }
 
 export function Badge({
@@ -13,13 +13,15 @@ export function Badge({
 }: BadgeProps) {
   const variantStyles = {
     primary:
-      "bg-[#FF6257]/10 text-[#FF6257] border border-[#FF6257]/20",
+      "bg-[var(--triply-coral)]/10 text-[var(--triply-coral)] border border-[var(--triply-coral)]/20",
     neutral:
       "bg-[var(--surface-muted)] text-[var(--foreground)] border border-[var(--border)]",
     travel:
-      "bg-[var(--travel-accent)] text-[#1C3F5E] border border-[#1C3F5E]/15",
+      "bg-[var(--triply-purple)]/10 text-[var(--triply-purple)] border border-[var(--triply-purple)]/20",
     safety:
-      "bg-[var(--safety-accent)] text-[#1A4531] border border-[#1A4531]/15",
+      "bg-[var(--triply-lavender)]/15 text-[var(--triply-midnight)] border border-[var(--triply-lavender)]/30",
+    gradient:
+      "bg-gradient-to-r from-[#FF735D]/15 via-[#E84A8B]/15 to-[#6B5BFF]/15 text-[var(--foreground)] border border-[#E84A8B]/25",
     outline:
       "bg-transparent text-[var(--foreground)] border border-[var(--border)]",
   };

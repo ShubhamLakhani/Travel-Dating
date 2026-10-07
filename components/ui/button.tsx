@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils/cn";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "ghost" | "gradient";
   size?: "sm" | "md" | "lg";
   isLoading?: boolean;
   leftIcon?: React.ReactNode;
@@ -28,20 +28,22 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      "inline-flex items-center justify-center font-medium transition-colors select-none rounded-[var(--radius-button)] min-h-[44px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)] disabled:pointer-events-none disabled:opacity-50";
+      "inline-flex items-center justify-center font-medium transition-all select-none rounded-[var(--radius-button)] min-h-[44px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--focus)] disabled:pointer-events-none disabled:opacity-50 cursor-pointer";
 
     const variantStyles = {
       primary:
-        "bg-[var(--primary)] text-[var(--primary-foreground)] hover:brightness-95 active:brightness-90 shadow-sm",
+        "bg-[var(--primary)] text-white hover:brightness-105 active:scale-[0.98] shadow-sm",
       secondary:
-        "bg-[var(--surface)] text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--surface-muted)] active:bg-[var(--travel-accent)]",
+        "bg-[var(--surface)] text-[var(--foreground)] border border-[var(--border)] hover:bg-[var(--surface-muted)] active:bg-[var(--surface-muted)]/80",
       ghost:
-        "bg-transparent text-[var(--foreground)] hover:bg-[var(--surface-muted)] active:bg-[var(--travel-accent)]",
+        "bg-transparent text-[var(--foreground)] hover:bg-[var(--surface-muted)] active:bg-[var(--surface-muted)]/80",
+      gradient:
+        "bg-gradient-to-r from-[#FF735D] via-[#E84A8B] to-[#6B5BFF] text-white hover:opacity-95 shadow-md active:scale-[0.98]",
     };
 
     const sizeStyles = {
       sm: "h-10 px-4 text-sm gap-2",
-      md: "h-[52px] px-6 text-base gap-2.5",
+      md: "h-[50px] px-6 text-base gap-2.5",
       lg: "h-[56px] px-8 text-lg gap-3",
     };
 

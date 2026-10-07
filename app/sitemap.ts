@@ -1,54 +1,54 @@
 import type { MetadataRoute } from "next";
+import { getAbsoluteUrl } from "@/lib/seo/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://roam.toolmint.cc";
   const now = new Date();
 
   return [
     {
-      url: `${siteUrl}/`,
+      url: getAbsoluteUrl("/"),
       lastModified: now,
       changeFrequency: "daily",
       priority: 1.0,
     },
     {
-      url: `${siteUrl}/travel-dating`,
+      url: getAbsoluteUrl("/travel-dating"),
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${siteUrl}/dating-while-traveling`,
+      url: getAbsoluteUrl("/dating-while-traveling"),
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${siteUrl}/meet-people-before-your-trip`,
+      url: getAbsoluteUrl("/meet-people-before-your-trip"),
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${siteUrl}/solo-travel-dating`,
+      url: getAbsoluteUrl("/solo-travel-dating"),
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${siteUrl}/safety`,
+      url: getAbsoluteUrl("/safety"),
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${siteUrl}/privacy`,
+      url: getAbsoluteUrl("/privacy"),
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
-      url: `${siteUrl}/terms`,
+      url: getAbsoluteUrl("/terms"),
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.5,

@@ -5,7 +5,7 @@ import { SuccessContent } from "@/components/success/success-content";
 import { Container } from "@/components/ui/container";
 
 export const metadata: Metadata = {
-  title: "Early Access Confirmed | Roam",
+  title: "Early Access Confirmed",
   robots: {
     index: false,
     follow: false,

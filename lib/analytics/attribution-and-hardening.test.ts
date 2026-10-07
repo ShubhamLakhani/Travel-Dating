@@ -1,4 +1,4 @@
-// Project Roam — Phase 8 Attribution, Analytics Sanitization & Hardening Tests
+// Project Roam : Phase 8 Attribution, Analytics Sanitization & Hardening Tests
 // File: lib/analytics/attribution-and-hardening.test.ts
 
 import { test } from "node:test";
@@ -9,6 +9,7 @@ import {
   getOrCreateAnonymousId,
 } from "./attribution.ts";
 import { sanitizeAnalyticsProperties } from "./track.ts";
+import { isPostHogAllowedInEnvironment } from "./environment.ts";
 import { checkRateLimit, resetRateLimitStore } from "../security/rate-limit.ts";
 import { earlyAccessServerSchema } from "../validation/early-access-schema.ts";
 
@@ -164,3 +165,61 @@ test("age-gating: server schema strictly rejects minors (is18Plus false)", () =>
   const parsed = earlyAccessServerSchema.safeParse(invalidPayload);
   assert.equal(parsed.success, false, "Schema must reject under-18 submission");
 });
+
+test("environment-isolation: strictly excludes localhost and loopbacks", () => {
+  assert.equal(isPostHogAllowedInEnvironment("localhost"), false);
+  assert.equal(isPostHogAllowedInEnvironment("127.0.0.1"), false);
+  assert.equal(isPostHogAllowedInEnvironment("::1"), false);
+  assert.equal(isPostHogAllowedInEnvironment("[::1]"), false);
+  assert.equal(isPostHogAllowedInEnvironment("test.localhost"), false);
+});
+
+test("environment-isolation: excludes Vercel preview hostnames by default", () => {
+  const originalPreviewFlag = process.env.NEXT_PUBLIC_ANALYTICS_PREVIEW;
+  try {
+    delete process.env.NEXT_PUBLIC_ANALYTICS_PREVIEW;
+    assert.equal(
+      isPostHogAllowedInEnvironment("project-roam-abc123.vercel.app"),
+      false
+    );
+    assert.equal(
+      isPostHogAllowedInEnvironment("triply-git-feature-preview.vercel.app"),
+      false
+    );
+  } finally {
+    if (originalPreviewFlag !== undefined) {
+      process.env.NEXT_PUBLIC_ANALYTICS_PREVIEW = originalPreviewFlag;
+    }
+  }
+});
+
+test("environment-isolation: allows Vercel preview when preview analytics explicitly enabled", () => {
+  const originalPreviewFlag = process.env.NEXT_PUBLIC_ANALYTICS_PREVIEW;
+  try {
+    process.env.NEXT_PUBLIC_ANALYTICS_PREVIEW = "true";
+    assert.equal(
+      isPostHogAllowedInEnvironment("project-roam-preview.vercel.app"),
+      true
+    );
+  } finally {
+    if (originalPreviewFlag !== undefined) {
+      process.env.NEXT_PUBLIC_ANALYTICS_PREVIEW = originalPreviewFlag;
+    } else {
+      delete process.env.NEXT_PUBLIC_ANALYTICS_PREVIEW;
+    }
+  }
+});
+
+test("environment-isolation: allows production hostnames triply.toolmint.cc and roam.toolmint.cc", () => {
+  assert.equal(isPostHogAllowedInEnvironment("triply.toolmint.cc"), true);
+  assert.equal(isPostHogAllowedInEnvironment("roam.toolmint.cc"), true);
+  assert.equal(isPostHogAllowedInEnvironment("TRIPLY.TOOLMINT.CC"), true);
+});
+
+test("environment-isolation: rejects arbitrary unauthorized hostnames and LAN IPs", () => {
+  assert.equal(isPostHogAllowedInEnvironment("192.168.1.45"), false);
+  assert.equal(isPostHogAllowedInEnvironment("10.0.0.1"), false);
+  assert.equal(isPostHogAllowedInEnvironment("attacker-site.com"), false);
+  assert.equal(isPostHogAllowedInEnvironment(""), false);
+});
+

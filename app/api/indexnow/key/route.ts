@@ -1,4 +1,4 @@
-// Project Roam — Phase 11 IndexNow Key Verification Route
+// Project Roam : Phase 11 IndexNow Key Verification Route
 // File: app/api/indexnow/key/route.ts
 
 import { NextResponse } from "next/server";

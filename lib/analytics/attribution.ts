@@ -1,4 +1,4 @@
-// Project Roam — Phase 8 UTM Attribution & Anonymous Identity Engine
+// Project Roam : Phase 8 UTM Attribution & Anonymous Identity Engine
 // File: lib/analytics/attribution.ts
 
 export interface AttributionData {

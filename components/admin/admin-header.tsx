@@ -1,10 +1,11 @@
-// Project Roam — Phase 7 Admin Header Component
+// Triply Admin Header Component
 // File: components/admin/admin-header.tsx
 
 "use client";
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
@@ -56,10 +57,15 @@ export function AdminHeader({ adminEmail }: AdminHeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Logo & Product Title */}
         <div className="flex items-center gap-3">
-          <Link href="/admin" className="flex items-center gap-2">
-            <span className="font-extrabold text-2xl tracking-tight text-[var(--primary)]">
-              roam
-            </span>
+          <Link href="/admin" className="flex items-center gap-2" aria-label="Triply Admin home">
+            <Image
+              src="/brand/triply/triply-primary-horizontal.png"
+              alt="Triply Admin"
+              width={100}
+              height={32}
+              priority
+              className="h-7 w-auto object-contain"
+            />
           </Link>
           <div className="hidden sm:flex items-center gap-2 pl-3 border-l border-[var(--border)]">
             <span className="text-xs font-bold tracking-wide uppercase px-2 py-0.5 rounded-full bg-[var(--surface-muted)] text-[var(--foreground)]/80 border border-[var(--border)]">
@@ -83,7 +89,7 @@ export function AdminHeader({ adminEmail }: AdminHeaderProps) {
             title="Log out of admin"
           >
             <LogOut className="h-3.5 w-3.5" aria-hidden="true" />
-            <span>{loggingOut ? "Exiting…" : "Log out"}</span>
+            <span>{loggingOut ? "Exiting..." : "Log out"}</span>
           </button>
         </div>
       </div>
@@ -100,9 +106,9 @@ export function AdminHeader({ adminEmail }: AdminHeaderProps) {
             <Link
               key={item.href}
               href={item.href}
-              className={`inline-flex items-center gap-2 px-3.5 py-2.5 text-xs font-semibold border-b-2 whitespace-nowrap transition-colors ${
+              className={`flex items-center gap-1.5 px-3 py-2.5 text-xs font-semibold whitespace-nowrap border-b-2 transition-colors ${
                 isActive
-                  ? "border-[var(--primary)] text-[var(--primary)] bg-[var(--primary)]/5"
+                  ? "border-[var(--primary)] text-[var(--primary)] font-bold"
                   : "border-transparent text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:border-[var(--border)]"
               }`}
             >

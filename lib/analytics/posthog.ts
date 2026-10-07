@@ -1,10 +1,14 @@
 import posthog from "posthog-js";
+import { isPostHogAllowedInEnvironment } from "./environment.ts";
 
 let posthogInitialized = false;
 
 /**
- * Initializes PostHog analytics in browser context only when environment variables exist.
+ * Initializes PostHog analytics in browser context only when environment variables exist
+ * and the current hostname is a permitted production domain.
+ *
  * Configured with strict privacy defaults:
+ * - Localhost and preview environments strictly excluded from production project
  * - Session recording disabled
  * - Autocapture disabled to prevent accidental form-field data leaks
  * - No PII capture
@@ -16,6 +20,16 @@ export function initPostHog(): void {
   }
 
   if (posthogInitialized) {
+    return;
+  }
+
+  // Centralized guard: prevent development or preview traffic from contaminating production analytics
+  if (!isPostHogAllowedInEnvironment()) {
+    if (process.env.NODE_ENV === "development") {
+      console.debug(
+        `[PostHog] Initialization skipped on hostname "${window.location.hostname}" to isolate production analytics.`
+      );
+    }
     return;
   }
 
@@ -54,7 +68,8 @@ export function initPostHog(): void {
 }
 
 export function isPostHogInitialized(): boolean {
-  return posthogInitialized;
+  return posthogInitialized && isPostHogAllowedInEnvironment();
 }
 
-export { posthog };
+export { posthog, isPostHogAllowedInEnvironment };
+

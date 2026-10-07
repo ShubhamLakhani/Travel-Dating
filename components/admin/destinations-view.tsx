@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Destination Analytics Component
+// Project Roam : Phase 7 Destination Analytics Component
 // File: components/admin/destinations-view.tsx
 
 "use client";
@@ -174,7 +174,7 @@ export function DestinationsView({ summaries, totalTripsCount }: DestinationsVie
                   <div className="flex items-center justify-between">
                     <span>Date Range:</span>
                     <span className="text-[var(--foreground)] font-medium">
-                      {dest.earliestArrival ? `${dest.earliestArrival} → ${dest.latestDeparture}` : "—"}
+                      {dest.earliestArrival ? `${dest.earliestArrival} → ${dest.latestDeparture}` : "N/A"}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">

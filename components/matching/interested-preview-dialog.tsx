@@ -60,7 +60,7 @@ export function InterestedPreviewDialog({
 
         <div className="bg-[var(--surface-muted)] border border-[var(--border)] rounded-2xl p-4 text-xs text-[var(--muted-foreground)] leading-relaxed flex flex-col gap-1.5">
           <span className="font-semibold text-[var(--foreground)]">
-            This is a preview of how Roam could work.
+            This is a preview of how Triply could work.
           </span>
           <span>
             Join early access to meet real travelers when matching opens in {match.destination.name}.

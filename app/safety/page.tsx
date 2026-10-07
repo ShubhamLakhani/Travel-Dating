@@ -10,15 +10,16 @@ import { Footer } from "@/components/landing/footer";
 export const metadata: Metadata = {
   title: "Trust & Safety Principles",
   description:
-    "Learn about Roam's core trust and safety principles, privacy by design, and travel meetup precautions.",
+    "Learn about Triply's core trust and safety principles, privacy by design, and travel meetup precautions.",
   alternates: {
     canonical: "/safety",
   },
   openGraph: {
-    title: "Trust & Safety Principles",
+    title: "Trust & Safety Principles | Triply",
     description:
-      "Learn about Roam's core trust and safety principles, privacy by design, and travel meetup precautions.",
-    url: "https://roam.toolmint.cc/safety",
+      "Learn about Triply's core trust and safety principles, privacy by design, and travel meetup precautions.",
+    url: "/safety",
+    siteName: "Triply",
   },
 };
 
@@ -37,7 +38,7 @@ export default function SafetyPage() {
                 className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
               >
                 <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                <span>Back to Roam</span>
+                <span>Back to Triply</span>
               </Link>
             </div>
 
@@ -50,16 +51,16 @@ export default function SafetyPage() {
                 Safety by design for travel dating
               </h1>
               <p className="text-sm sm:text-base text-[var(--muted-foreground)] leading-relaxed">
-                Meeting someone new in an unfamiliar city requires higher standards of safety, privacy, and accountability. Here is how Roam is being planned.
+                Meeting someone new in an unfamiliar city requires higher standards of safety, privacy, and accountability. Here is how Triply is being planned.
               </p>
             </div>
 
             {/* Validation Stage Callout */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--surface-muted)] border border-[var(--border)] flex items-start gap-3 mb-10 text-xs sm:text-sm text-[var(--foreground)]/90 leading-relaxed">
-              <AlertCircle className="h-5 w-5 text-[var(--primary)] shrink-0 mt-0.5" aria-hidden="true" />
+            <div className="p-4 sm:p-5 rounded-2xl bg-[var(--surface-soft)] border border-[var(--border)] flex items-start gap-3 mb-10 text-xs sm:text-sm text-[var(--foreground)]/90 leading-relaxed">
+              <AlertCircle className="h-5 w-5 text-[var(--triply-coral)] shrink-0 mt-0.5" aria-hidden="true" />
               <div>
                 <strong className="font-semibold text-[var(--foreground)]">Pre-Launch Validation Notice:</strong>{" "}
-                Project Roam is currently in pre-launch validation. No real dating marketplace or user accounts are currently active. Profiles shown across the preview are fictional demonstrations. Safety features described here reflect our planned architecture.
+                Triply is currently in pre-launch validation. No real dating marketplace or user accounts are currently active. Profiles shown across the preview are fictional demonstrations. Safety features described here reflect our planned architecture.
               </div>
             </div>
 
@@ -75,7 +76,7 @@ export default function SafetyPage() {
                   </h2>
                 </div>
                 <p className="text-sm text-[var(--muted-foreground)]">
-                  Catfishing and fake profiles are common concerns on social apps. When Roam opens live matching, we plan to implement selfie verification before profiles are permitted to message other travelers.
+                  Catfishing and fake profiles are common concerns on social apps. When Triply opens live matching, we plan to implement selfie verification before profiles are permitted to message other travelers.
                 </p>
               </section>
 
@@ -89,7 +90,7 @@ export default function SafetyPage() {
                   </h2>
                 </div>
                 <p className="text-sm text-[var(--muted-foreground)]">
-                  Roam is designed around trip dates and destination cities, not real-time proximity meters. Your hotel, villa, or live GPS coordinates will never be collected or shown. You choose where and when to meet in public settings.
+                  Triply is designed around trip dates and destination cities, not real-time proximity meters. Your hotel, villa, or live GPS coordinates will never be collected or shown. You choose where and when to meet in public settings.
                 </p>
               </section>
 
@@ -117,7 +118,7 @@ export default function SafetyPage() {
                   </h2>
                 </div>
                 <p className="text-sm text-[var(--muted-foreground)]">
-                  In-app check-ins will prompt you at a pre-set time to confirm your date is going well. Uncompromising block and report mechanisms will ensure bad actors are permanently removed.
+                  In-app check-ins will prompt you at a pre-set time to confirm your date is going well. Clear, uncompromising reporting mechanisms will ensure bad actors are permanently removed.
                 </p>
               </section>
 
@@ -126,7 +127,7 @@ export default function SafetyPage() {
                   5. Age Requirement: 18+ Only
                 </h2>
                 <p className="text-sm text-[var(--muted-foreground)]">
-                  Project Roam is strictly for adults aged 18 and older. Minor accounts will not be permitted.
+                  Triply is strictly for adults aged 18 and older. Minor accounts will not be permitted.
                 </p>
               </section>
 
@@ -135,7 +136,7 @@ export default function SafetyPage() {
                   Our Safety Principle
                 </h3>
                 <p className="text-xs sm:text-sm text-[#1B4332] leading-relaxed">
-                  Core safety tools shouldn&apos;t sit behind a premium subscription. Verification, trusted contacts, and safety check-ins will be fundamental features for all travelers on Roam.
+                  Core safety tools should not sit behind a premium subscription. Verification, trusted contacts, and safety check-ins will be fundamental features for all travelers on Triply.
                 </p>
               </section>
             </div>

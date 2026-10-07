@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Admin Density API Route
+// Project Roam : Phase 7 Admin Density API Route
 // File: app/api/admin/density/route.ts
 
 import { NextResponse } from "next/server";

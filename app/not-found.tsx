@@ -17,7 +17,7 @@ export default function NotFound() {
               </Badge>
               <CardTitle>Destination Not Found</CardTitle>
               <CardDescription>
-                The page or route you are looking for does not exist in Project Roam.
+                The page or route you are looking for does not exist on Triply.
               </CardDescription>
             </CardHeader>
             <CardContent className="flex justify-center pt-2">

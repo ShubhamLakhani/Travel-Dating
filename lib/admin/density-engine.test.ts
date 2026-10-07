@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Trip Density Engine & Concurrency Unit Tests
+// Project Roam : Phase 7 Trip Density Engine & Concurrency Unit Tests
 // File: lib/admin/density-engine.test.ts
 
 import test from "node:test";

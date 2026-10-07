@@ -7,6 +7,10 @@ import {
 export { renderPrivacyRequestNotificationText };
 export type { PrivacyRequestNotificationEmailProps };
 
+/**
+ * Server-only notification email sent to the operator (ADMIN_SIGNUP_NOTIFICATION_EMAIL)
+ * upon a privacy data request (deletion, export, etc.).
+ */
 export function PrivacyRequestNotificationEmail({
   requesterEmail,
   requestType,
@@ -19,7 +23,7 @@ export function PrivacyRequestNotificationEmail({
         fontFamily:
           "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
         backgroundColor: "#FAF7F2",
-        color: "#1A2530",
+        color: "#0B0F2D",
         padding: "40px 20px",
         lineHeight: 1.6,
       }}
@@ -41,10 +45,10 @@ export function PrivacyRequestNotificationEmail({
               fontSize: "20px",
               fontWeight: 800,
               letterSpacing: "-0.03em",
-              color: "#FF6257",
+              color: "#FF735D",
             }}
           >
-            roam
+            triply
           </span>
           <span
             style={{
@@ -64,17 +68,17 @@ export function PrivacyRequestNotificationEmail({
           style={{
             fontSize: "20px",
             fontWeight: 700,
-            color: "#1A2530",
+            color: "#0B0F2D",
             margin: "0 0 16px 0",
             letterSpacing: "-0.02em",
           }}
         >
-          Roam privacy request — {requestType}
+          Triply privacy request: {requestType}
         </h1>
 
         <div
           style={{
-            backgroundColor: "#F4EFE6",
+            backgroundColor: "#F7E9DA",
             borderRadius: "12px",
             padding: "20px",
             margin: "20px 0 24px 0",
@@ -83,11 +87,11 @@ export function PrivacyRequestNotificationEmail({
         >
           <div style={{ marginBottom: "12px" }}>
             <strong style={{ color: "#4B5563" }}>Request Type:</strong>{" "}
-            <span style={{ fontWeight: 700, color: "#1A2530" }}>{requestType}</span>
+            <span style={{ fontWeight: 700, color: "#0B0F2D" }}>{requestType}</span>
           </div>
           <div style={{ marginBottom: "12px" }}>
             <strong style={{ color: "#4B5563" }}>User Contact Email:</strong>{" "}
-            <span style={{ fontFamily: "monospace", color: "#1A2530", fontWeight: 600 }}>
+            <span style={{ fontFamily: "monospace", color: "#0B0F2D", fontWeight: 600 }}>
               {requesterEmail}
             </span>
           </div>
@@ -107,7 +111,7 @@ export function PrivacyRequestNotificationEmail({
                   padding: "12px 14px",
                   borderRadius: "8px",
                   border: "1px solid #EDE8E1",
-                  color: "#1A2530",
+                  color: "#0B0F2D",
                   whiteSpace: "pre-wrap",
                   fontSize: "13px",
                 }}
@@ -119,13 +123,13 @@ export function PrivacyRequestNotificationEmail({
         </div>
 
         <p style={{ fontSize: "14px", color: "#4B5563", margin: "0 0 16px 0" }}>
-          You can inspect and manage user validation records directly in the Supabase or Roam Admin Console.
+          You can inspect and manage user validation records directly in the Supabase or Triply Admin Console.
         </p>
 
         <hr style={{ border: "none", borderTop: "1px solid #EDE8E1", margin: "28px 0" }} />
 
         <p style={{ fontSize: "12px", color: "#9CA3AF", margin: 0 }}>
-          Project Roam — Internal Privacy Request Dispatcher<br />
+          Triply: Internal Privacy Request Dispatcher<br />
           This communication is delivered solely to the authorized operator contact.
         </p>
       </div>

@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Next.js Server Admin Authentication Guard
+// Project Roam : Phase 7 Next.js Server Admin Authentication Guard
 // File: lib/admin/auth.ts
 
 import "server-only";

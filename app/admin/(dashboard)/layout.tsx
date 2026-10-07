@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Admin Protected Dashboard Layout
+// Triply Admin Protected Dashboard Layout
 // File: app/admin/(dashboard)/layout.tsx
 
 import { redirect } from "next/navigation";
@@ -6,8 +6,8 @@ import { verifyAdminSession } from "@/lib/admin/auth";
 import { AdminHeader } from "@/components/admin/admin-header";
 
 export const metadata = {
-  title: "Admin Dashboard | Project Roam",
-  description: "Internal validation dashboard and trip density analytics for Project Roam.",
+  title: "Admin Dashboard",
+  description: "Internal validation dashboard and trip density analytics for Triply.",
   robots: {
     index: false,
     follow: false,
@@ -32,7 +32,7 @@ export default async function AdminDashboardLayout({
         {children}
       </main>
       <footer className="border-t border-[var(--border)] py-4 text-center text-xs text-[var(--muted-foreground)]">
-        Project Roam Internal Validation Dashboard • Stage: Pre-MVP Validation • Strictly Confidential
+        Triply Internal Validation Dashboard • Stage: Pre-MVP Validation • Strictly Confidential
       </footer>
     </div>
   );

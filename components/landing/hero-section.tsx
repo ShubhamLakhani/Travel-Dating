@@ -58,14 +58,17 @@ export function HeroSection({ initialSearchDraft }: HeroSectionProps) {
     <Section spacing="sm" className="pt-6 sm:pt-10 pb-16">
       <Container size="wide">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Column: Headline, Copy, Trip Search Card */}
+          {/* Left Column (55%): Eyebrow, Headline, Copy, Trip Search Card */}
           <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left gap-6">
             <div className="flex flex-col gap-3.5 max-w-xl">
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[var(--foreground)] leading-[1.12]">
+              <span className="text-xs font-bold tracking-[0.18em] uppercase text-[var(--triply-purple)] font-mono">
+                Two travelers. One shared destination.
+              </span>
+              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--foreground)] leading-[1.1]">
                 Meet someone going where you&apos;re going.
               </h1>
               <p className="text-base sm:text-lg text-[var(--foreground)]/75 leading-relaxed font-normal">
-                Connect with compatible singles before or during your next trip. Find people traveling to the same destination during the same dates.
+                Triply connects people whose trips overlap, so you can discover someone before you arrive or while you&apos;re both there.
               </p>
             </div>
 
@@ -81,7 +84,7 @@ export function HeroSection({ initialSearchDraft }: HeroSectionProps) {
             />
           </div>
 
-          {/* Right Column: Visual Trip Crossing Teaser */}
+          {/* Right Column (45%): Animated Triply Travel Visual */}
           <div className="lg:col-span-5 flex justify-center w-full pt-4 lg:pt-0">
             <TripCrossingTeaser />
           </div>

@@ -1,4 +1,4 @@
-// Project Roam — Phase 8 Attribution Analytics Dashboard
+// Project Roam : Phase 8 Attribution Analytics Dashboard
 // File: app/admin/(dashboard)/attribution/page.tsx
 
 import { TrendingUp, Globe, Target, Layers, ArrowUpRight } from "lucide-react";
@@ -8,7 +8,7 @@ import { CampaignLinkHelper } from "@/components/admin/campaign-link-helper";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Traffic Attribution | Project Roam Admin",
+  title: "Traffic Attribution | Triply Admin",
   description: "Acquisition source, campaign, and referrer analytics for validation traffic.",
 };
 

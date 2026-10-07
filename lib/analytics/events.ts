@@ -1,5 +1,5 @@
 /**
- * Project Roam Analytics Event Registry — Phase 8 Canonical Event Taxonomy
+ * Project Roam Analytics Event Registry : Phase 8 Canonical Event Taxonomy
  * Canonical event names for demand validation tracking adhering strictly to Section 3 taxonomy.
  */
 

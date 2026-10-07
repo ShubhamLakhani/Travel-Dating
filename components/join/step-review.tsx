@@ -127,7 +127,7 @@ export function StepReview({
         setStatus("error");
         setErrorMessage(
           data.message ||
-            "We couldn't save your early-access request. Your answers are still here — please try again."
+            "We couldn't save your early-access request. Your answers are still here, so please try again."
         );
         return;
       }
@@ -151,7 +151,7 @@ export function StepReview({
     } catch {
       setStatus("error");
       setErrorMessage(
-        "We couldn't save your early-access request. Your answers are still here — please try again."
+        "We couldn't save your early-access request. Your answers are still here, so please try again."
       );
     }
   };
@@ -294,7 +294,7 @@ export function StepReview({
           </div>
           <div>
             <h2 className="font-display text-base sm:text-lg font-bold text-[var(--foreground)]">
-              Help us build Roam properly.
+              Help us build Triply properly.
             </h2>
             <p className="text-xs text-[var(--muted-foreground)]">
               Would you be open to a short conversation about how you meet people while traveling?
@@ -357,7 +357,7 @@ export function StepReview({
           }
           className="w-full sm:w-auto h-12 px-10 text-sm font-bold rounded-full shadow-md"
         >
-          {status === "submitting" ? "Joining…" : "Join Early Access"}
+          {status === "submitting" ? "Joining..." : "Join Early Access"}
         </Button>
 
         {/* Development preview button fallback */}

@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Interview Pipeline Page
+// Project Roam : Phase 7 Interview Pipeline Page
 // File: app/admin/(dashboard)/interviews/page.tsx
 
 import { getInterviewVolunteersList } from "@/lib/admin/queries";
@@ -7,7 +7,7 @@ import { InterviewsView } from "@/components/admin/interviews-view";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Interview Research Pipeline | Project Roam Admin",
+  title: "Interview Research Pipeline | Triply Admin",
   description: "User interview pipeline for qualitative founder research and outreach.",
 };
 

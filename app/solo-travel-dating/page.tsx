@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, UserCheck, ShieldCheck, Compass, Sparkles } from "lucide-react";
-import { LandingHeader } from "@/components/landing/landing-header";
-import { Footer } from "@/components/landing/footer";
-import { Container } from "@/components/ui/container";
-import { Section } from "@/components/ui/section";
-import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
+import { Compass, UserCheck, ShieldCheck, AlertCircle } from "lucide-react";
+import { SeoArticleLayout, type TocItem } from "@/components/seo/seo-article-layout";
+import { getAbsoluteUrl, getSiteUrl } from "@/lib/seo/site-url";
 
 export const metadata: Metadata = {
   title: "Solo Travel Dating: Connecting Without Compromising Freedom",
@@ -15,22 +13,25 @@ export const metadata: Metadata = {
     canonical: "/solo-travel-dating",
   },
   openGraph: {
-    title: "Solo Travel Dating: Connecting Without Compromising Freedom",
+    title: "Solo Travel Dating: Connecting Without Compromising Freedom | Triply",
     description:
       "How to date as a solo traveler without losing your independent spirit. Practical tips for finding shared excursions, dinner dates, and romance abroad.",
-    url: "https://roam.toolmint.cc/solo-travel-dating",
+    url: "/solo-travel-dating",
     type: "article",
-    siteName: "Roam",
+    siteName: "Triply",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Solo Travel Dating: Connecting Without Compromising Freedom",
+    title: "Solo Travel Dating: Connecting Without Compromising Freedom | Triply",
     description:
       "How to date as a solo traveler without losing your independent spirit. Practical tips for finding shared excursions, dinner dates, and romance abroad.",
   },
 };
 
 export default function SoloTravelDatingPage() {
+  const pageUrl = getAbsoluteUrl("/solo-travel-dating");
+  const siteUrl = getSiteUrl();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -39,207 +40,182 @@ export default function SoloTravelDatingPage() {
       "How to date as a solo traveler without losing your independent spirit. Practical tips for finding shared excursions, dinner dates, and romance abroad.",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://roam.toolmint.cc/solo-travel-dating",
+      "@id": pageUrl,
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Roam",
-      "url": "https://roam.toolmint.cc/",
+      "name": "Triply",
+      "url": `${siteUrl}/`,
     },
     "inLanguage": "en-US",
   };
 
+  const tocItems: TocItem[] = [
+    { id: "solo-paradox", label: "The solo traveler's paradox" },
+    { id: "protecting-freedom", label: "Connecting without compromising your route" },
+    { id: "coastal-train", label: "Scenario: The coastal train day trip" },
+    { id: "solo-safety", label: "Solo safety: non-negotiables" },
+    { id: "early-access-note", label: "Early-access disclosure" },
+  ];
+
+  const heroVisual = (
+    <div className="w-full max-w-[380px] bg-[var(--surface)] border border-[var(--border)] rounded-3xl p-4 shadow-lg relative overflow-hidden">
+      <div className="relative h-44 rounded-2xl overflow-hidden mb-3">
+        <Image
+          src="/images/editorial/coastal-sunset.jpg"
+          alt="A solo traveler standing on a scenic seaside overlook during golden hour"
+          fill
+          sizes="(max-width: 640px) 100vw, 360px"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--triply-midnight)]/80 via-transparent to-transparent" />
+        <div className="absolute bottom-2.5 left-3 right-3 text-white">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--triply-coral)] block">
+            Independent Freedom
+          </span>
+          <span className="text-xs font-semibold">Cinque Terre Overlook &middot; Shared afternoon hike</span>
+        </div>
+      </div>
+
+      <div className="p-3 rounded-2xl bg-[var(--surface-soft)] border border-[var(--border)]/70 space-y-2">
+        <div className="flex items-center justify-between text-xs font-bold text-[var(--foreground)]">
+          <span>Solo Balance Principle</span>
+          <span className="text-[11px] text-[var(--triply-purple)] font-medium">Zero Codependency</span>
+        </div>
+        <div className="text-[11px] text-[var(--muted-foreground)] leading-relaxed">
+          Two travelers, two independent bookings, one memorable afternoon.
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--background)]">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <LandingHeader />
+      <SeoArticleLayout
+        category="Solo Travel Insights"
+        title="Solo travel dating: how to meet people without losing your freedom"
+        intro="Traveling solo offers complete autonomy, but sharing a memorable dinner, a coastal train ride, or an afternoon hike with someone special elevates the journey."
+        heroVisual={heroVisual}
+        tocItems={tocItems}
+        currentSlug="solo-travel-dating"
+      >
+        {/* Section 1 */}
+        <section id="solo-paradox" className="space-y-4">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+            The solo traveler&apos;s paradox
+          </h2>
+          <p>
+            Solo travelers treasure waking up without obligations to anyone else. You choose where to eat, when to sleep, which cobblestone alleyways to explore, and when to sit quietly with a book for three hours.
+          </p>
+          <p>
+            Yet even the most self-sufficient traveler encounters moments where companionship makes an experience significantly richer:
+          </p>
 
-      <main className="flex-1 flex flex-col">
-        <Section spacing="default">
-          <Container size="narrow">
-            <div className="mb-6">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-              >
-                <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                <span>Back to Roam Home</span>
-              </Link>
+          <ul className="space-y-2.5 text-sm sm:text-base text-[var(--foreground)]/90 list-disc pl-5">
+            <li>
+              <strong>The dinner barrier:</strong> Sitting alone at lively tapas counters or celebrated bistros can sometimes feel isolated. Having someone across the table to share small plates transforms the meal.
+            </li>
+            <li>
+              <strong>Shared awe:</strong> Watching the sun sink into the sea from a cliffside trail is often more poignant when reflected in someone else&apos;s eyes.
+            </li>
+            <li>
+              <strong>Hostel fatigue:</strong> Loud group tours and party hostels are not for everyone. Finding one thoughtful, like-minded traveler who respects your tempo is deeply refreshing.
+            </li>
+          </ul>
+        </section>
+
+        {/* Section 2 */}
+        <section id="protecting-freedom" className="space-y-4 pt-6 border-t border-[var(--border)]">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+            Connecting without compromising your route
+          </h2>
+          <p>
+            The secret to rewarding solo travel dating is keeping your itinerary intact. You are not looking for someone to rewrite your travel map. You are looking for natural, unforced intersections:
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+            <div className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs flex flex-col gap-2">
+              <span className="font-bold text-sm text-[var(--foreground)] flex items-center gap-2">
+                <Compass className="h-4 w-4 text-[var(--triply-coral)]" aria-hidden="true" />
+                Discrete Activity Overlap
+              </span>
+              <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
+                Plan a two-hour morning coffee walk or an afternoon modern art gallery visit. If you click, continue to dinner. If not, return to your solo journey with zero guilt.
+              </p>
             </div>
 
-            <header className="flex flex-col gap-4 mb-10">
-              <Badge variant="travel" className="w-fit text-xs font-semibold">
-                Solo Travel Insights
-              </Badge>
-              <h1 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[var(--foreground)] leading-tight">
-                Solo travel dating: how to meet people without losing your freedom
-              </h1>
-              <p className="text-base sm:text-lg text-[var(--muted-foreground)] leading-relaxed">
-                Traveling alone offers unmatched autonomy, but sharing a memorable meal, a rooftop sunset, or a day trip with someone special elevates the journey.
+            <div className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs flex flex-col gap-2">
+              <span className="font-bold text-sm text-[var(--foreground)] flex items-center gap-2">
+                <UserCheck className="h-4 w-4 text-[var(--triply-purple)]" aria-hidden="true" />
+                Two Travelers, Two Itineraries
+              </span>
+              <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
+                Because both individuals have their own rooms, transport, and plans, there is no codependency. You connect purely by choice, not out of convenience.
               </p>
-            </header>
+            </div>
+          </div>
+        </section>
 
-            <article className="prose prose-neutral max-w-none space-y-8 text-[var(--foreground)] text-sm sm:text-base leading-relaxed">
-              <section className="space-y-4">
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--foreground)]">
-                  The solo traveler&apos;s paradox
-                </h2>
-                <p>
-                  Solo travelers treasure waking up with zero obligations to anyone else. You choose where to eat, when to sleep, and which alleyways to wander.
-                </p>
-                <p>
-                  Yet, even the most independent solo voyager experiences moments where companionship makes an experience richer:
-                </p>
-                <ul className="list-disc pl-5 space-y-2 text-[var(--foreground)]/90">
-                  <li><strong>The dinner barrier:</strong> Sitting alone at high-end dining spots or lively tapas bars can feel isolating.</li>
-                  <li><strong>Shared awe:</strong> Watching a sunrise over volcanic peaks or viewing Renaissance art is often more poignant when reflected in someone else&apos;s eyes.</li>
-                  <li><strong>Hostel fatigue:</strong> Group tours and rowdy party hostels aren&apos;t for everyone; finding one thoughtful, like-minded traveler who shares your pacing is rare.</li>
-                </ul>
-              </section>
+        {/* Section 3 */}
+        <section id="coastal-train" className="space-y-4 pt-6 border-t border-[var(--border)]">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+            Scenario: the coastal train day trip
+          </h2>
+          <p>
+            Imagine you are traveling through northern Italy. You want to take the regional train to the coast for an afternoon walk along the seaside footpaths, followed by seafood risotto at a harbor trattoria.
+          </p>
+          <p>
+            Through Triply, you connect with another solo traveler who is also based in Florence and planning a day trip to the same coastal village on Thursday. You meet at the central railway station platform, share the scenic ride, walk the clifftop trails together, and head back on the evening train.
+          </p>
+          <p>
+            You both experienced a wonderful shared day in the Italian sun without either of you having to change your weekly hotel reservations or sacrifice personal space.
+          </p>
+        </section>
 
-              <section className="space-y-4 pt-4 border-t border-[var(--border)]">
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--foreground)]">
-                  Connecting without compromising your route
-                </h2>
-                <p>
-                  The key to successful solo travel dating is keeping your core travel plans intact. You are not looking for someone to dictate your vacation—you are looking for natural overlaps:
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6 not-prose">
-                  <div className="p-4 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs">
-                    <span className="font-bold text-sm text-[var(--foreground)] flex items-center gap-2 mb-1">
-                      <Compass className="h-4 w-4 text-[var(--primary)]" aria-hidden="true" />
-                      Discrete activity overlap
-                    </span>
-                    <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
-                      Plan a 2-hour morning coffee walk or an afternoon gallery visit together. If you click, extend to dinner; if not, return to your solo adventure guilt-free.
-                    </p>
-                  </div>
+        {/* Section 4 */}
+        <section id="solo-safety" className="space-y-4 pt-6 border-t border-[var(--border)]">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+            Solo safety: non-negotiables
+          </h2>
+          <p>
+            When traveling solo, personal safety is your top responsibility. Never lower your personal standards for a date:
+          </p>
 
-                  <div className="p-4 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs">
-                    <span className="font-bold text-sm text-[var(--foreground)] flex items-center gap-2 mb-1">
-                      <UserCheck className="h-4 w-4 text-[var(--primary)]" aria-hidden="true" />
-                      Two travelers, two itineraries
-                    </span>
-                    <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
-                      Because both travelers have their own accommodations, pacing, and plans, there is zero codependency. Connection happens by choice, not necessity.
-                    </p>
-                  </div>
-                </div>
-              </section>
+          <div className="p-6 rounded-2xl bg-[var(--triply-midnight)] text-white space-y-3">
+            <div className="flex items-center gap-2 text-sm font-bold text-[var(--triply-coral)]">
+              <ShieldCheck className="h-5 w-5" aria-hidden="true" />
+              Four Safety Essentials for Solo Travelers
+            </div>
+            <ul className="space-y-2 text-xs sm:text-sm text-slate-300 list-disc pl-5">
+              <li>Always maintain your own private accommodation. Never stay in a date&apos;s rental or hotel room.</li>
+              <li>Always carry backup payment methods and emergency local cash in a separate secure pocket.</li>
+              <li>Share your meetup spot with a trusted contact back home before heading out.</li>
+              <li>Never leave food or beverages unattended, and trust your instincts if any situation feels uncomfortable.</li>
+            </ul>
+            <div className="pt-2">
+              <Link
+                href="/safety"
+                className="text-xs font-bold text-[var(--triply-lavender)] hover:underline inline-flex items-center gap-1"
+              >
+                Read full guidelines in the Triply Safety Center &rarr;
+              </Link>
+            </div>
+          </div>
+        </section>
 
-              <section className="space-y-4 pt-4 border-t border-[var(--border)]">
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--foreground)]">
-                  Solo safety: non-negotiables
-                </h2>
-                <p>
-                  When traveling solo, personal safety is entirely your responsibility. Never lower your standards for a date:
-                </p>
-                <div className="p-5 rounded-2xl bg-[var(--surface-muted)] border border-[var(--border)] space-y-3 not-prose">
-                  <div className="flex items-center gap-2 text-sm font-bold text-[var(--foreground)]">
-                    <ShieldCheck className="h-5 w-5 text-emerald-600" aria-hidden="true" />
-                    Crucial safety habits for solo dating
-                  </div>
-                  <ul className="space-y-2 text-xs sm:text-sm text-[var(--muted-foreground)] list-disc pl-5">
-                    <li>Always stay in your own booked accommodation. Do not check into a match&apos;s hotel or rental.</li>
-                    <li>Always keep a backup credit card and sufficient local currency in a separate pocket.</li>
-                    <li>Share your live phone location with a trusted friend or family member back home before meeting.</li>
-                    <li>Never leave food or beverages unattended, and stay alert to your surroundings.</li>
-                  </ul>
-                  <div className="pt-2">
-                    <Link
-                      href="/safety"
-                      className="text-xs font-bold text-[var(--primary)] hover:underline inline-flex items-center gap-1"
-                    >
-                      Read full safety guidelines in the Roam Safety Center &rarr;
-                    </Link>
-                  </div>
-                </div>
-              </section>
-
-              {/* Validation Stage Disclosure */}
-              <section className="p-4 rounded-xl bg-[var(--travel-accent)]/50 border border-[var(--border)] text-xs text-[var(--muted-foreground)] not-prose flex items-start gap-3">
-                <Sparkles className="h-5 w-5 text-[var(--primary)] shrink-0 mt-0.5" aria-hidden="true" />
-                <div>
-                  <strong className="text-[var(--foreground)] block mb-0.5">Pre-Launch Validation Disclosure</strong>
-                  Project Roam is currently in pre-launch validation. We are measuring demand for destination-and-date based matching among solo and group travelers. Submitting your trip helps validate where we launch.
-                </div>
-              </section>
-
-              {/* CTA Section */}
-              <section className="p-8 rounded-3xl bg-[var(--surface)] border border-[var(--border)] text-center space-y-4 not-prose shadow-sm">
-                <h3 className="text-xl sm:text-2xl font-extrabold text-[var(--foreground)] tracking-tight">
-                  Taking a solo journey soon?
-                </h3>
-                <p className="text-sm text-[var(--muted-foreground)] max-w-md mx-auto">
-                  Tell us where and when you&apos;re going, and be the first to know when Roam validates your destination.
-                </p>
-                <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <Link
-                    href="/join"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-bold text-white bg-[var(--primary)] hover:opacity-95 transition-all shadow-xs"
-                  >
-                    <span>Join Early Access</span>
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </Link>
-                  <Link
-                    href="/travel-dating"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-[var(--foreground)] bg-[var(--surface-muted)] hover:bg-[var(--border)]/60 transition-all border border-[var(--border)]"
-                  >
-                    <span>How Roam Works</span>
-                  </Link>
-                </div>
-              </section>
-
-              {/* Related Guides */}
-              <section className="pt-6 border-t border-[var(--border)] not-prose">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--muted-foreground)] mb-4">
-                  Related Travel Dating Guides
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <Link
-                    href="/travel-dating"
-                    className="p-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--primary)]/50 transition-colors group"
-                  >
-                    <span className="text-xs font-bold text-[var(--foreground)] group-hover:text-[var(--primary)] block transition-colors">
-                      The Travel Dating Concept
-                    </span>
-                    <span className="text-[11px] text-[var(--muted-foreground)] mt-1 block">
-                      Why matching by dates changes the game.
-                    </span>
-                  </Link>
-                  <Link
-                    href="/dating-while-traveling"
-                    className="p-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--primary)]/50 transition-colors group"
-                  >
-                    <span className="text-xs font-bold text-[var(--foreground)] group-hover:text-[var(--primary)] block transition-colors">
-                      Dating While Traveling
-                    </span>
-                    <span className="text-[11px] text-[var(--muted-foreground)] mt-1 block">
-                      Balancing curiosity and low-pressure connections.
-                    </span>
-                  </Link>
-                  <Link
-                    href="/meet-people-before-your-trip"
-                    className="p-4 rounded-xl border border-[var(--border)] bg-[var(--surface)] hover:border-[var(--primary)]/50 transition-colors group"
-                  >
-                    <span className="text-xs font-bold text-[var(--foreground)] group-hover:text-[var(--primary)] block transition-colors">
-                      Pre-Trip Connections
-                    </span>
-                    <span className="text-[11px] text-[var(--muted-foreground)] mt-1 block">
-                      Planning shared activities 2–4 weeks in advance.
-                    </span>
-                  </Link>
-                </div>
-              </section>
-            </article>
-          </Container>
-        </Section>
-      </main>
-
-      <Footer />
-    </div>
+        {/* Section 5 */}
+        <section id="early-access-note" className="p-4 rounded-xl bg-[var(--triply-sand)]/60 border border-[var(--border)] text-xs text-[var(--muted-foreground)] flex items-start gap-3">
+          <AlertCircle className="h-5 w-5 text-[var(--triply-coral)] shrink-0 mt-0.5" aria-hidden="true" />
+          <div>
+            <strong className="text-[var(--foreground)] block mb-0.5">Pre-Launch Validation Disclosure</strong>
+            Triply is currently in pre-launch validation. We are measuring demand for destination-and-date based matching among solo and group travelers. Submitting your trip helps validate where we open first.
+          </div>
+        </section>
+      </SeoArticleLayout>
+    </>
   );
 }

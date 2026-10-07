@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Demographics & Users Page
+// Project Roam : Phase 7 Demographics & Users Page
 // File: app/admin/(dashboard)/users/page.tsx
 
 import { getDemographicsAndUsersData } from "@/lib/admin/queries";
@@ -7,7 +7,7 @@ import { DemographicsView } from "@/components/admin/demographics-view";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Demographics & User Profiles | Project Roam Admin",
+  title: "Demographics & User Profiles | Triply Admin",
   description: "Aggregated user demographics, travel intentions, and privacy-first validation records.",
 };
 

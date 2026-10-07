@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Admin Session Token & Authorization Logic
+// Project Roam : Phase 7 Admin Session Token & Authorization Logic
 // File: lib/admin/session.ts
 
 import { createHmac, timingSafeEqual } from "node:crypto";

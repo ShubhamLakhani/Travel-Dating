@@ -208,7 +208,7 @@ export async function POST(request: Request) {
     const message =
       err instanceof Error && err.message.includes("Database service unavailable")
         ? "Database persistence is not yet connected in this environment."
-        : "We couldn't save your early-access request. Your answers are still here — please try again.";
+        : "We couldn't save your early-access request. Your answers are still here, so please try again.";
 
     return NextResponse.json(
       {

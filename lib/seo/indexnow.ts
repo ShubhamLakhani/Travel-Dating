@@ -1,16 +1,22 @@
-// Project Roam — Phase 11 IndexNow Protocol Support
+// Triply: IndexNow Protocol Support
 // File: lib/seo/indexnow.ts
 
-export const CANONICAL_PUBLIC_URLS = [
-  "https://roam.toolmint.cc/",
-  "https://roam.toolmint.cc/travel-dating",
-  "https://roam.toolmint.cc/dating-while-traveling",
-  "https://roam.toolmint.cc/meet-people-before-your-trip",
-  "https://roam.toolmint.cc/solo-travel-dating",
-  "https://roam.toolmint.cc/safety",
-  "https://roam.toolmint.cc/privacy",
-  "https://roam.toolmint.cc/terms",
+import { getAbsoluteUrl, getSiteHost, getSiteUrl } from "./site-url";
+
+export const CANONICAL_PUBLIC_PATHS = [
+  "/",
+  "/travel-dating",
+  "/dating-while-traveling",
+  "/meet-people-before-your-trip",
+  "/solo-travel-dating",
+  "/safety",
+  "/privacy",
+  "/terms",
 ] as const;
+
+export const CANONICAL_PUBLIC_URLS: string[] = CANONICAL_PUBLIC_PATHS.map((p) =>
+  getAbsoluteUrl(p)
+);
 
 const FORBIDDEN_SUBSTRINGS = [
   "/join",
@@ -33,13 +39,15 @@ export interface IndexNowResult {
  */
 export function filterIndexablePublicUrls(candidateUrls?: string[]): string[] {
   if (!candidateUrls || candidateUrls.length === 0) {
-    return [...CANONICAL_PUBLIC_URLS];
+    return CANONICAL_PUBLIC_PATHS.map((p) => getAbsoluteUrl(p));
   }
+
+  const allowedHosts = new Set(["triply.toolmint.cc", "roam.toolmint.cc", getSiteHost()]);
 
   return candidateUrls.filter((url) => {
     try {
       const parsed = new URL(url);
-      if (parsed.hostname !== "roam.toolmint.cc") {
+      if (!allowedHosts.has(parsed.hostname.toLowerCase())) {
         return false;
       }
       const pathname = parsed.pathname;
@@ -78,10 +86,13 @@ export async function submitToIndexNow(urls?: string[]): Promise<IndexNowResult>
     };
   }
 
+  const siteHost = getSiteHost();
+  const siteUrl = getSiteUrl();
+
   const payload = {
-    host: "roam.toolmint.cc",
+    host: siteHost,
     key,
-    keyLocation: "https://roam.toolmint.cc/api/indexnow/key",
+    keyLocation: `${siteUrl}/api/indexnow/key`,
     urlList: safeUrls,
   };
 

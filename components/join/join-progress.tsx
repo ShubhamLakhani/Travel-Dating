@@ -34,9 +34,9 @@ export function JoinProgress({ currentStep }: JoinProgressProps) {
               key={step}
               className={`h-1.5 rounded-full transition-all duration-300 ${
                 isComplete
-                  ? "bg-[var(--primary)]"
+                  ? "bg-gradient-to-r from-[var(--triply-coral)] to-[var(--triply-purple)]"
                   : isCurrent
-                  ? "bg-[var(--primary)]/70 animate-pulse"
+                  ? "bg-[var(--triply-coral)] animate-pulse"
                   : "bg-[var(--border)]"
               }`}
             />
@@ -50,7 +50,7 @@ export function JoinProgress({ currentStep }: JoinProgressProps) {
           {isReview ? "Review & Confirmation" : `Step ${stepNumber} of 4`}
         </span>
         <span className="text-[var(--foreground)]">
-          {isReview ? "Ready for Phase 6" : STEP_LABELS[stepNumber]}
+          {isReview ? "Confirm Your Details" : STEP_LABELS[stepNumber]}
         </span>
       </div>
     </div>

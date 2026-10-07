@@ -1,27 +1,46 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand Raw Palette */
-  --roam-coral: #FF6257;
-  --midnight: #151619;
-  --warm-sand: #FAF8F4;
-  --sky-mist: #E9F1F7;
-  --soft-sage: #DDECE4;
-  --white: #FFFFFF;
+  /* Triply Brand Palette */
+  --triply-coral: #FF735D;
+  --triply-purple: #6B5BFF;
+  --triply-lavender: #A78BFA;
+  --triply-sand: #F7E9DA;
+  --triply-midnight: #0B0F2D;
+  --triply-magenta: #E84A8B;
+
+  /* Signature Gradients */
+  --triply-gradient: linear-gradient(135deg, #FF735D 0%, #E84A8B 50%, #6B5BFF 100%);
+  --triply-gradient-h: linear-gradient(90deg, #FF735D 0%, #E84A8B 50%, #6B5BFF 100%);
 
   /* Semantic Theme Tokens */
-  --background: #FAF8F4;
-  --foreground: #151619;
+  --background: #FCFBF9;
+  --foreground: #0B0F2D;
   --surface: #FFFFFF;
-  --surface-muted: #F4EFEB;
-  --primary: #FF6257;
+  --surface-soft: #FBF8F4;
+  --surface-muted: #F7E9DA;
+  --surface-midnight: #0B0F2D;
+  --primary: #FF735D;
   --primary-foreground: #FFFFFF;
-  --travel-accent: #E9F1F7;
-  --safety-accent: #DDECE4;
-  --border: #E8E2D9;
-  --muted: #E9F1F7;
-  --muted-foreground: #6B7280;
-  --focus: #FF6257;
+  --secondary: #6B5BFF;
+  --secondary-foreground: #FFFFFF;
+  --travel-accent: #EDE9FE;
+  --safety-accent: #F7E9DA;
+  --border: #EFE4D8;
+  --border-subtle: #F5EEE6;
+  --muted: #F3EEFA;
+  --muted-foreground: #5A607F;
+  --focus: #FF735D;
+  --success: #10B981;
+  --warning: #F59E0B;
+
+  /* Legacy compatibility aliases */
+  --roam-coral: var(--triply-coral);
+  --midnight: var(--triply-midnight);
+  --warm-sand: var(--triply-sand);
+  --sky-mist: var(--travel-accent);
+  --soft-sage: #E2ECE5;
+  --white: #FFFFFF;
 
   /* Spacing / Geometry Tokens */
   --radius-button: 16px;
@@ -31,28 +50,43 @@
 }
 
 @theme {
-  --color-roam-coral: #FF6257;
-  --color-midnight: #151619;
-  --color-warm-sand: #FAF8F4;
-  --color-sky-mist: #E9F1F7;
-  --color-soft-sage: #DDECE4;
-  --color-white: #FFFFFF;
+  --color-triply-coral: #FF735D;
+  --color-triply-purple: #6B5BFF;
+  --color-triply-lavender: #A78BFA;
+  --color-triply-sand: #F7E9DA;
+  --color-triply-midnight: #0B0F2D;
+  --color-triply-magenta: #E84A8B;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
   --color-surface-muted: var(--surface-muted);
+  --color-surface-midnight: var(--surface-midnight);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-travel-accent: var(--travel-accent);
   --color-safety-accent: var(--safety-accent);
   --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-focus: var(--focus);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
 
-  --font-display: var(--font-display), sans-serif;
-  --font-body: var(--font-body), sans-serif;
+  /* Legacy mappings */
+  --color-roam-coral: var(--primary);
+  --color-midnight: var(--triply-midnight);
+  --color-warm-sand: var(--triply-sand);
+  --color-sky-mist: var(--travel-accent);
+  --color-soft-sage: #E2ECE5;
+  --color-white: #FFFFFF;
+
+  --font-display: var(--font-manrope), sans-serif;
+  --font-body: var(--font-manrope), sans-serif;
 
   --radius-button: 16px;
   --radius-input: 16px;
@@ -60,7 +94,7 @@
   --radius-large: 28px;
 }
 
-/* Accessibility: Global visible focus ring using Roam Coral */
+/* Accessibility: Global visible focus ring using Sunset Coral */
 :focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
@@ -81,7 +115,7 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-manrope), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   min-height: 100vh;
   margin: 0;
   -webkit-font-smoothing: antialiased;

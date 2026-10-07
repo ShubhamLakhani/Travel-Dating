@@ -1,4 +1,4 @@
-// Project Roam — Privacy Request Route
+// Project Roam : Privacy Request Route
 // File: app/api/privacy-request/route.ts
 
 import { NextResponse } from "next/server";
@@ -190,7 +190,7 @@ export async function POST(request: Request) {
     const { error: sendError } = await resend.emails.send({
       from: emailFrom,
       to: destinationEmail.trim(),
-      subject: `Roam privacy request — ${humanLabel}`,
+      subject: `Triply privacy request: ${humanLabel}`,
       html: privacyHtml,
       text: renderPrivacyRequestNotificationText({
         requesterEmail: email,

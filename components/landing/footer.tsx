@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Modal } from "@/components/ui/modal";
 import { Button } from "@/components/ui/button";
@@ -13,29 +14,30 @@ export function Footer() {
     <footer className="border-t border-[var(--border)] py-12 bg-[var(--surface)] text-[var(--muted-foreground)]">
       <Container size="wide">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-          {/* Brand & Tagline */}
-          <div className="flex flex-col gap-2 sm:col-span-2">
+          {/* Column 1: Brand & Philosophy */}
+          <div className="flex flex-col gap-3">
             <Link
               href="/"
-              className="font-display text-2xl font-bold tracking-tight text-[var(--foreground)] hover:opacity-90 transition-opacity"
-              aria-label="Roam home"
+              className="flex items-center select-none hover:opacity-90 transition-opacity"
+              aria-label="Triply home"
             >
-              roam
+              <Image
+                src="/brand/triply/triply-primary-horizontal.png"
+                alt="Triply"
+                width={120}
+                height={40}
+                className="h-8 w-auto object-contain"
+              />
             </Link>
-            <p className="text-xs sm:text-sm text-[var(--muted-foreground)] max-w-sm">
-              Meet someone going where you&apos;re going. Travel dating built around shared destinations and real travel dates.
+            <p className="text-xs font-semibold text-[var(--triply-purple)] uppercase tracking-wider">
+              Two travelers. One shared destination.
             </p>
-            <div className="pt-2">
-              <Link
-                href="/join"
-                className="inline-flex items-center text-xs font-semibold text-[var(--primary)] hover:underline"
-              >
-                Join early access &rarr;
-              </Link>
-            </div>
+            <p className="text-xs text-[var(--muted-foreground)] max-w-xs leading-relaxed">
+              Travel dating built around shared destinations and matching travel dates. Connect before or during your trip.
+            </p>
           </div>
 
-          {/* Travel Guides */}
+          {/* Column 2: Travel Guides */}
           <div className="flex flex-col gap-3">
             <span className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]">
               Travel Guides
@@ -68,12 +70,12 @@ export function Footer() {
             </nav>
           </div>
 
-          {/* Legal and Support Links */}
+          {/* Column 3: Safety & Legal */}
           <div className="flex flex-col gap-3">
             <span className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]">
               Safety &amp; Legal
             </span>
-            <nav aria-label="Footer Navigation" className="flex flex-col gap-2 text-xs sm:text-sm">
+            <nav aria-label="Safety and Legal Links" className="flex flex-col gap-2 text-xs sm:text-sm">
               <Link
                 href="/safety"
                 className="hover:text-[var(--foreground)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)]"
@@ -92,43 +94,78 @@ export function Footer() {
               >
                 Terms of Service
               </Link>
+              <Link
+                href="/privacy/request"
+                className="hover:text-[var(--foreground)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)]"
+              >
+                Data Privacy Request
+              </Link>
+            </nav>
+          </div>
+
+          {/* Column 4: Early Access & Contact */}
+          <div className="flex flex-col gap-3">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]">
+              Early Access
+            </span>
+            <div className="flex flex-col gap-2 text-xs sm:text-sm">
+              <Link
+                href="/join"
+                className="font-semibold text-[var(--primary)] hover:underline inline-flex items-center gap-1"
+              >
+                <span>Join Early Access</span>
+                <span>&rarr;</span>
+              </Link>
               <button
                 type="button"
                 onClick={() => setIsContactOpen(true)}
                 className="text-left hover:text-[var(--foreground)] transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)] cursor-pointer"
               >
-                Contact
+                Contact &amp; Feedback
               </button>
-            </nav>
+            </div>
+            <p className="text-[11px] text-[var(--muted-foreground)] leading-relaxed mt-2">
+              Triply is currently in early-access validation. Demonstration profiles are fictional examples.
+            </p>
           </div>
         </div>
 
-        {/* Pre-launch Disclaimer Banner */}
-        <div className="mt-8 pt-6 border-t border-[var(--border)]/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--muted-foreground)]/80">
-          <div>
-            &copy; {new Date().getFullYear()} Project Roam &middot; Pre-MVP Validation Stage &middot; 18+ only.
-          </div>
-          <div>
-            Fictional profiles for demonstration only. No real matching is active.
+        {/* Bottom Bar: Copyright & Mode Notice */}
+        <div className="mt-12 pt-8 border-t border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--muted-foreground)]">
+          <p>
+            &copy; {new Date().getFullYear()} Triply. All rights reserved.
+          </p>
+          <div className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-emerald-500" />
+            <span>Pre-launch validation mode</span>
           </div>
         </div>
       </Container>
 
-      {/* Truthful Contact Information Modal */}
+      {/* Contact Modal */}
       <Modal
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
-        title="Contact Project Roam"
-        size="sm"
+        title="Contact Triply"
       >
-        <div className="p-6 flex flex-col gap-4 text-left">
-          <p className="text-xs sm:text-sm text-[var(--foreground)]/90 leading-relaxed">
-            Project Roam is currently in pre-launch validation. Dedicated public customer support channels will be established and published prior to open public access.
+        <div className="flex flex-col gap-4 text-sm text-[var(--foreground)]">
+          <p className="text-[var(--muted-foreground)] leading-relaxed">
+            Have questions about Triply, feedback on the early-access preview, or privacy inquiries? We would love to hear from you.
           </p>
-          <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
-            If you have questions regarding the validation research or your early-access submission, contact information will be provided directly in research invitation emails.
-          </p>
-          <div className="pt-2 flex justify-end">
+
+          <div className="p-4 bg-[var(--surface-muted)] rounded-2xl border border-[var(--border)] flex flex-col gap-1">
+            <span className="text-xs font-bold uppercase tracking-wider text-[var(--muted-foreground)]">
+              Direct Contact
+            </span>
+            <a
+              href="mailto:hello@mail.toolmint.cc"
+              className="text-base font-semibold text-[var(--primary)] hover:underline"
+            >
+              hello@mail.toolmint.cc
+            </a>
+          </div>
+
+          <div className="flex justify-end pt-2">
             <Button
               variant="secondary"
               size="sm"

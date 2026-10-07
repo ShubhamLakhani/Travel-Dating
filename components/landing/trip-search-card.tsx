@@ -107,9 +107,9 @@ export function TripSearchCard({
           onClick={handleOpenDestination}
           aria-haspopup="dialog"
           aria-expanded={isDestPickerOpen}
-          className="w-full text-left px-5 py-4 flex items-center gap-4 hover:bg-[var(--surface-muted)]/50 transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)]"
+          className="w-full text-left px-5 py-4 flex items-center gap-4 hover:bg-[var(--surface-muted)]/50 transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)] cursor-pointer"
         >
-          <div className="h-10 w-10 rounded-full bg-[var(--surface-muted)] text-[var(--primary)] flex items-center justify-center shrink-0">
+          <div className="h-10 w-10 rounded-full bg-[var(--triply-purple)]/10 text-[var(--triply-purple)] flex items-center justify-center shrink-0">
             <MapPin className="h-5 w-5" aria-hidden="true" />
           </div>
           <div className="flex-1 min-w-0">
@@ -132,9 +132,9 @@ export function TripSearchCard({
           onClick={() => setIsDatePickerOpen(true)}
           aria-haspopup="dialog"
           aria-expanded={isDatePickerOpen}
-          className="w-full text-left px-5 py-4 flex items-center gap-4 hover:bg-[var(--surface-muted)]/50 transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)]"
+          className="w-full text-left px-5 py-4 flex items-center gap-4 hover:bg-[var(--surface-muted)]/50 transition-colors focus-visible:outline-2 focus-visible:outline-[var(--focus)] cursor-pointer"
         >
-          <div className="h-10 w-10 rounded-full bg-[var(--travel-accent)] text-[#1C3F5E] flex items-center justify-center shrink-0">
+          <div className="h-10 w-10 rounded-full bg-[var(--triply-coral)]/10 text-[var(--triply-coral)] flex items-center justify-center shrink-0">
             <Calendar className="h-5 w-5" aria-hidden="true" />
           </div>
           <div className="flex-1 min-w-0">
@@ -154,7 +154,7 @@ export function TripSearchCard({
             </div>
           </div>
           {nights > 0 && (
-            <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-[var(--travel-accent)] text-[#1C3F5E]">
+            <span className="shrink-0 text-xs font-semibold px-2.5 py-1 rounded-full bg-[var(--triply-coral)]/10 text-[var(--triply-coral)]">
               {nights} {nights === 1 ? "night" : "nights"}
             </span>
           )}
@@ -163,13 +163,13 @@ export function TripSearchCard({
 
       {/* Primary CTA */}
       <Button
-        variant="primary"
+        variant="gradient"
         size="lg"
         onClick={handleFindMatches}
         disabled={!isComplete}
         aria-disabled={!isComplete}
         rightIcon={<ArrowRight className="h-5 w-5 ml-1" aria-hidden="true" />}
-        className="w-full h-[54px] text-base font-semibold rounded-[var(--radius-button)] shadow-md disabled:cursor-not-allowed transition-all"
+        className="w-full h-[54px] text-base font-semibold rounded-[var(--radius-button)] shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-all"
       >
         Find Travel Matches
       </Button>
@@ -187,8 +187,8 @@ export function TripSearchCard({
 
       {/* Hero Reassurance Note */}
       <div className="flex items-center justify-center gap-1.5 pt-1 text-xs text-[var(--muted-foreground)] font-medium">
-        <ShieldCheck className="h-4 w-4 text-[var(--foreground)]/60 shrink-0" aria-hidden="true" />
-        <span>18+ only · Your exact location is never shown publicly</span>
+        <ShieldCheck className="h-4 w-4 text-[var(--triply-purple)] shrink-0" aria-hidden="true" />
+        <span>18+ only · Free early access · Your exact location is never shared</span>
       </div>
 
       {/* Pickers */}

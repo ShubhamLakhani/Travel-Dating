@@ -1,35 +1,38 @@
+"use client";
+
 import { ShieldCheck, MapPinOff, Share2, Clock, CheckCircle2 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
-import { Badge } from "@/components/ui/badge";
 
 export function SafetyPreviewSection() {
   const safetyFeatures = [
     {
       icon: ShieldCheck,
-      title: "Verified profiles",
-      description: "Selfie verification is planned to help reduce fake profiles.",
+      title: "Selfie verification",
+      description: "Planned selfie check before profiles can message, helping keep interactions genuine.",
       badge: "Planned verification",
+      accent: "#FF735D",
     },
     {
       icon: MapPinOff,
-      title: "Approximate location",
-      description:
-        "Roam is being designed so your exact accommodation or live location is never shown publicly.",
+      title: "Approximate location only",
+      description: "Your exact accommodation, villa, or live GPS is never tracked or shared. You choose where to meet.",
       badge: "Privacy by design",
+      accent: "#A78BFA",
     },
     {
       icon: Share2,
-      title: "Share your date",
-      description:
-        "Privately share who you're meeting, where, and when with someone you trust.",
+      title: "Share your date details",
+      description: "Easily send meet details, venue, and timing to a trusted friend or family member before you go.",
       badge: "Planned safety feature",
+      accent: "#6B5BFF",
     },
     {
       icon: Clock,
-      title: "Safety check-ins",
-      description: "Set a time for Roam to check whether your date is going okay.",
-      badge: "Product concept only",
+      title: "Comfort check-ins",
+      description: "Automated prompts to verify your date is going well and remind you of safe departure options.",
+      badge: "Product concept",
+      accent: "#E84A8B",
     },
   ];
 
@@ -37,25 +40,36 @@ export function SafetyPreviewSection() {
     <Section
       id="safety"
       spacing="default"
-      className="border-t border-[var(--border)] bg-[#FAF8F4] scroll-mt-20"
+      className="border-t border-[var(--border)] bg-[#0B0F2D] text-white scroll-mt-20 relative overflow-hidden"
     >
+      {/* Background brand ambient glows */}
+      <div
+        className="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-[#6B5BFF]/15 blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-[#FF735D]/15 blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
+
       <Container size="wide">
         {/* Section Heading */}
-        <div className="max-w-2xl mx-auto text-center flex flex-col gap-3 mb-12 sm:mb-16">
-          <Badge variant="safety" className="w-fit mx-auto text-xs font-semibold">
-            Trust &amp; Safety
-          </Badge>
+        <div className="max-w-2xl mx-auto text-center flex flex-col gap-3.5 mb-14 sm:mb-18">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-[#A78BFA] text-xs font-semibold uppercase tracking-wider mx-auto border border-white/15">
+            <ShieldCheck className="h-3.5 w-3.5 text-[#FF735D]" aria-hidden="true" />
+            <span>Trust &amp; Safety by Design</span>
+          </div>
 
-          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[var(--foreground)] leading-tight">
-            Travel dating should feel safer.
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            Travel dating should feel calm and safe.
           </h2>
 
-          <p className="text-sm sm:text-base text-[var(--muted-foreground)] leading-relaxed">
-            Meeting someone new can feel different when you&apos;re far from home. Roam is being designed with travel-specific safety built into the experience.
+          <p className="text-base text-slate-300 leading-relaxed">
+            Meeting someone new in an unfamiliar city requires higher standards. Triply is being designed from day one with thoughtful travel safeguards.
           </p>
         </div>
 
-        {/* 2-Column Layout: 4 Features on Left, Interactive-style Preview Card on Right */}
+        {/* 2-Column Layout: 4 Features on Left, Preview Card on Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
           {/* Left: 4 Planned Features */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -64,23 +78,26 @@ export function SafetyPreviewSection() {
               return (
                 <div
                   key={feat.title}
-                  className="bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius-card)] p-5 sm:p-6 shadow-sm flex flex-col justify-between"
+                  className="bg-white/[0.04] border border-white/10 hover:border-white/20 rounded-[var(--radius-card)] p-5 sm:p-6 shadow-sm flex flex-col justify-between transition-all backdrop-blur-xs"
                 >
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between">
-                      <div className="h-10 w-10 rounded-xl bg-[var(--safety-accent)] text-[#1B4332] flex items-center justify-center">
+                      <div
+                        style={{ color: feat.accent, backgroundColor: `${feat.accent}15` }}
+                        className="h-10 w-10 rounded-xl flex items-center justify-center"
+                      >
                         <Icon className="h-5 w-5" aria-hidden="true" />
                       </div>
-                      <span className="text-[10px] font-semibold text-[#1B4332] bg-[var(--safety-accent)]/70 px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] font-semibold text-[#A78BFA] bg-white/[0.06] border border-white/10 px-2.5 py-0.5 rounded-full">
                         {feat.badge}
                       </span>
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <h3 className="font-display text-base sm:text-lg font-bold text-[var(--foreground)]">
+                      <h3 className="font-display text-base sm:text-lg font-bold text-white">
                         {feat.title}
                       </h3>
-                      <p className="text-xs sm:text-sm text-[var(--muted-foreground)] leading-relaxed">
+                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                         {feat.description}
                       </p>
                     </div>
@@ -92,87 +109,45 @@ export function SafetyPreviewSection() {
 
           {/* Right: Planned Safety Experience Preview Card */}
           <div className="lg:col-span-5 flex justify-center w-full">
-            <div className="w-full max-w-sm bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius-card)] p-6 shadow-sm flex flex-col gap-5 relative">
+            <div className="w-full max-w-sm bg-white/[0.05] border border-white/15 rounded-[var(--radius-large)] p-6 shadow-xl flex flex-col gap-5 relative backdrop-blur-md">
               {/* Badge */}
-              <div className="flex items-center justify-between">
-                <Badge variant="safety" className="text-[11px] font-semibold uppercase tracking-wider">
-                  Safety feature preview
-                </Badge>
-                <span className="text-[11px] text-[var(--muted-foreground)]">Non-functional mock</span>
-              </div>
-
-              {/* Date Snapshot Card */}
-              <div className="bg-[var(--surface-muted)]/70 border border-[var(--border)] rounded-2xl p-4 flex flex-col gap-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--muted-foreground)]">
-                  Your Date
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#A78BFA]">
+                  Safety Feature Preview
                 </span>
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-lg font-bold text-[var(--foreground)]">
-                    Maya
-                  </span>
-                  <span className="text-xs font-semibold text-[var(--primary)] bg-[var(--primary)]/10 px-2 py-0.5 rounded-full">
-                    Friday &middot; 8:00 PM
-                  </span>
-                </div>
-                <div className="text-xs text-[var(--muted-foreground)] flex items-center gap-1">
-                  <span>Beach House Caf&eacute; &middot; Canggu</span>
-                </div>
-              </div>
-
-              {/* Share With Trusted Contact (Decorative Demonstration) */}
-              <div
-                aria-hidden="true"
-                className="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex items-center justify-between text-xs"
-              >
-                <div className="flex items-center gap-2">
-                  <Share2 className="h-4 w-4 text-[#1B4332]" />
-                  <span className="font-semibold text-[var(--foreground)]">Share with</span>
-                </div>
-                <span className="text-[11px] font-medium text-[var(--primary)] bg-[var(--primary)]/10 px-2 py-0.5 rounded-lg">
-                  + Trusted contact
+                <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-white/10 text-white">
+                  Concept
                 </span>
               </div>
 
-              {/* Check on me timer (Decorative Demonstration) */}
-              <div
-                aria-hidden="true"
-                className="p-3.5 rounded-xl border border-[var(--border)] bg-[var(--surface)] flex items-center justify-between text-xs"
-              >
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-[#1B4332]" />
-                  <div>
-                    <div className="font-semibold text-[var(--foreground)]">Check on me</div>
-                    <div className="text-[10px] text-[var(--muted-foreground)]">10:30 PM</div>
-                  </div>
+              {/* Verified Badge Mock */}
+              <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.04] border border-white/10">
+                <div className="h-10 w-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                  <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[11px] font-bold text-[#1B4332]">ON</span>
-                  <div className="w-8 h-4.5 bg-[#1B4332] rounded-full p-0.5 flex justify-end items-center">
-                    <div className="w-3.5 h-3.5 bg-white rounded-full shadow-xs" />
-                  </div>
+                <div className="flex flex-col">
+                  <span className="text-xs font-bold text-white">Selfie Verified Profile</span>
+                  <span className="text-[11px] text-slate-300">Identity checked before matching</span>
                 </div>
               </div>
 
-              {/* Reassurance text */}
-              <div className="text-[11px] text-[var(--muted-foreground)] flex items-center gap-1.5 pt-1">
-                <CheckCircle2 className="h-3.5 w-3.5 text-[#1B4332] shrink-0" aria-hidden="true" />
-                <span>Private details are never made visible to matches</span>
+              {/* Approximate Location Notice */}
+              <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.04] border border-white/10">
+                <div className="h-10 w-10 rounded-full bg-[#A78BFA]/20 text-[#A78BFA] flex items-center justify-center shrink-0">
+                  <MapPinOff className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs font-bold text-white">Zero Live Location Tracking</span>
+                  <span className="text-[11px] text-slate-300">Hotels and real-time GPS stay private</span>
+                </div>
               </div>
+
+              {/* Public Meetup Reassurance */}
+              <p className="text-xs text-slate-300 leading-relaxed pt-1">
+                Triply always recommends meeting in busy, well-lit public spots like museums, bakeries, or central piazzas.
+              </p>
             </div>
           </div>
-        </div>
-
-        {/* Product Principle Statement Banner */}
-        <div className="mt-12 max-w-3xl mx-auto p-4 sm:p-5 rounded-2xl bg-[var(--safety-accent)]/50 border border-[#1B4332]/20 text-center flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-xs sm:text-sm font-semibold text-[#1B4332] leading-relaxed">
-            Our product principle: core safety tools shouldn&apos;t sit behind a premium subscription.
-          </p>
-          <a
-            href="/safety"
-            className="text-xs font-bold text-[#1B4332] underline hover:opacity-80 shrink-0"
-          >
-            Read our full safety principles &rarr;
-          </a>
         </div>
       </Container>
     </Section>

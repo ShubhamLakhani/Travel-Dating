@@ -1,4 +1,4 @@
-// Project Roam — Phase 7 Trips Explorer Page
+// Project Roam : Phase 7 Trips Explorer Page
 // File: app/admin/(dashboard)/trips/page.tsx
 
 import { getTravelMonthAnalytics } from "@/lib/admin/queries";
@@ -9,7 +9,7 @@ import type { TripEntity } from "@/types/admin";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Trips Explorer | Project Roam Admin",
+  title: "Trips Explorer | Triply Admin",
   description: "Browse individual trip submissions and aggregated travel month density.",
 };
 

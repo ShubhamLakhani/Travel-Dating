@@ -1,62 +1,52 @@
 import type { Metadata, Viewport } from "next";
-import { Instrument_Sans, Inter } from "next/font/google";
+import { Manrope } from "next/font/google";
 import { AnalyticsProvider } from "@/components/analytics/posthog-provider";
 import "./globals.css";
 
-const instrumentSans = Instrument_Sans({
-  variable: "--font-display",
+const manrope = Manrope({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-manrope",
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-body",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-function getMetadataBase(): URL {
-  if (process.env.NEXT_PUBLIC_SITE_URL) {
-    try {
-      return new URL(process.env.NEXT_PUBLIC_SITE_URL);
-    } catch {
-      // Fall through to Vercel deployment host
-    }
-  }
-  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
-    return new URL(`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`);
-  }
-  if (process.env.VERCEL_URL) {
-    return new URL(`https://${process.env.VERCEL_URL}`);
-  }
-  return new URL("https://roam.toolmint.cc");
-}
+import { getMetadataBase } from "@/lib/seo/site-url";
 
 export const metadata: Metadata = {
   metadataBase: getMetadataBase(),
   title: {
-    default: "Roam — Meet Someone Going Where You're Going",
-    template: "%s | Roam",
+    default: "Triply | Meet Someone Going Where You're Going",
+    template: "%s | Triply",
   },
   description:
-    "Travel dating built around destination and travel dates. Connect with compatible travelers before or during a trip. Roam is currently in early access validation.",
+    "Travel dating built around destination and travel dates. Connect with compatible travelers before or during your trip. Triply is currently in early-access validation.",
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
-    title: "Roam — Meet Someone Going Where You're Going",
+    title: "Triply | Meet Someone Going Where You're Going",
     description:
-      "Travel dating built around destination and travel dates. Connect with compatible travelers before or during a trip. Roam is currently in early access validation.",
-    url: "https://roam.toolmint.cc",
+      "Travel dating built around destination and travel dates. Connect with compatible travelers before or during your trip. Triply is currently in early-access validation.",
+    url: "/",
     type: "website",
     locale: "en_US",
-    siteName: "Roam",
+    siteName: "Triply",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Roam — Meet Someone Going Where You're Going",
+    title: "Triply | Meet Someone Going Where You're Going",
     description:
-      "Travel dating built around destination and travel dates. Connect with compatible travelers before or during a trip. Roam is currently in early access validation.",
+      "Travel dating built around destination and travel dates. Connect with compatible travelers before or during your trip. Triply is currently in early-access validation.",
   },
   verification: process.env.GOOGLE_SITE_VERIFICATION
     ? {
@@ -68,7 +58,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#FAF8F4",
+  themeColor: "#0B0F2D",
 };
 
 export default function RootLayout({
@@ -79,9 +69,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSans.variable} ${inter.variable} antialiased`}
+      className={`${manrope.variable} antialiased`}
     >
-      <body className="min-h-screen flex flex-col font-body bg-background text-foreground">
+      <body className="min-h-screen flex flex-col font-sans bg-background text-foreground">
         <AnalyticsProvider>
           {children}
         </AnalyticsProvider>
